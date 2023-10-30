@@ -30,16 +30,6 @@ class Ingredient
     private $vegetables;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Recipe::class, mappedBy="ingredients")
-     */
-    private $recipes;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Measure::class)
-     */
-    private $measures;
-
-    /**
      * @ORM\Column(type="datetime_immutable")
      */
     private $created_at;
@@ -52,8 +42,6 @@ class Ingredient
     public function __construct()
     {
         $this->vegetables = new ArrayCollection();
-        $this->recipes = new ArrayCollection();
-        $this->measures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,57 +87,6 @@ class Ingredient
                 $vegetable->setIngredient(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Recipe>
-     */
-    public function getRecipes(): Collection
-    {
-        return $this->recipes;
-    }
-
-    public function addRecipe(Recipe $recipe): self
-    {
-        if (!$this->recipes->contains($recipe)) {
-            $this->recipes[] = $recipe;
-            $recipe->addIngredient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRecipe(Recipe $recipe): self
-    {
-        if ($this->recipes->removeElement($recipe)) {
-            $recipe->removeIngredient($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Measure>
-     */
-    public function getMeasures(): Collection
-    {
-        return $this->measures;
-    }
-
-    public function addMeasure(Measure $measure): self
-    {
-        if (!$this->measures->contains($measure)) {
-            $this->measures[] = $measure;
-        }
-
-        return $this;
-    }
-
-    public function removeMeasure(Measure $measure): self
-    {
-        $this->measures->removeElement($measure);
 
         return $this;
     }

@@ -55,11 +55,6 @@ class Recipe
     private $meal;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Ingredient::class, inversedBy="recipes")
-     */
-    private $ingredients;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Member::class, mappedBy="recipes")
      */
     private $members;
@@ -74,10 +69,15 @@ class Recipe
      */
     private $updated_at;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Content::class, mappedBy="recipe")
+     */
+    private $contents;
+
     public function __construct()
     {
-        $this->ingredients = new ArrayCollection();
         $this->members = new ArrayCollection();
+        $this->contents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,30 +170,6 @@ class Recipe
     }
 
     /**
-     * @return Collection<int, Ingredient>
-     */
-    public function getIngredients(): Collection
-    {
-        return $this->ingredients;
-    }
-
-    public function addIngredient(Ingredient $ingredient): self
-    {
-        if (!$this->ingredients->contains($ingredient)) {
-            $this->ingredients[] = $ingredient;
-        }
-
-        return $this;
-    }
-
-    public function removeIngredient(Ingredient $ingredient): self
-    {
-        $this->ingredients->removeElement($ingredient);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Member>
      */
     public function getMembers(): Collection
@@ -240,6 +216,36 @@ class Recipe
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Content>
+     */
+    public function getContents(): Collection
+    {
+        return $this->contents;
+    }
+
+    public function addContent(Content $content): self
+    {
+        if (!$this->contents->contains($content)) {
+            $this->contents[] = $content;
+            $content->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContent(Content $content): self
+    {
+        if ($this->contents->removeElement($content)) {
+            // set the owning side to null (unless already changed)
+            if ($content->getRecipe() === $this) {
+                $content->setRecipe(null);
+            }
+        }
 
         return $this;
     }
