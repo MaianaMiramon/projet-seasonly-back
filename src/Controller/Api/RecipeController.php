@@ -16,12 +16,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
- * @Route("/api/", name="app_back_")
+ * @Route("/api/recipe", name="app_api_recipe_")
  */
 class RecipeController extends AbstractController
 {
     /**
-     * @Route("recipe", name="app_api_recipe", methods="GET")
+     * @Route("/", name="list", methods="GET")
      */
     public function list(RecipeRepository $recipeRepository): JsonResponse
     {
@@ -37,7 +37,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * @Route("recipe/{id}", name="read", methods="GET", requirements={"id"="\d+"})
+     * @Route("/{id}", name="read", methods="GET", requirements={"id"="\d+"})
      */
     public function read($id, RecipeRepository $recipeRepository): JsonResponse
     {
@@ -61,7 +61,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * @Route("recipe", name="create", methods="POST")
+     * @Route("/", name="create", methods="POST")
      */
     public function create(EntityManagerInterface $em, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
@@ -82,7 +82,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * @Route("recipe/{id}", name="update", methods="PUT", requirements={"id"="\d+"})
+     * @Route("/{id}", name="update", methods="PUT", requirements={"id"="\d+"})
      */
     public function update($id, EntityManagerInterface $em, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
@@ -112,7 +112,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * @Route("recipe/{id}", name="delete", methods="DELETE")
+     * @Route("/{id}", name="delete", methods="DELETE")
      */
     public function delete($id, EntityManagerInterface $em): JsonResponse
     {
