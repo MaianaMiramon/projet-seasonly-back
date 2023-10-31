@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,12 +16,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
- * @Route("/api/recipes", name="app_back_")
+ * @Route("/api/", name="app_back_")
  */
 class RecipeController extends AbstractController
 {
     /**
-     * @Route("/", name="app_api_recipe")
+     * @Route("recipe", name="app_api_recipe", methods="GET")
      */
     public function list(RecipeRepository $recipeRepository): JsonResponse
     {
@@ -32,11 +33,11 @@ class RecipeController extends AbstractController
         // Envoie des données
         return $this->json([
             'Recettes' => $allRecipes,
-        ], Response::HTTP_OK, [], ["groups" => "recipes_list"]);
+        ]);
     }
 
     /**
-     * @Route("/{id}", name="read", methods="GET", requirements={"id"="\d+"})
+     * @Route("recipe/{id}", name="read", methods="GET", requirements={"id"="\d+"})
      */
     public function read($id, RecipeRepository $recipeRepository): JsonResponse
     {
@@ -55,12 +56,12 @@ class RecipeController extends AbstractController
         // Sinon envoie des données
         return $this->json([
             'recette' => $recipe,
-        ], Response::HTTP_OK, [], ["groups" => "recipes_read"]);
+        ]);
         
     }
 
     /**
-     * @Route("/", name="create", methods="POST")
+     * @Route("recipe", name="create", methods="POST")
      */
     public function create(EntityManagerInterface $em, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
@@ -70,25 +71,18 @@ class RecipeController extends AbstractController
         // Deserialisation des données Json pour obtenir un objet
         $recipe = $serializer->deserialize($json, Recipe::class, 'json');
 
-        // Verification des données reçues, avant de les envoyer en BDD
-        $errorList = $validator->validate($recipe);
-        if (count($errorList) > 0)
-        {
-            return $this->json($errorList, Response::HTTP_BAD_REQUEST);
-        }
-
         // persist() prépare l'entité pour la création
         $em->persist($recipe);
         // flush() envoie les données en BDD
         $em->flush();
 
         // on renvoit une réponse
-        return $this->json($recipe, Response::HTTP_CREATED, [], ["groups" => 'Recipes_create']);
+        return $this->json($recipe);
 
     }
 
     /**
-     * @Route("/{id}", name="update", methods="PUT", requirements={"id"="\d+"})
+     * @Route("recipe/{id}", name="update", methods="PUT", requirements={"id"="\d+"})
      */
     public function update($id, EntityManagerInterface $em, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
@@ -101,7 +95,7 @@ class RecipeController extends AbstractController
             $errorMessage = [
                 'message' => "Recette introuvable",
             ];
-            return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
+            return new JsonResponse($errorMessage);
         }
 
         // Récupération des données au format json
@@ -109,16 +103,6 @@ class RecipeController extends AbstractController
 
         // Deserialisation des données Json pour obtenir un objet
         $serializer->deserialize($json, Recipe::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $recipe]);
-
-        // Verification des données reçues, avant de les envoyer en BDD
-        $errorList = $validator->validate($recipe);
-        if (count($errorList) > 0)
-        {
-            return $this->json($errorList, Response::HTTP_BAD_REQUEST);
-        }
-        // pas besoin de persist car on a fait un find
-        // $em->persist($movie);
-
 
         // flush() envoie les données en BDD
         $em->flush();
@@ -128,7 +112,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="delete", methods="DELETE")
+     * @Route("recipe/{id}", name="delete", methods="DELETE")
      */
     public function delete($id, EntityManagerInterface $em): JsonResponse
     {
@@ -140,7 +124,7 @@ class RecipeController extends AbstractController
             $errorMessage = [
                 'message' => "Recette introuvable",
             ];
-            return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
+            return new JsonResponse($errorMessage);
         }
 
         // $em->remove($monEntite) permet de notifier à Doctrine que
