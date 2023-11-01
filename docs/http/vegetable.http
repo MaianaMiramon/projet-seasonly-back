@@ -1,0 +1,30 @@
+### Liste des vegetables
+GET http://localhost:8000/api/vegetable
+
+### Détail d'un vegetable
+GET http://localhost:8000/api/vegetable/20
+
+### Modification d'un vegetable
+PUT http://localhost:8000/api/vegetable/21
+content-type: application/json
+
+{
+    "title" : "Mise a jour via l'api"
+}
+
+### Suppression d'un vegetable
+DELETE http://localhost:8000/api/vegetable/23
+
+### Ajout d'un movie
+POST http://localhost:8000/api/vegetable
+content-type: application/json
+
+{
+  "name": "From API",
+  "description": "Lorem ipsum",
+  "image": "",
+  "benefits": "Lorem ipsum",
+  "local": true,
+  "conservation": "Lorem ipsum",
+  "created_at": "2023-01-01"
+}

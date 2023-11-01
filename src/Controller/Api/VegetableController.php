@@ -127,7 +127,7 @@ class VegetableController extends AbstractController
     public function delete($id, EntityManagerInterface $em): JsonResponse
     {
         // On récupère l'objet Vegetable
-        $vegetable = $em->find(Movie::class, $id);
+        $vegetable = $em->find(Vegetable::class, $id);
 
         // s'il n'existe pas = erreur 404
         if ($vegetable === null)
@@ -145,6 +145,6 @@ class VegetableController extends AbstractController
         $em->flush();
 
         //On revoie une réponse Json
-        return $this->json("Deleted", Response::HTTP_NO_CONTENT);
+        return $this->json("Deleted");
     }
 }
