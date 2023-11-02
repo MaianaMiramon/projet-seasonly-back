@@ -33,7 +33,7 @@ class RecipeController extends AbstractController
         // Envoie des données
         return $this->json([
             'Recettes' => $allRecipes,
-        ]);
+        ], Response::HTTP_OK, []);
     }
 
     /**
@@ -48,7 +48,7 @@ class RecipeController extends AbstractController
         if ($recipe === null)
         {
             $errorMessage = [
-                'message' => "Recette introuvable !",
+                'message' => "Recipe not found !",
             ];
             return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
@@ -56,7 +56,7 @@ class RecipeController extends AbstractController
         // Sinon envoie des données
         return $this->json([
             'recette' => $recipe,
-        ]);
+        ], Response::HTTP_OK, []);
         
     }
 
@@ -71,13 +71,20 @@ class RecipeController extends AbstractController
         // Deserialisation des données Json pour obtenir un objet
         $recipe = $serializer->deserialize($json, Recipe::class, 'json');
 
+        // Validation de l'objet Vegetable, si erreur = erreur 400
+        $errorList = $validator->validate($recipe);
+        if (count($errorList) > 0)
+        {
+            return $this->json($errorList, Response::HTTP_BAD_REQUEST);
+        }
+
         // persist() prépare l'entité pour la création
         $em->persist($recipe);
         // flush() envoie les données en BDD
         $em->flush();
 
         // on renvoit une réponse
-        return $this->json($recipe);
+        return $this->json($recipe, Response::HTTP_CREATED, []);
 
     }
 
@@ -93,9 +100,9 @@ class RecipeController extends AbstractController
         if ($recipe === null)
         {
             $errorMessage = [
-                'message' => "Recette introuvable",
+                'message' => "Recipe not found",
             ];
-            return new JsonResponse($errorMessage);
+            return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
 
         // Récupération des données au format json
@@ -104,11 +111,18 @@ class RecipeController extends AbstractController
         // Deserialisation des données Json pour obtenir un objet
         $serializer->deserialize($json, Recipe::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $recipe]);
 
+        // Si erreur de validation = erreur 400
+        $errorList = $validator->validate($recipe);
+        if (count($errorList) > 0)
+        {
+            return $this->json($errorList, Response::HTTP_BAD_REQUEST);
+        }
+
         // flush() envoie les données en BDD
         $em->flush();
 
         // on renvoit une réponse
-        return $this->json($recipe, Response::HTTP_OK, [], ["groups" => 'recipes_update']);
+        return $this->json($recipe, Response::HTTP_OK, []);
     }
 
     /**
@@ -122,9 +136,9 @@ class RecipeController extends AbstractController
         if ($recipe === null)
         {
             $errorMessage = [
-                'message' => "Recette introuvable",
+                'message' => "Recipe not found",
             ];
-            return new JsonResponse($errorMessage);
+            return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
 
         // $em->remove($monEntite) permet de notifier à Doctrine que
@@ -134,6 +148,6 @@ class RecipeController extends AbstractController
         // flush() execute les requêtes
         $em->flush();
 
-        return $this->json("Done");
+        return $this->json("Deleted");
     }
 }

@@ -15,6 +15,17 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void 
     {       
+        // Création des Meal
+        $mealList = $this->getMeal();
+        foreach ($mealList as $currentMealName) {
+        // création de l'objet Meal
+        $currentMeal = new Meal();
+        $currentMeal->setName($currentMealName['name']);
+        $currentMeal->setCreatedAt(new DateTimeImmutable($currentMeal['created_at']));
+
+        $manager->persist($currentMeal);
+        }
+
         // Création des recettes
         $recipeList = $this->getRecipe();
         foreach($recipeList as $currentRecipe) {
@@ -27,47 +38,34 @@ class AppFixtures extends Fixture
             $recipeObject->setServing($currentRecipe['serving']);
             $recipeObject->setCreatedAt(new DateTimeImmutable($currentRecipe['created_at']));
   
+            // TODO Association avec les meal
+                        
+
             $manager->persist($recipeObject);
         }
 
-        // Création des Meal
-        $mealList = $this->getMeal();
-        // $mealObjectList = [];
-        foreach ($mealList as $currentMealName) {
-        // création de l'objet Meal
-        $currentMeal = new Meal();
-        $currentMeal->setName($currentMealName['name']);
-        $currentMeal->setCreatedAt(new DateTimeImmutable($currentRecipe['created_at']));
-
-        $manager->persist($currentMeal);
-        // $mealObjectList[$currentMealName] = $currentMeal;
-        }
 
         // Création des Measures
         $measureList = $this->getMeasure();
-        // $measureObjectList = [];
 
         foreach ($measureList as $currentMeasureName) {
             // Création de l'objet Measure
             $currentMeasure = new Measure();
             $currentMeasure->setType($currentMeasureName['type']);
-            $currentMeasure->setCreatedAt(new DateTimeImmutable($currentRecipe['created_at']));
+            $currentMeasure->setCreatedAt(new DateTimeImmutable($currentMeasure['created_at']));
 
             $manager->persist($currentMeasure);
-            // $measureObjectList[$currentMeasureName] = $currentMeasure;
         }
         
         // Creation des Ingredients
         $ingredientList = $this->getIngredient();
-        // $ingredientObjectList = [];
         foreach ($ingredientList as $currentIngredientName) {
         // création de l'objet Ingredient
         $currentIngredient = new Ingredient();
         $currentIngredient->setName($currentIngredientName['name']);
-        $currentIngredient->setCreatedAt(new DateTimeImmutable($currentRecipe['created_at']));
+        $currentIngredient->setCreatedAt(new DateTimeImmutable($currentIngredient['created_at']));
 
         $manager->persist($currentIngredient);
-        // $ingredientObjectList[$currentIngredientName] = $currentIngredient;
         }
 
         $manager->flush();
@@ -262,6 +260,7 @@ class AppFixtures extends Fixture
                 'duration' => 120,
                 'serving' => 4,
                 'created_at' => '2010-03-05',
+                'meal' => 'Entrée',
             ],
             [
                 'title' => 'Pizza 4 fromages',
@@ -271,6 +270,7 @@ class AppFixtures extends Fixture
                 'duration' => 130,
                 'serving' => 4,
                 'created_at' => '2010-03-05',
+                'meal' => 'Plat',
             ],
             [
                 'title' => 'Salade composé',
@@ -280,6 +280,7 @@ class AppFixtures extends Fixture
                 'duration' => 120,
                 'serving' => 4,
                 'created_at' => '2010-03-05',
+                'meal' => 'Entrée',
             ],
             [
                 'title' => 'Ratatouille',
@@ -289,6 +290,7 @@ class AppFixtures extends Fixture
                 'duration' => 230,
                 'serving' => 6,
                 'created_at' => '2010-03-05',
+                'meal' => 'Plat',
             ],
             [
                 'title' => 'Pizza',
@@ -298,6 +300,7 @@ class AppFixtures extends Fixture
                 'duration' => 120,
                 'serving' => 4,
                 'created_at' => '2010-03-05',
+                'meal' => 'Plat',
             ],
         ];
     }
