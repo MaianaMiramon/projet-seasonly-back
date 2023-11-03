@@ -15,17 +15,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void 
     {       
-        // Création des Meal
-        $mealList = $this->getMeal();
-        foreach ($mealList as $currentMealName) {
-        // création de l'objet Meal
-        $currentMeal = new Meal();
-        $currentMeal->setName($currentMealName['name']);
-        $currentMeal->setCreatedAt(new DateTimeImmutable($currentMeal['created_at']));
-
-        $manager->persist($currentMeal);
-        }
-
+        
         // Création des recettes
         $recipeList = $this->getRecipe();
         foreach($recipeList as $currentRecipe) {
@@ -37,14 +27,24 @@ class AppFixtures extends Fixture
             $recipeObject->setDuration($currentRecipe['duration']);
             $recipeObject->setServing($currentRecipe['serving']);
             $recipeObject->setCreatedAt(new DateTimeImmutable($currentRecipe['created_at']));
-  
+            
             // TODO Association avec les meal
-                        
-
+            
+            
             $manager->persist($recipeObject);
         }
+        
+        // Création des Meal
+        $mealList = $this->getMeal();
+        foreach ($mealList as $currentMealName) {
+        // création de l'objet Meal
+        $currentMeal = new Meal();
+        $currentMeal->setName($currentMealName['name']);
+        $currentMeal->setCreatedAt(new DateTimeImmutable($currentMealName['created_at']));
 
-
+        $manager->persist($currentMeal);
+        }
+        
         // Création des Measures
         $measureList = $this->getMeasure();
 
@@ -52,7 +52,7 @@ class AppFixtures extends Fixture
             // Création de l'objet Measure
             $currentMeasure = new Measure();
             $currentMeasure->setType($currentMeasureName['type']);
-            $currentMeasure->setCreatedAt(new DateTimeImmutable($currentMeasure['created_at']));
+            $currentMeasure->setCreatedAt(new DateTimeImmutable($currentMeasureName['created_at']));
 
             $manager->persist($currentMeasure);
         }
@@ -63,7 +63,7 @@ class AppFixtures extends Fixture
         // création de l'objet Ingredient
         $currentIngredient = new Ingredient();
         $currentIngredient->setName($currentIngredientName['name']);
-        $currentIngredient->setCreatedAt(new DateTimeImmutable($currentIngredient['created_at']));
+        $currentIngredient->setCreatedAt(new DateTimeImmutable($currentIngredientName['created_at']));
 
         $manager->persist($currentIngredient);
         }

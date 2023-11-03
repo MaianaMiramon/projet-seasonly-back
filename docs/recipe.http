@@ -2,10 +2,10 @@
 GET http://localhost:8000/public/api/recipe/
 
 ### Détail d'une recette
-GET http://localhost:8000/public/api/recipe/8
+GET http://localhost:8000/public/api/recipe/14
 
 ### Modification d'une recette
-PUT http://localhost:8000/public/api/recipe/8
+PUT http://localhost:8000/public/api/recipe/15
 content-type: application/json
 
 {
@@ -13,7 +13,7 @@ content-type: application/json
 }
 
 ### Suppression d'une recette
-DELETE http://localhost:8000/public/api/recipe/9
+DELETE http://localhost:8000/public/api/recipe/15
 
 ### Ajout d'une recette
 POST http://localhost:8000/public/api/recipe/
