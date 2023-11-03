@@ -15,6 +15,16 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void 
     {       
+        // Création des Meal
+        $mealList = $this->getMeal();
+        foreach ($mealList as $currentMealName) {
+        // création de l'objet Meal
+        $currentMeal = new Meal();
+        $currentMeal->setName($currentMealName['name']);
+        $currentMeal->setCreatedAt(new DateTimeImmutable($currentMealName['created_at']));
+
+        $manager->persist($currentMeal);
+        }
         
         // Création des recettes
         $recipeList = $this->getRecipe();
@@ -34,16 +44,6 @@ class AppFixtures extends Fixture
             $manager->persist($recipeObject);
         }
         
-        // Création des Meal
-        $mealList = $this->getMeal();
-        foreach ($mealList as $currentMealName) {
-        // création de l'objet Meal
-        $currentMeal = new Meal();
-        $currentMeal->setName($currentMealName['name']);
-        $currentMeal->setCreatedAt(new DateTimeImmutable($currentMealName['created_at']));
-
-        $manager->persist($currentMeal);
-        }
         
         // Création des Measures
         $measureList = $this->getMeasure();
