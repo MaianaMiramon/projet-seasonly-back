@@ -142,9 +142,10 @@ class AppFixtures extends Fixture
             ],
             [
                 'name' => 'Dessert',
-             ],
-           ];
-        }
+                'created_at' => '2010-03-05',
+            ],
+        ];
+    }
 
     public function getGenre() {
         return [
