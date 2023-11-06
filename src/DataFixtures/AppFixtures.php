@@ -2,12 +2,16 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Recipe;
+use App\Entity\Meal;
+use App\Entity\Ingredient;
+use App\Entity\Measure;
+use App\Entity\Content;
+use DateTimeImmutable;
 use App\Entity\Genre;
 use App\Entity\Month;
-use DateTimeImmutable;
 use App\Entity\Botanical;
 use App\Entity\Vegetable;
-use App\Entity\Ingredient;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -15,6 +19,48 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void 
     {       
+        // Création des Meal
+        $mealList = $this->getMeal();
+        foreach ($mealList as $currentMealName) {
+        // création de l'objet Meal
+        $currentMeal = new Meal();
+        $currentMeal->setName($currentMealName['name']);
+        $currentMeal->setCreatedAt(new DateTimeImmutable($currentMealName['created_at']));
+
+        $manager->persist($currentMeal);
+        }
+        
+        // Création des recettes
+        $recipeList = $this->getRecipe();
+        foreach($recipeList as $currentRecipe) {
+            $recipeObject = new Recipe();
+            $recipeObject->setTitle($currentRecipe['title']);
+            $recipeObject->setImage($currentRecipe['image']);
+            $recipeObject->setDescription($currentRecipe['description']);
+            $recipeObject->setInstruction($currentRecipe['instruction']);
+            $recipeObject->setDuration($currentRecipe['duration']);
+            $recipeObject->setServing($currentRecipe['serving']);
+            $recipeObject->setCreatedAt(new DateTimeImmutable($currentRecipe['created_at']));
+            
+            // TODO Association avec les meal
+            
+            
+            $manager->persist($recipeObject);
+        }
+        
+        
+        // Création des Measures
+        $measureList = $this->getMeasure();
+
+        foreach ($measureList as $currentMeasureName) {
+            // Création de l'objet Measure
+            $currentMeasure = new Measure();
+            $currentMeasure->setType($currentMeasureName['type']);
+            $currentMeasure->setCreatedAt(new DateTimeImmutable($currentMeasureName['created_at']));
+
+            $manager->persist($currentMeasure);
+        }
+  
         // Création des vegetables
         $vegetableList = $this->getVegetables();
         foreach($vegetableList as $currentVegetable) {
@@ -75,14 +121,30 @@ class AppFixtures extends Fixture
         // création de l'objet Ingredient
         $currentIngredient = new Ingredient();
         $currentIngredient->setName($currentIngredientName['name']);
-        $currentIngredient->setCreatedAt(new DateTimeImmutable($currentVegetable['created_at']));
+        $currentIngredient->setCreatedAt(new DateTimeImmutable($currentIngredientName['created_at']));
 
         $manager->persist($currentIngredient);
-
         }
 
-        $manager->flush(); 
+        $manager->flush();
+        
     }
+
+    public function getMeal() {
+        return [
+            [
+                'name' => 'Entrée',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Plat',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Dessert',
+             ],
+           ];
+        }
 
     public function getGenre() {
         return [
@@ -96,6 +158,31 @@ class AppFixtures extends Fixture
             ],
         ];
     }
+
+    public function getMeasure() {
+        return [
+            [
+                'type' => 'ml',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => 'cl',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => 'l',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => 'g',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => 'kl',
+                'created_at' => '2010-03-05',
+            ],
+          ];
+      }
 
     public function getBotanical() {
         return [
@@ -141,6 +228,17 @@ class AppFixtures extends Fixture
                 'created_at' => '2010-03-05',
             ],
             [
+                'name' => 'pomme de terre',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'farine',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'oeuf',
+                'created_at' => '2010-03-05',
+            ],
                 'name' => 'concombre',
                 'created_at' => '2010-03-05',
             ],
@@ -167,6 +265,146 @@ class AppFixtures extends Fixture
         ];
     }
 
+    public function getQuantity() {
+        return [
+            [
+                1,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                2,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                3,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                4,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                5,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                10,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                20,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                25,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                50,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                100,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                200,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                250,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                300,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                400,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                500,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                600,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                700,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                750,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                800,
+                'created_at' => '2010-03-05',
+            ],
+            [
+                900,
+                'created_at' => '2010-03-05',
+            ],
+        ];
+    }
+
+    public function getRecipe() {
+        return [
+            [
+                'title' => 'Pizza',
+                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'description' => 'Un pizza italienne',
+                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'duration' => 120,
+                'serving' => 4,
+                'created_at' => '2010-03-05',
+                'meal' => 'Entrée',
+            ],
+            [
+                'title' => 'Pizza 4 fromages',
+                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'description' => 'Un pizza italienne avec plus de fromages',
+                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'duration' => 130,
+                'serving' => 4,
+                'created_at' => '2010-03-05',
+                'meal' => 'Plat',
+            ],
+            [
+                'title' => 'Salade composé',
+                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'description' => 'Un salade avec plein d\'aliments',
+                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'duration' => 120,
+                'serving' => 4,
+                'created_at' => '2010-03-05',
+                'meal' => 'Entrée',
+            ],
+            [
+                'title' => 'Ratatouille',
+                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'description' => 'Un mélange de légumes',
+                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'duration' => 230,
+                'serving' => 6,
+                'created_at' => '2010-03-05',
+                'meal' => 'Plat',
+            ],
+            [
+                'title' => 'Pizza',
+                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'description' => 'Un pizza italienne',
+                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'duration' => 120,
+                'serving' => 4,
+                'created_at' => '2010-03-05',
+                'meal' => 'Plat',
+              ],
+          ];
+    }
+  
     public function getMonths() {
         return [
             [
@@ -383,7 +621,7 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
-            ],
+          ],
         ];
     }
 }
