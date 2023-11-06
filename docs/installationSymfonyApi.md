@@ -12,7 +12,7 @@ git checkout feature/RecipeController
 ## Installation des dépendances
 
 ```bash
-Composer install
+composer install
 ```
 
 ## Créer un fichier .env.local à la racine du projet
