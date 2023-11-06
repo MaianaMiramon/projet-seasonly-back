@@ -1,11 +1,11 @@
 ### Liste des vegetables
-GET http://localhost:8000/api/vegetable
+GET http://localhost:8000/public/api/vegetable
 
 ### Détail d'un vegetable
-GET http://localhost:8000/api/vegetable/20
+GET http://localhost:8000/public/api/vegetable/10
 
 ### Modification d'un vegetable
-PUT http://localhost:8000/api/vegetable/21
+PUT http://localhost:8000/public/api/vegetable/10
 content-type: application/json
 
 {
@@ -13,10 +13,10 @@ content-type: application/json
 }
 
 ### Suppression d'un vegetable
-DELETE http://localhost:8000/api/vegetable/23
+DELETE http://localhost:8000/public/api/vegetable/9
 
 ### Ajout d'un movie
-POST http://localhost:8000/api/vegetable
+POST http://localhost:8000/public/api/vegetable
 content-type: application/json
 
 {
