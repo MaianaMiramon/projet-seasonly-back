@@ -239,6 +239,7 @@ class AppFixtures extends Fixture
                 'name' => 'oeuf',
                 'created_at' => '2010-03-05',
             ],
+            [
                 'name' => 'concombre',
                 'created_at' => '2010-03-05',
             ],
