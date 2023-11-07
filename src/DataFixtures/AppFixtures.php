@@ -2,16 +2,17 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Recipe;
 use App\Entity\Meal;
-use App\Entity\Ingredient;
-use App\Entity\Measure;
-use App\Entity\Content;
-use DateTimeImmutable;
+use App\Entity\User;
 use App\Entity\Genre;
 use App\Entity\Month;
+use App\Entity\Recipe;
+use DateTimeImmutable;
+use App\Entity\Content;
+use App\Entity\Measure;
 use App\Entity\Botanical;
 use App\Entity\Vegetable;
+use App\Entity\Ingredient;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -127,7 +128,20 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+
+        // Création des users
+        $userList = $this->getUser();
+
+        foreach($userList as $currentUser) {
+        $userObject = new User();
+        $userObject->setEmail($currentUser['email']);
+        $userObject->setNewsletter($currentUser['newsletter']);
+        $userObject->setCreatedAt(new DateTimeImmutable($currentUser['created_at']));
         
+        $manager->persist($userObject);
+
+        $manager->flush();
+        }
     }
 
     public function getMeal() {
@@ -625,5 +639,35 @@ class AppFixtures extends Fixture
                 'created_at' => '2010-03-05',
           ],
         ];
+    }
+    
+    public function getUser() {
+        return [
+            [
+                'email' => 'john@gmail.com',
+                'newsletter' => true,
+                'created_at' => '2017-03-05',
+            ],
+            [
+                'email' => 'coucou@hotmail.fr',
+                'newsletter' => false,
+                'created_at' => '2017-03-05',
+            ],
+            [
+                'email' => 'sylvie@laposte.net',
+                'newsletter' => true,
+                'created_at' => '2017-03-05',
+            ],
+            [
+                'email' => 'marie@yahoo.fr',
+                'newsletter' => true,
+                'created_at' => '2017-03-05',
+            ],
+            [
+                'email' => 'pierre@gmail.com',
+                'newsletter' => false,
+                'created_at' => '2017-03-05',
+            ],
+          ];
     }
 }
