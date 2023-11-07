@@ -1,5 +1,5 @@
 ### Liste des vegetables
-GET http://localhost:8000/public/api/vegetable
+GET http://localhost:8000/api/vegetable
 
 ### Détail d'un vegetable
 GET http://localhost:8000/public/api/vegetable/10

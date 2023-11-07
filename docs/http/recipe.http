@@ -1,5 +1,5 @@
 ### Liste des recettes
-GET http://localhost:8000/public/api/recipe/
+GET http://localhost:8000/api/recipe/
 
 ### Détail d'une recette
 GET http://localhost:8000/public/api/recipe/14
