@@ -2,63 +2,69 @@
 
 namespace App\Entity;
 
-use App\Repository\MemberRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MemberRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=MemberRepository::class)
  */
-class Member
+class Member implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
      */
     private $pseudo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="json")
+     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
      */
     private $password;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $role;
-
-    /**
+        /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="member", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
      */
     private $user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Recipe::class, inversedBy="members")
+     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
      */
     private $recipes;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
      */
     private $updated_at;
-
-    public function __construct()
-    {
-        $this->recipes = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -77,7 +83,47 @@ class Member
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->pseudo;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->pseudo;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -89,16 +135,24 @@ class Member
         return $this;
     }
 
-    public function getRole(): ?string
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
     {
-        return $this->role;
+        return null;
     }
 
-    public function setRole(string $role): self
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        $this->role = $role;
-
-        return $this;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getUser(): ?User

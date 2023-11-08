@@ -3,10 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Meal;
-use App\Entity\User;
 use App\Entity\Genre;
 use App\Entity\Month;
 use App\Entity\Recipe;
+use App\Entity\Member;
+use App\Entity\User;
 use DateTimeImmutable;
 use App\Entity\Content;
 use App\Entity\Measure;
@@ -15,9 +16,17 @@ use App\Entity\Vegetable;
 use App\Entity\Ingredient;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture 
 {
+    private $passwordHasher;
+    // injecter une dépendance
+    public function __construct(UserPasswordHasherInterface $passwordHasherInterface)
+    {
+        $this->passwordHasher = $passwordHasherInterface;
+    }
+
     public function load(ObjectManager $manager): void 
     {       
         // Création des Meal
@@ -126,6 +135,63 @@ class AppFixtures extends Fixture
 
         $manager->persist($currentIngredient);
         }
+
+                        // Création du membre
+        $user = new User();
+        $user->setEmail('member@member.fr');
+        $user->setNewsletter(true);
+        $user->setCreatedAt(new DateTimeImmutable('2010-03-05'));
+        
+        $manager->persist($user);
+
+
+        $member = new Member();
+        $member->setPseudo('member');
+
+        $hashedPassword = $this->passwordHasher->hashPassword($member, 'member');
+        $member->setPassword($hashedPassword);
+        $member->setRoles(['ROLE_MEMBER']);
+        $member->setCreatedAt(new DateTimeImmutable('2010-03-05'));
+        $member->setUser($user);
+
+        $manager->persist($member);
+        
+        
+        // Création du moderator
+        $user = new User();
+        $user->setEmail('moderator@moderator.fr');
+        $user->setNewsletter(false);
+        $user->setCreatedAt(new DateTimeImmutable('2010-03-05'));
+
+        $manager->persist($user);    
+        
+        $moderatorMember = new Member();
+        $moderatorMember->setPseudo('moderator');
+        $hashedPassword = $this->passwordHasher->hashPassword($moderatorMember, 'moderator');
+        $moderatorMember->setPassword($hashedPassword);
+        $moderatorMember->setRoles(['ROLE_MODERATOR']);
+        $moderatorMember->setCreatedAt(new DateTimeImmutable('2010-03-05'));
+        $moderatorMember->setUser($user);
+
+        $manager->persist($moderatorMember);
+
+        // création admin
+        $user = new User();
+        $user->setEmail('admin@admin.fr');
+        $user->setNewsletter(true);
+        $user->setCreatedAt(new DateTimeImmutable('2010-03-05'));
+
+        $manager->persist($user);
+
+        $adminMember = new Member();
+        $adminMember->setPseudo('admin');
+        $hashedPassword = $this->passwordHasher->hashPassword($adminMember, 'admin');
+        $adminMember->setPassword($hashedPassword);
+        $adminMember->setRoles(['ROLE_ADMIN']);
+        $adminMember->setCreatedAt(new DateTimeImmutable('2010-03-05'));
+        $adminMember->setUser($user);
+
+        $manager->persist($adminMember);
 
         $manager->flush();
 
