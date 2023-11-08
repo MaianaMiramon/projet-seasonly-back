@@ -6,7 +6,7 @@ Cloner le projet avec la clé SSH
 ## Se rendre sur la branche correspondante
 
 ```bash
-git checkout feature/RecipeController
+git checkout develop
 ```
 
 ## Installation des dépendances
@@ -54,5 +54,5 @@ php bin/console doctrine:fixtures:load
 ## Lancer un serveur en local
 
 ```bash
-php -S localhost:8000
+php -S localhost:8000 -tpublic
 ```
