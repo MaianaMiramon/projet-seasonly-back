@@ -194,7 +194,20 @@ class AppFixtures extends Fixture
         $manager->persist($adminMember);
 
         $manager->flush();
+
+        // Création des users
+        $userList = $this->getUser();
+
+        foreach($userList as $currentUser) {
+        $userObject = new User();
+        $userObject->setEmail($currentUser['email']);
+        $userObject->setNewsletter($currentUser['newsletter']);
+        $userObject->setCreatedAt(new DateTimeImmutable($currentUser['created_at']));
         
+        $manager->persist($userObject);
+
+        $manager->flush();
+        }
     }
 
     public function getMeal() {
@@ -692,5 +705,35 @@ class AppFixtures extends Fixture
                 'created_at' => '2010-03-05',
           ],
         ];
+    }
+    
+    public function getUser() {
+        return [
+            [
+                'email' => 'john@gmail.com',
+                'newsletter' => true,
+                'created_at' => '2017-03-05',
+            ],
+            [
+                'email' => 'coucou@hotmail.fr',
+                'newsletter' => false,
+                'created_at' => '2017-03-05',
+            ],
+            [
+                'email' => 'sylvie@laposte.net',
+                'newsletter' => true,
+                'created_at' => '2017-03-05',
+            ],
+            [
+                'email' => 'marie@yahoo.fr',
+                'newsletter' => true,
+                'created_at' => '2017-03-05',
+            ],
+            [
+                'email' => 'pierre@gmail.com',
+                'newsletter' => false,
+                'created_at' => '2017-03-05',
+            ],
+          ];
     }
 }
