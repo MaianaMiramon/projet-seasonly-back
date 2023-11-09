@@ -187,16 +187,14 @@ class AppFixtures extends Fixture
             $monthRepository = $manager->getRepository(Month::class);
             $monthList = $monthRepository->findAll();
 
-            // foreach sur le tableau de data getVegetables()
-            foreach ($vegetableList as $vegetable) {
-                // récupération de la liste des mois du vegetable
-                $vegetableMonth = $vegetable['month'];
-                foreach($vegetableMonth as $month) {
-                    foreach ($monthList as $monthEntity) {
-                        $currentMonthName = $monthEntity->getName();
-                        if ($currentMonthName === $month) {
-                            $vegetableObject->addMonth($monthEntity);
-                        }
+
+            // récupération de la liste des mois du vegetable
+            $vegetableMonth = $currentVegetable['month'];
+            foreach($vegetableMonth as $month) {
+                foreach ($monthList as $monthEntity) {
+                    $currentMonthName = $monthEntity->getName();
+                    if ($currentMonthName === $month) {
+                        $vegetableObject->addMonth($monthEntity);
                     }
                 }
             }
