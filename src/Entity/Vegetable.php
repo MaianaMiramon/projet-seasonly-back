@@ -6,6 +6,7 @@ use App\Repository\VegetableRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VegetableRepository::class)
@@ -16,66 +17,79 @@ class Vegetable
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ({"vegetable"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups ({"vegetable"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups ({"vegetable"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups ({"vegetable"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups ({"vegetable"})
      */
     private $benefits;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups ({"vegetable"})
      */
     private $local;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups ({"vegetable"})
      */
     private $conservation;
 
     /**
      * @ORM\ManyToMany(targetEntity=Month::class, inversedBy="vegetables")
+     * @Groups ({"vegetable"})
      */
     private $months;
 
     /**
      * @ORM\ManyToOne(targetEntity=Botanical::class, inversedBy="vegetables")
+     * @Groups ({"vegetable"})
      */
     private $botanical;
 
     /**
      * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="vegetables")
+     * @Groups ({"vegetable"})
      */
     private $genre;
 
     /**
      * @ORM\ManyToOne(targetEntity=Ingredient::class, inversedBy="vegetables")
+     * @Groups ({"vegetable"})
      */
     private $ingredient;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups ({"vegetable"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups ({"vegetable"})
      */
     private $updated_at;
 

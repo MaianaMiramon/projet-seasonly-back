@@ -17,42 +17,50 @@ class Recipe
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ({"recipe"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups ({"member_list", "member_read"})
+     * @Groups ({"recipe"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups ({"recipe"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups ({"recipe"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups ({"recipe"})
      */
     private $instruction;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups ({"recipe"})
      */
     private $duration;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups ({"recipe"})
      */
     private $serving;
 
     /**
      * @ORM\ManyToOne(targetEntity=Meal::class, inversedBy="recipes")
+     * @Groups ({"recipe"})
      */
     private $meal;
 
@@ -63,16 +71,19 @@ class Recipe
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups ({"recipe"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups ({"recipe"})
      */
     private $updated_at;
 
     /**
      * @ORM\OneToMany(targetEntity=Content::class, mappedBy="recipe")
+     * @Groups ({"recipe"})
      */
     private $contents;
 

@@ -39,6 +39,71 @@ class AppFixtures extends Fixture
 
         $manager->persist($currentMeal);
         }
+
+        // Création des Measures
+        $measureList = $this->getMeasure();
+
+        foreach ($measureList as $currentMeasureName) {
+            // Création de l'objet Measure
+            $currentMeasure = new Measure();
+            $currentMeasure->setType($currentMeasureName['type']);
+            $currentMeasure->setCreatedAt(new DateTimeImmutable($currentMeasureName['created_at']));
+
+            $manager->persist($currentMeasure);
+        }
+        
+        // Création des genres
+        $genreList = $this->getGenre();
+        
+        foreach ($genreList as $currentGenreName) {
+            // création de l'objet Genre
+            $currentGenre = new Genre();
+            $currentGenre->setName($currentGenreName['name']);
+            $currentGenre->setCreatedAt(new DateTimeImmutable($currentGenreName['created_at']));
+            
+            $manager->persist($currentGenre);
+            
+        }
+        
+        // Création des botanicals
+        $botanicalList = $this->getBotanical();
+        // $measureObjectList = [];
+        
+        foreach ($botanicalList as $currentBotanicalName) {
+            // Création de l'objet Botanical
+            $currentBotanical = new Botanical();
+            $currentBotanical->setName($currentBotanicalName['name']);
+            $currentBotanical->setCreatedAt(new DateTimeImmutable($currentBotanicalName['created_at']));
+            
+            $manager->persist($currentBotanical);
+        }
+        
+        
+        // Creation des Ingredients
+        $ingredientList = $this->getIngredient();
+        
+        foreach ($ingredientList as $currentIngredientName) {
+            // création de l'objet Ingredient
+            $currentIngredient = new Ingredient();
+            $currentIngredient->setName($currentIngredientName['name']);
+            $currentIngredient->setCreatedAt(new DateTimeImmutable($currentIngredientName['created_at']));
+            
+            $manager->persist($currentIngredient);
+        }
+
+        // Creation des Month
+        $monthList = $this->getMonths();
+        foreach ($monthList as $currentMonthName) {
+        // création de l'objet Month
+        $currentMonth = new Month();
+        $currentMonth->setName($currentMonthName['name']);
+        $currentMonth->setCreatedAt(new DateTimeImmutable($currentMonthName['created_at']));
+        
+        $manager->persist($currentMonth);
+    }
+        
+        
+        $manager->flush();
         
         // Création des recettes
         $recipeList = $this->getRecipe();
@@ -52,25 +117,22 @@ class AppFixtures extends Fixture
             $recipeObject->setServing($currentRecipe['serving']);
             $recipeObject->setCreatedAt(new DateTimeImmutable($currentRecipe['created_at']));
             
-            // TODO Association avec les meal
-            
+            // Association avec les meal
+            $MealRepository = $manager->getRepository(Meal::class);
+            $mealList = $MealRepository->findAll();
+            foreach ($mealList as $meal)
+            {
+                $currentMealName = $meal->getName();
+                if ($currentMealName === $currentRecipe['meal'])
+                {
+                    $recipeObject->setMeal($meal);
+                }
+            }
             
             $manager->persist($recipeObject);
+            
         }
         
-        
-        // Création des Measures
-        $measureList = $this->getMeasure();
-
-        foreach ($measureList as $currentMeasureName) {
-            // Création de l'objet Measure
-            $currentMeasure = new Measure();
-            $currentMeasure->setType($currentMeasureName['type']);
-            $currentMeasure->setCreatedAt(new DateTimeImmutable($currentMeasureName['created_at']));
-
-            $manager->persist($currentMeasure);
-        }
-  
         // Création des vegetables
         $vegetableList = $this->getVegetables();
         foreach($vegetableList as $currentVegetable) {
@@ -82,61 +144,104 @@ class AppFixtures extends Fixture
             $vegetableObject->setLocal($currentVegetable['local']);
             $vegetableObject->setConservation($currentVegetable['conservation']);
             $vegetableObject->setCreatedAt(new DateTimeImmutable($currentVegetable['created_at']));
-  
+            
+            // Association avec les genres
+            $genreRepository = $manager->getRepository(Genre::class);
+            $genreList = $genreRepository->findAll();
+            foreach ($genreList as $genre)
+            {
+                $currentGenreName = $genre->getName();
+                if ($currentGenreName === $currentVegetable['genre'])
+                {
+                    $vegetableObject->setGenre($genre);
+                }
+            }
+            
+            // Association avec Botanical
+            $botanicalRepository = $manager->getRepository(Botanical::class);
+            $botanicalList = $botanicalRepository->findAll();
+            foreach ($botanicalList as $botanical)
+            {
+                $currentBotanicalName = $botanical->getName();
+                if ($currentBotanicalName === $currentVegetable['botanical'])
+                {
+                    $vegetableObject->setBotanical($botanical);
+                }
+            }
+            
+            // Association avec Ingredient
+            $ingredientRepository = $manager->getRepository(Ingredient::class);
+            $ingredientList = $ingredientRepository->findAll();
+            foreach ($ingredientList as $ingredient)
+            {
+                $currentIngredientName = $ingredient->getName();
+                if ($currentIngredientName === $currentVegetable['ingredient'])
+                {
+                    $vegetableObject->setIngredient($ingredient);
+                }
+            }
+
+            // Association avec Month
+
+            // récupération du repository Month
+            $monthRepository = $manager->getRepository(Month::class);
+            $monthList = $monthRepository->findAll();
+
+            // foreach sur le tableau de data getVegetables()
+            foreach ($vegetableList as $vegetable) {
+                // récupération de la liste des mois du vegetable
+                $vegetableMonth = $vegetable['month'];
+                foreach($vegetableMonth as $month) {
+                    foreach ($monthList as $monthEntity) {
+                        $currentMonthName = $monthEntity->getName();
+                        if ($currentMonthName === $month) {
+                            $vegetableObject->addMonth($monthEntity);
+                        }
+                    }
+                }
+            }
+            
             $manager->persist($vegetableObject);
         }
-
-        // Création des genres
-        $genreList = $this->getGenre();
-
-        foreach ($genreList as $currentGenreName) {
-        // création de l'objet Genre
-        $currentGenre = new Genre();
-        $currentGenre->setName($currentGenreName['name']);
-        $currentGenre->setCreatedAt(new DateTimeImmutable($currentVegetable['created_at']));
-
-        $manager->persist($currentGenre);
-
-        }
-
-        // Création des botanicals
-        $botanicalList = $this->getBotanical();
-        // $measureObjectList = [];
-
-        foreach ($botanicalList as $currentBotanicalName) {
-            // Création de l'objet Botanical
-            $currentBotanical = new Botanical();
-            $currentBotanical->setName($currentBotanicalName['name']);
-            $currentBotanical->setCreatedAt(new DateTimeImmutable($currentVegetable['created_at']));
-
-            $manager->persist($currentBotanical);
-        }
         
-        // Creation des Month
-        $monthList = $this->getMonths();
-        // $ingredientObjectList = [];
-        foreach ($monthList as $currentMonthName) {
-        // création de l'objet Month
-        $currentMonth = new Month();
-        $currentMonth->setName($currentMonthName['name']);
-        $currentMonth->setCreatedAt(new DateTimeImmutable($currentVegetable['created_at']));
+        $manager->flush();
+        
+        for ($i = 1; $i <= 11; $i++) {
+            // Création Content
+            $contentList = $this->getQuantity();
+            
+            
+            $contentRandom = mt_rand(0, count($contentList) -1);
+            $currentContentName = $contentList[$contentRandom];
+            // Création de l'objet Content
+            $currentContent = new Content();
+            $currentContent->setQuantity($currentContentName['quantity']);
+            
+        $measureRepository = $manager->getRepository(Measure::class);
+        $measureList = $measureRepository->findAll();
+        $measureRandom = mt_rand(0, count($measureList) -1);
+        $currentMeasureId = $measureList[$measureRandom];
+        $currentContent->setMeasure($currentMeasureId);
+        
+        $ingredientRepository = $manager->getRepository(Ingredient::class);
+        $ingredientList = $ingredientRepository->findAll();
+        $ingredientRandom = mt_rand(0, count($ingredientList) -1);
+        $currentIngredientId = $ingredientList[$ingredientRandom];
+        $currentContent->setIngredient($currentIngredientId);
+        
+        $recipeRepository = $manager->getRepository(Recipe::class);
+        $recipeList = $recipeRepository->findAll();
+        $recipeRandom = mt_rand(0, count($recipeList) -1);
+        $currentRecipeId = $recipeList[$recipeRandom];
+        $currentContent->setRecipe($currentRecipeId);
+        
+        $manager->persist($currentContent);
+        
+    }
 
-        $manager->persist($currentMonth);
-        }
+        
 
-        // Creation des Ingredients
-        $ingredientList = $this->getIngredient();
-
-        foreach ($ingredientList as $currentIngredientName) {
-        // création de l'objet Ingredient
-        $currentIngredient = new Ingredient();
-        $currentIngredient->setName($currentIngredientName['name']);
-        $currentIngredient->setCreatedAt(new DateTimeImmutable($currentIngredientName['created_at']));
-
-        $manager->persist($currentIngredient);
-        }
-
-                        // Création du membre
+        // Création du membre
         $user = new User();
         $user->setEmail('member@member.fr');
         $user->setNewsletter(true);
@@ -192,8 +297,6 @@ class AppFixtures extends Fixture
         $adminMember->setUser($user);
 
         $manager->persist($adminMember);
-
-        $manager->flush();
 
         // Création des users
         $userList = $this->getUser();
@@ -268,31 +371,55 @@ class AppFixtures extends Fixture
     public function getBotanical() {
         return [
             [
-                'name' => 'Légume racine',
+                'name' => 'Légumes racines',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'Légume bulbe',
+                'name' => 'Légumes bulbes',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'Légume tige',
+                'name' => 'Légumes tiges',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'Légume graine',
+                'name' => 'Légumes graines',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'Légume fleur',
+                'name' => 'Légumes fleurs',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'Légume feuille',
+                'name' => 'Légumes feuilles',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'Légume fruit',
+                'name' => 'Légumes fruits',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Fruits à noyau',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Fruits à pépins',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Fruits rouges',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Agrumes',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Fruits à coque',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Fruits exotiques',
                 'created_at' => '2010-03-05',
             ],
         ];
@@ -350,83 +477,83 @@ class AppFixtures extends Fixture
     public function getQuantity() {
         return [
             [
-                1,
+                'quantity' => 1,
                 'created_at' => '2010-03-05',
             ],
             [
-                2,
+                'quantity' => 2,
                 'created_at' => '2010-03-05',
             ],
             [
-                3,
+                'quantity' => 3,
                 'created_at' => '2010-03-05',
             ],
             [
-                4,
+                'quantity' => 4,
                 'created_at' => '2010-03-05',
             ],
             [
-                5,
+                'quantity' => 5,
                 'created_at' => '2010-03-05',
             ],
             [
-                10,
+                'quantity' => 10,
                 'created_at' => '2010-03-05',
             ],
             [
-                20,
+                'quantity' => 20,
                 'created_at' => '2010-03-05',
             ],
             [
-                25,
+                'quantity' => 25,
                 'created_at' => '2010-03-05',
             ],
             [
-                50,
+                'quantity' => 50,
                 'created_at' => '2010-03-05',
             ],
             [
-                100,
+                'quantity' => 100,
                 'created_at' => '2010-03-05',
             ],
             [
-                200,
+                'quantity' => 200,
                 'created_at' => '2010-03-05',
             ],
             [
-                250,
+                'quantity' => 250,
                 'created_at' => '2010-03-05',
             ],
             [
-                300,
+                'quantity' => 300,
                 'created_at' => '2010-03-05',
             ],
             [
-                400,
+                'quantity' => 400,
                 'created_at' => '2010-03-05',
             ],
             [
-                500,
+                'quantity' => 500,
                 'created_at' => '2010-03-05',
             ],
             [
-                600,
+                'quantity' => 600,
                 'created_at' => '2010-03-05',
             ],
             [
-                700,
+                'quantity' => 700,
                 'created_at' => '2010-03-05',
             ],
             [
-                750,
+                'quantity' => 750,
                 'created_at' => '2010-03-05',
             ],
             [
-                800,
+                'quantity' => 800,
                 'created_at' => '2010-03-05',
             ],
             [
-                900,
+                'quantity' => 900,
                 'created_at' => '2010-03-05',
             ],
         ];
@@ -436,9 +563,9 @@ class AppFixtures extends Fixture
         return [
             [
                 'title' => 'Pizza',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
-                'description' => 'Un pizza italienne',
-                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'image' => 'https://cdn.pixabay.com/photo/2012/04/01/16/51/pizza-23477_1280.png',
+                'description' => 'La pizza est une recette de cuisine traditionnelle de la cuisine italienne, originaire de Naples à base de galette de pâte à pain, garnie principalement d\'huile d\'olive, de sauce tomate, de mozzarella et d\'autres ingrédients et cuite au four.',
+                'instruction' => 'Etape 1 : réparer une pâte à pizza ou l\'acheter toute faite, Etape 2 : Étaler la pâte et la recouvrir d\'huile d\'olive, Etape 3 : Couper les tomates en rondelles, la mozzarella en cubes et le jambon en petits carrés. Éplucher l\'oignon et les champignons. Les hacher finement.',
                 'duration' => 120,
                 'serving' => 4,
                 'created_at' => '2010-03-05',
@@ -446,7 +573,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Pizza 4 fromages',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2012/04/01/16/51/pizza-23477_1280.png',
                 'description' => 'Un pizza italienne avec plus de fromages',
                 'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
                 'duration' => 130,
@@ -456,7 +583,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Salade composé',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2014/12/21/23/29/salad-575436_1280.png',
                 'description' => 'Un salade avec plein d\'aliments',
                 'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
                 'duration' => 120,
@@ -476,14 +603,55 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Pizza',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2012/04/01/16/51/pizza-23477_1280.png',
                 'description' => 'Un pizza italienne',
                 'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
                 'duration' => 120,
                 'serving' => 4,
                 'created_at' => '2010-03-05',
                 'meal' => 'Plat',
-              ],
+            ],
+            [
+                'title' => 'tarte aux pommes',
+                'image' => 'https://cdn.pixabay.com/photo/2018/08/31/14/33/apple-pie-3644790_1280.png',
+                'description' => 'Une magnifique tarte aux pommes, pour allié légèreté et gourmandise',
+                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'duration' => 120,
+                'serving' => 4,
+                'created_at' => '2010-03-05',
+                'meal' => 'Dessert',
+            ],
+            [
+                'title' => 'Salade de fruit',
+                'image' => 'https://cdn.pixabay.com/photo/2014/12/21/23/38/salad-575716_1280.png',
+                'description' => 'Un mélange de plusieurs fruits de saison, pour une fin de repas plus légère',
+                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'duration' => 120,
+                'serving' => 4,
+                'created_at' => '2010-03-05',
+                'meal' => 'Dessert',
+            ],
+            [
+                'title' => 'tarte au chèvre et au concombre',
+                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'description' => 'c\'est le moment de se régaler avec une tarte fait maison au chèvre et au au concombre',
+                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'duration' => 120,
+                'serving' => 4,
+                'created_at' => '2010-03-05',
+                'meal' => 'Plat',
+            ],
+            [
+                'title' => 'Salade de concombre, orange et noix',
+                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'description' => 'Essayer un mélange de saveur avec cette salade composé de concombre, orange et noix',
+                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
+                'duration' => 120,
+                'serving' => 4,
+                'created_at' => '2010-03-05',
+                'meal' => 'Plat',
+            ],
+
           ];
     }
   
@@ -544,165 +712,237 @@ class AppFixtures extends Fixture
         return [
             [   
                 'name' => 'tomates cerises',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
-                'benefits' => 'Lorem ipsum dolor sit amet',
+                'description' => 'La tomate cerise est un type de variété de tomate, cultivée comme cette dernière pour ses fruits - mais de taille réduite - consommés comme légumes. Les tomates cerises sont généralement considérées comme des hybrides entre Solanum pimpinellifolium L. et la tomate cultivée, issue de l\'espèce Solanum lycopersicum.',
+                'image' => 'https://cdn.pixabay.com/photo/2017/03/26/09/39/tomato-2175133_1280.png',
+                'benefits' => 'Vitamines C',
                 'local' => true,
-                'conservation' => 'Lorem ipsum dolor sit amet',
+                'conservation' => 'Malgré ce que l\'on croit, , il faut éviter de placer les tomates cerises au frigo. L\'air froid va les empécher de continuer à mûrir.',
                 'created_at' => '2010-03-05',
+                'month' => ['juillet', 'août', 'septembre'],
+                'botanical' => 'Fruits à pépins',
+                'genre' => 'Fruit',
+                'ingredient' => 'tomate',
             ],
             [
                 'name' => 'tomates coeur de boeuf',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2017/03/26/09/39/tomato-2175133_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['juillet', 'août', 'septembre'],
+                'botanical' => 'Fruits à pépins',
+                'genre' => 'Fruit',
+                'ingredient' => 'tomate',
             ],
             [
                 'name' => 'pomme golden',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2014/05/28/13/22/fruit-356519_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['septembre', 'octobre'],
+                'botanical' => 'Fruits à pépins',
+                'genre' => 'Fruit',
+                'ingredient' => 'pomme',
             ],
             [
                 'name' => 'pomme gala',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2014/05/28/13/22/fruit-356519_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['octobre', 'novembre', 'décembre'],
+                'botanical' => 'Fruits à pépins',
+                'genre' => 'Fruit',
+                'ingredient' => 'pomme',
             ],
             [
                 'name' => 'pomme',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2014/05/28/13/22/fruit-356519_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['juillet', 'août'],
+                'botanical' => 'Fruits à pépins',
+                'genre' => 'Fruit',
+                'ingredient' => 'pomme',
             ],
             [
                 'name' => 'citron vert',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2013/07/12/19/16/lemon-154449_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['juin', 'juillet', 'août'],
+                'botanical' => 'Agrumes',
+                'genre' => 'Fruit',
+                'ingredient' => 'citron',
             ],
             [
                 'name' => 'citron jaune',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2013/07/12/19/16/lemon-154449_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['juillet', 'août', 'septembre'],
+                'botanical' => 'Agrumes',
+                'genre' => 'Fruit',
+                'ingredient' => 'citron',
             ],
             [
                 'name' => 'pomme',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2014/05/28/13/22/fruit-356519_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['janvier', 'février', 'mars'],
+                'botanical' => 'Fruits à pépins',
+                'genre' => 'Fruit',
+                'ingredient' => 'pomme',
             ],
             [
                 'name' => 'salade romaine',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2014/03/24/17/08/lettuce-295158_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['avril', 'mai', 'juin', 'juillet'],
+                'botanical' => 'Légumes feuilles',
+                'genre' => 'Légume',
+                'ingredient' => 'salade',
             ],
             [
                 'name' => 'salade batavia',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2014/03/24/17/08/lettuce-295158_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['mars', 'avril', 'mai'],
+                'botanical' => 'Légumes feuilles',
+                'genre' => 'Légume',
+                'ingredient' => 'salade',
             ],
             [
                 'name' => 'mini concombre',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2022/01/14/00/30/cucumber-6936214_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['mai', 'juin'],
+                'botanical' => 'Fruits à pépins',
+                'genre' => 'Fruit',
+                'ingredient' => 'concombre',
             ],
             [
                 'name' => 'concombre blanc',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2022/01/14/00/30/cucumber-6936214_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['avril', 'mai', 'juin', 'juillet'],
+                'botanical' => 'Fruits à pépins',
+                'genre' => 'Fruit',
+                'ingredient' => 'concombre',
             ],
             [
                 'name' => 'aubergine de barbentane',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2020/03/28/17/01/eggplant-4977808_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['juin', 'juillet', 'août'],
+                'botanical' => 'Légumes fruits',
+                'genre' => 'Légume',
+                'ingredient' => 'aubergine',
             ],
             [
                 'name' => 'aubergine black beauty',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2020/03/28/17/01/eggplant-4977808_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['juin', 'jillet', 'août', 'septembre'],
+                'botanical' => 'Légumes fruits',
+                'genre' => 'Légume',
+                'ingredient' => 'aubergine',
             ],
             [
                 'name' => 'fraise gariguette',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2012/04/18/12/54/strawberry-36949_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['avril', 'mai', 'juin'],
+                'botanical' => 'Fruits rouges',
+                'genre' => 'Fruit',
+                'ingredient' => 'fraise',
             ],
             [
                 'name' => 'fraise reine des vallées',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2012/04/18/12/54/strawberry-36949_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['avril', 'mai', 'juin'],
+                'botanical' => 'Fruits rouges',
+                'genre' => 'Fruit',
+                'ingredient' => 'fraise',
             ],
             [
                 'name' => 'banane cavendish',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2014/12/21/23/39/bananas-575773_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['octobre', 'novembre', 'décembre'],
+                'botanical' => 'Fruits exotiques',
+                'genre' => 'Fruit',
+                'ingredient' => 'banane',
             ],
             [
                 'name' => 'banane plantain',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2014/12/21/23/39/bananas-575773_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
                 'local' => true,
                 'conservation' => 'Lorem ipsum dolor sit amet',
                 'created_at' => '2010-03-05',
+                'month' => ['septembre', 'octobre', 'novembre', 'décembre', 'janvier'],
+                'botanical' => 'Fruits exotiques',
+                'genre' => 'Fruit',
+                'ingredient' => 'banane',
           ],
         ];
     }
