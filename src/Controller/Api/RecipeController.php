@@ -26,14 +26,12 @@ class RecipeController extends AbstractController
     public function list(RecipeRepository $recipeRepository): JsonResponse
     {
         // Préparation des données
-        $allRecipes = $recipeRepository->findAll();
-
-        // dump($allRecipes);
+        $allRecipes = $recipeRepository->findAll();     
 
         // Envoie des données
         return $this->json([
             'Recettes' => $allRecipes,
-        ], Response::HTTP_OK, []);
+        ], Response::HTTP_OK, [], ["groups" => "recipe"]);
     }
 
     /**
@@ -56,7 +54,7 @@ class RecipeController extends AbstractController
         // Sinon envoie des données
         return $this->json([
             'recette' => $recipe,
-        ], Response::HTTP_OK, []);
+        ], Response::HTTP_OK, [], ["groups" => "recipe"]);
         
     }
 
@@ -84,7 +82,7 @@ class RecipeController extends AbstractController
         $em->flush();
 
         // on renvoit une réponse
-        return $this->json($recipe, Response::HTTP_CREATED, []);
+        return $this->json($recipe, Response::HTTP_CREATED, [], ["groups" => "recipe"]);
 
     }
 
@@ -122,7 +120,7 @@ class RecipeController extends AbstractController
         $em->flush();
 
         // on renvoit une réponse
-        return $this->json($recipe, Response::HTTP_OK, []);
+        return $this->json($recipe, Response::HTTP_OK, [], ["groups" => "recipe"]);
     }
 
     /**

@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\MeasureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MeasureRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=MeasureRepository::class)
@@ -19,6 +20,7 @@ class Measure
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups ({"recipe"})
      */
     private $type;
 

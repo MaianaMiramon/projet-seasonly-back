@@ -6,6 +6,7 @@ use App\Repository\BotanicalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BotanicalRepository::class)
@@ -16,11 +17,13 @@ class Botanical
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ({"vegetable"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups ({"vegetable"})
      */
     private $name;
 

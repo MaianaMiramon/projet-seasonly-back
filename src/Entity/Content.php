@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ContentRepository::class)
@@ -14,29 +15,34 @@ class Content
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ({"recipe"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups ({"recipe"})
      */
     private $quantity;
 
     /**
      * @ORM\ManyToOne(targetEntity=Ingredient::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups ({"recipe"})
      */
     private $ingredient;
 
     /**
      * @ORM\ManyToOne(targetEntity=Measure::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups ({"recipe"})
      */
     private $measure;
 
     /**
      * @ORM\ManyToOne(targetEntity=Recipe::class, inversedBy="contents")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups ({"content"})
      */
     private $recipe;
 

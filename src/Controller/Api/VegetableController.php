@@ -30,7 +30,7 @@ class VegetableController extends AbstractController
         // On retourne les données des vegetables au format Json
         return $this->json([
             'vegetables' => $vegetablesList,
-        ], Response::HTTP_OK, []);
+        ], Response::HTTP_OK, [], ["groups" => "vegetable"]);
     }
 
     /**
@@ -53,7 +53,7 @@ class VegetableController extends AbstractController
         // On retourne les données du vegetable au format Json
         return $this->json([
             'vegetable' => $vegetable,
-        ], Response::HTTP_OK, []);
+        ], Response::HTTP_OK, [], ["groups" => "vegetable"]);
     }
 
     /**
@@ -92,7 +92,7 @@ class VegetableController extends AbstractController
         $em->flush();
 
         // On retourne la réponse, on renvoie l'objet Vegetable
-        return $this->json($vegetable, Response::HTTP_OK, []);
+        return $this->json($vegetable, Response::HTTP_OK, [], ["groups" => "vegetable"]);
     }
 
     /**
@@ -118,7 +118,7 @@ class VegetableController extends AbstractController
         $em->flush();
 
         // On retourne une réponse 
-        return $this->json($vegetable, Response::HTTP_CREATED, []);
+        return $this->json($vegetable, Response::HTTP_CREATED, [], ["groups" => "vegetable"]);
     }
 
     /**
