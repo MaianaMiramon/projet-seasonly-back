@@ -137,7 +137,7 @@ class AppFixtures extends Fixture
         $vegetableList = $this->getVegetables();
         foreach($vegetableList as $currentVegetable) {
             $vegetableObject = new Vegetable();
-            $vegetableObject->setTitle($currentVegetable['title']);
+            $vegetableObject->setName($currentVegetable['name']);
             $vegetableObject->setImage($currentVegetable['image']);
             $vegetableObject->setDescription($currentVegetable['description']);
             $vegetableObject->setBenefits($currentVegetable['benefits']);
@@ -709,7 +709,7 @@ class AppFixtures extends Fixture
     public function getVegetables() {
         return [
             [   
-                'title' => 'tomates cerises',
+                'name' => 'tomates cerises',
                 'description' => 'La tomate cerise est un type de variété de tomate, cultivée comme cette dernière pour ses fruits - mais de taille réduite - consommés comme légumes. Les tomates cerises sont généralement considérées comme des hybrides entre Solanum pimpinellifolium L. et la tomate cultivée, issue de l\'espèce Solanum lycopersicum.',
                 'image' => 'https://cdn.pixabay.com/photo/2017/03/26/09/39/tomato-2175133_1280.png',
                 'benefits' => 'Vitamines C',
@@ -722,7 +722,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'tomate',
             ],
             [
-                'title' => 'tomates coeur de boeuf',
+                'name' => 'tomates coeur de boeuf',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2017/03/26/09/39/tomato-2175133_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -735,7 +735,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'tomate',
             ],
             [
-                'title' => 'pomme golden',
+                'name' => 'pomme golden',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/05/28/13/22/fruit-356519_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -748,7 +748,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'pomme',
             ],
             [
-                'title' => 'pomme gala',
+                'name' => 'pomme gala',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/05/28/13/22/fruit-356519_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -761,7 +761,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'pomme',
             ],
             [
-                'title' => 'pomme',
+                'name' => 'pomme',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/05/28/13/22/fruit-356519_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -774,7 +774,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'pomme',
             ],
             [
-                'title' => 'citron vert',
+                'name' => 'citron vert',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2013/07/12/19/16/lemon-154449_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -787,7 +787,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'citron',
             ],
             [
-                'title' => 'citron jaune',
+                'name' => 'citron jaune',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2013/07/12/19/16/lemon-154449_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -800,7 +800,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'citron',
             ],
             [
-                'title' => 'pomme',
+                'name' => 'pomme',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/05/28/13/22/fruit-356519_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -813,7 +813,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'pomme',
             ],
             [
-                'title' => 'salade romaine',
+                'name' => 'salade romaine',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/03/24/17/08/lettuce-295158_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -826,7 +826,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'salade',
             ],
             [
-                'title' => 'salade batavia',
+                'name' => 'salade batavia',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/03/24/17/08/lettuce-295158_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -839,7 +839,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'salade',
             ],
             [
-                'title' => 'mini concombre',
+                'name' => 'mini concombre',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2022/01/14/00/30/cucumber-6936214_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -852,7 +852,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'concombre',
             ],
             [
-                'title' => 'concombre blanc',
+                'name' => 'concombre blanc',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2022/01/14/00/30/cucumber-6936214_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -865,7 +865,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'concombre',
             ],
             [
-                'title' => 'aubergine de barbentane',
+                'name' => 'aubergine de barbentane',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2020/03/28/17/01/eggplant-4977808_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -878,7 +878,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'aubergine',
             ],
             [
-                'title' => 'aubergine black beauty',
+                'name' => 'aubergine black beauty',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2020/03/28/17/01/eggplant-4977808_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -891,7 +891,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'aubergine',
             ],
             [
-                'title' => 'fraise gariguette',
+                'name' => 'fraise gariguette',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2012/04/18/12/54/strawberry-36949_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -904,7 +904,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'fraise',
             ],
             [
-                'title' => 'fraise reine des vallées',
+                'name' => 'fraise reine des vallées',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2012/04/18/12/54/strawberry-36949_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -917,7 +917,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'fraise',
             ],
             [
-                'title' => 'banane cavendish',
+                'name' => 'banane cavendish',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/12/21/23/39/bananas-575773_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -930,7 +930,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'banane',
             ],
             [
-                'title' => 'banane plantain',
+                'name' => 'banane plantain',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/12/21/23/39/bananas-575773_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
