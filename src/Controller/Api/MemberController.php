@@ -29,7 +29,7 @@ class MemberController extends AbstractController
 
         return $this->json([
             'members' => $membersList,
-        ], Response::HTTP_OK, [], ["groups" => "member_list"]);
+        ], Response::HTTP_OK, [], ["groups" => "member"]);
     }
 
     /**
@@ -53,7 +53,7 @@ class MemberController extends AbstractController
         $em->persist($member);
         $em->flush();
 
-        return $this->json($member, Response::HTTP_CREATED, [], ["groups" => "member_create"]);
+        return $this->json($member, Response::HTTP_CREATED, [], ["groups" => "member"]);
     }
 
     /**
@@ -100,7 +100,7 @@ class MemberController extends AbstractController
 
         return $this->json([
             'movie' => $member,
-        ], Response::HTTP_OK, [], ["groups" => "member_read"]);
+        ], Response::HTTP_OK, [], ["groups" => "member"]);
         
     }
 
@@ -134,6 +134,6 @@ class MemberController extends AbstractController
         $em->flush();
 
         // on renvoit une réponse
-        return $this->json($member, Response::HTTP_OK, [], ["groups" => 'member_update']);
+        return $this->json($member, Response::HTTP_OK, [], ["groups" => 'member']);
     }
 }

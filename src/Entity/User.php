@@ -15,11 +15,12 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ({"member"})
      */
     private $id;
 
     /**
-     * @Groups ({"member_list", "member_read"})
+     * @Groups ({"member"})
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;

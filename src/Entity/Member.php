@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MemberRepository;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -18,53 +19,58 @@ class Member implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
+     * @Groups ({"member"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
+     * @Groups ({"member"})
      */
     private $pseudo;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
+     * @Groups ({"member"})
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
+     * @Groups ({"member"})
      */
     private $password;
 
         /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="member", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
+     * @Groups ({"member"})
      */
     private $user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Recipe::class, inversedBy="members")
-     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
+     * @Groups ({"member"})
      */
     private $recipes;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
+     * @Groups ({"member"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
-     * @Groups ({"member_list", "member_create", "member_read", "member_update"})
+     * @Groups ({"member"})
      */
     private $updated_at;
+
+    public function __construct()
+    {
+        $this->recipes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
