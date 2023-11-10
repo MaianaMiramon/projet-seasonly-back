@@ -25,7 +25,7 @@ class Vegetable
      * @ORM\Column(type="string", length=100)
      * @Groups ({"vegetable"})
      */
-    private $name;
+    private $title;
 
     /**
      * @ORM\Column(type="text")
@@ -103,14 +103,14 @@ class Vegetable
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
