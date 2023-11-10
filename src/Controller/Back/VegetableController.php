@@ -8,20 +8,20 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/back", name="app_back_")
+ * @Route("/back/vegetable", name="app_back_vegetable_")
  */
 class VegetableController extends AbstractController
 {
     /**
-     * @Route("/vegetable", name="list", methods="GET")
+     * @Route("/", name="index", methods="GET")
      */
-    public function list(VegetableRepository $vegetableRepository): Response
+    public function index(VegetableRepository $vegetableRepository): Response
     {
         // Préparation des données
         $vegetablesList = $vegetableRepository->findAll();
 
         // On retourne les données des vegetables au format Json
-        return $this->render('back/vegetable/list.html.twig', [
+        return $this->render('back/vegetable/index.html.twig', [
             'vegetables' => $vegetablesList,
         ]);
     }
