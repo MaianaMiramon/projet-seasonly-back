@@ -257,6 +257,15 @@ class AppFixtures extends Fixture
         $member->setCreatedAt(new DateTimeImmutable('2010-03-05'));
         $member->setUser($user);
 
+        // Association avec les recettes (favoris)
+        $recipeRepository = $manager->getRepository(Recipe::class);
+        $recipeList = $recipeRepository->findAll();
+        for ($i = 1; $i <= mt_rand(0, 4); $i++) {
+        $recipeRandom = mt_rand(0, count($recipeList) -1);
+        $currentRecipeId = $recipeList[$recipeRandom];
+        $member->addRecipe($currentRecipeId);
+        }
+
         $manager->persist($member);
         
         
@@ -276,6 +285,15 @@ class AppFixtures extends Fixture
         $moderatorMember->setCreatedAt(new DateTimeImmutable('2010-03-05'));
         $moderatorMember->setUser($user);
 
+        // Association avec les recettes (favoris)
+        $recipeRepository = $manager->getRepository(Recipe::class);
+        $recipeList = $recipeRepository->findAll();
+        for ($i = 1; $i <= mt_rand(0, 4); $i++) {
+        $recipeRandom = mt_rand(0, count($recipeList) -1);
+        $currentRecipeId = $recipeList[$recipeRandom];
+        $moderatorMember->addRecipe($currentRecipeId);
+        }
+
         $manager->persist($moderatorMember);
 
         // création admin
@@ -293,6 +311,16 @@ class AppFixtures extends Fixture
         $adminMember->setRoles(['ROLE_ADMIN']);
         $adminMember->setCreatedAt(new DateTimeImmutable('2010-03-05'));
         $adminMember->setUser($user);
+
+        // Association avec les recettes (favoris)
+        $recipeRepository = $manager->getRepository(Recipe::class);
+        $recipeList = $recipeRepository->findAll();
+        for ($i = 1; $i <= mt_rand(0, 4); $i++) {
+        $recipeRandom = mt_rand(0, count($recipeList) -1);
+        $currentRecipeId = $recipeList[$recipeRandom];
+        $adminMember->addRecipe($currentRecipeId);
+        
+        }
 
         $manager->persist($adminMember);
 
