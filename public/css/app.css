@@ -1,0 +1,42 @@
+html {
+    overflow-y: scroll;
+}
+
+.header-logo__title {
+    color: #7cb07c;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0 0.8em 0 0.3em;
+    text-transform: uppercase;
+}
+
+.nav-link {
+    color: #7cb07c;
+    font-weight: bold;
+}
+
+.h-md-300 {
+    height: 300px;
+}
+
+.movie__poster {
+    background-position: center;
+    background-size: cover;
+}
+
+.movie__poster img {
+    width: 100%;
+    /* height: 300px;
+    object-fit: cover;
+    object-position: top; */
+}
+
+.movie__favorite {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.allocine nav {
+    background-color: yellow;
+}
