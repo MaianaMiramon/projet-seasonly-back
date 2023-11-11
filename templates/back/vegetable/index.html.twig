@@ -1,30 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Genre List{% endblock %}
+{% block title %}Liste vegetable{% endblock %}
 
 {% block body %}
-<a class="btn btn-primary" href="">Ajouter</a>
+<a class="btn btn-secondary" href="">Ajouter un vegetable</a>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>#</th>
-            <th>Nom</th>
-            <th>Action</th>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
+
+    {% for currentVegetable in vegetables %}
         <tr>
-            <td></td>
-            <td></td>
+            <td>{{ currentVegetable.id }}</td>
+            <td>{{ currentVegetable.title }}</td>
             <td>
-                <form method="post" action="" onsubmit="return confirm('Etes vous sur de vouloir supprimer');">
+                <form method="post" action="{{ path('app_back_vegetable_delete', {'id': currentVegetable.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer');">
+                    <a href="{{ path('app_back_vegetable_show', {'id': currentVegetable.id}) }}" class="btn btn-secondary">Voir plus</a>
                     <a href="" class="btn btn-secondary">Modifier</a>
-                    <input type="hidden" name="_token" value="">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ currentVegetable.id) }} ">
                     <button class="btn btn-danger">Supprimer</button>
                 </form>
             </td>
         </tr>
+    {% endfor %}
     </tbody>
-</table>
+</table>    
 {% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail vegetable{% endblock %}
+
+{% block body %}
+<a class="btn btn-danger" href="">Supprimer</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Benefits</th>
+            <th>Local</th>
+            <th>Conservation</th>
+            <th>Genre</th>
+            <th>Botanical</th>
+            <th>Month</th>
+            <th>Ingredient</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>{{ vegetable.id }}</td>
+            <td>{{ vegetable.title }}</td>
+            <td>{{ vegetable.description }}</td>
+            <td>{{ vegetable.image }}</td>
+            <td>{{ vegetable.benefits }}</td>
+            <td>{{ vegetable.conservation }}</td>
+            <td>{{ vegetable.local }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>    
+{% endblock %}
