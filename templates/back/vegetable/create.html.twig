@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create vegetable{% endblock %}
+
+{% block body %}
+<h1>Ajouter un fruit ou un légume</h1>
+
+{{ form_start(form, {"attr": {"novalidate": "novalidate"}}) }}
+<button class="btn btn-primary">Ajouter</button>
+{{ form_end(form) }}
+{% endblock %}
