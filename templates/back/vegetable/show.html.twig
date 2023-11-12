@@ -18,7 +18,7 @@
             <th>Genre</th>
             <th>Botanical</th>
             <th>Month</th>
-            <th>Ingredient</th>
+            <th>Ingredient lié</th>
         </tr>
     </thead>
     <tbody>
@@ -29,12 +29,16 @@
             <td>{{ vegetable.description }}</td>
             <td>{{ vegetable.image }}</td>
             <td>{{ vegetable.benefits }}</td>
-            <td>{{ vegetable.conservation }}</td>
             <td>{{ vegetable.local }}</td>
-            <td>{{ month.name }}</td>
-            <td>{{ ingredient.name }}</td>
+            <td>{{ vegetable.conservation }}</td>
             <td>{{ genre.name }}</td>
             <td>{{ botanical.name }}</td>
+            <td>
+                {% for month in vegetable.months %}
+                    {{ month.name }}
+                {% endfor %}
+            </td>
+            <td>{{ ingredient.name }}</td>
         </tr>
     </tbody>
 </table>    
