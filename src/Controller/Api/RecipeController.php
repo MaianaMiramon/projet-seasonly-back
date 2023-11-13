@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -22,6 +23,7 @@ class RecipeController extends AbstractController
 {
     /**
      * @Route("/", name="list", methods="GET")
+     * @IsGranted("PUBLIC_ACCESS")
      */
     public function list(RecipeRepository $recipeRepository): JsonResponse
     {
@@ -36,6 +38,7 @@ class RecipeController extends AbstractController
 
     /**
      * @Route("/{id}", name="read", methods="GET", requirements={"id"="\d+"})
+     * @IsGranted("PUBLIC_ACCESS")
      */
     public function read($id, RecipeRepository $recipeRepository): JsonResponse
     {

@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -34,6 +35,7 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/add", name="api_member_create", methods="POST")
+     * @IsGranted("PUBLIC_ACCESS")
      */
     public function create(EntityManagerInterface $em, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
@@ -58,6 +60,7 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/{id}", name="api_member_delete", methods="DELETE")
+     * @IsGranted("ROLE_ADMIN or ROLE_MEMBER")
      */
     public function delete($id, EntityManagerInterface $em): JsonResponse
     {
@@ -84,6 +87,7 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/{id}", name="api_member_read", methods="GET", requirements={"id"="\d+"})
+     * @IsGranted("ROLE_ADMIN or ROLE_MEMBER")
      */
     public function read($id, MemberRepository $memberRepository): JsonResponse
     {
@@ -106,6 +110,7 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/{id}", name="api_member_update", methods="PUT", requirements={"id"="\d+"})
+     * @IsGranted("ROLE_ADMIN or ROLE_MEMBER")
      */
     public function update($id, EntityManagerInterface $em, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
