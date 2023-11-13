@@ -35,16 +35,21 @@ DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8&charset=
 
 ## Configurer le token JWT dans .env.local
 
+- créer un dossier "jwt" dans le dossier config
+- générer la commande : openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+    (quand il demande un mot de passe, y mettre le mdp de son choix)
+- générer la commande : openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
+    (mettre le mot de passe saisi juste avant)
+
 - Copier coller les éléments suivants depuis .env 
 
 ``` env
 ###> lexik/jwt-authentication-bundle ###
 JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
 JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
-JWT_PASSPHRASE=
+JWT_PASSPHRASE=(mettre le mot de passe choisi juste au dessus, mdp des clés SSL)
 ###< lexik/jwt-authentication-bundle ###
 ```
-- JWT_PASSPHRASE= mettre le mot de passe des clés SSL (demander au back)
 
 ## Lancer la commande de création de la database
 
