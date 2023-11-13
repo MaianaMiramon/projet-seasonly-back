@@ -36,10 +36,16 @@ DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8&charset=
 ## Configurer le token JWT dans .env.local
 
 - créer un dossier "jwt" dans le dossier config
-- générer la commande : openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
-    (quand il demande un mot de passe, y mettre le mdp de son choix)
-- générer la commande : openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
-    (mettre le mot de passe saisi juste avant)
+
+- générer la commande (quand il demande un mot de passe, y mettre le mdp de son choix) : 
+``` env
+openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+```
+
+- générer la commande (mettre le mot de passe saisi juste avant) : 
+``` env
+openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
+```    
 
 - Copier coller les éléments suivants depuis .env 
 
