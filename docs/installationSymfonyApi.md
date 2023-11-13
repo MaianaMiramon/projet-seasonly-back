@@ -33,6 +33,19 @@ DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8&charset=
 
 - Et le "8" après serverVersion= par "mariadb-10.3.2"
 
+## Configurer le token JWT dans .env.local
+
+- Copier coller les éléments suivants depuis .env 
+
+``` env
+###> lexik/jwt-authentication-bundle ###
+JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+JWT_PASSPHRASE=
+###< lexik/jwt-authentication-bundle ###
+```
+- JWT_PASSPHRASE= mettre le mot de passe des clés SSL (demander au back)
+
 ## Lancer la commande de création de la database
 
 ```bash
