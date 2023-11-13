@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste members{% endblock %}
+
+{% block body %}
+<a class="btn btn-secondary" href="{{ path('app_back_vegetable_create') }}">Ajouter un membre</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Pseudo</th>
+            <th>Email</th>
+            <th>Newsletter</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for currentMember in members %}
+        <tr>
+            <td>{{ currentMember.id }}</td>
+            <td>{{ currentMember.pseudo }}</td>
+            <td>{{ currentMember.pseudo }}</td>
+            <td>{{ currentMember.pseudo }}</td>
+            <td>
+                <form method="post" action="" onsubmit="return confirm('Etes vous sur de vouloir supprimer');">
+                    <a href="{{ path('app_back_member_show', {'id': currentMember.id}) }}" class="btn btn-secondary">Voir plus</a>
+                    <a href="" class="btn btn-secondary">Modifier</a>
+                    <input type="hidden" name="_token" value="">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>    
+{% endblock %}
