@@ -32,6 +32,11 @@ security:
             provider: app_user_provider
             logout:
                 path: app_logout
+            form_login:
+                # "app_back_login" route de connexion back et redirection vers l'accueil
+                login_path: app_back_login
+                check_path: app_back_login
+                default_target_path: /back/
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -58,6 +63,7 @@ security:
         - { path: ^/api/member, roles: [ROLE_MEMBER] }
         - { path: ^/api/member/\d+, roles: [ROLE_MEMBER] }
         - { path: ^/api, roles: PUBLIC_ACCESS }
+        - { path: ^/back/login, roles: PUBLIC_ACCESS }
         - { path: ^/back, roles: [ROLE_ADMIN] }
 
     role_hierarchy:

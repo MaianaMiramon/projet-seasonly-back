@@ -42,7 +42,7 @@ class Member implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
-        /**
+    /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="member", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups ({"member"})
