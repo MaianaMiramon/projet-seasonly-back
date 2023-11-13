@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -21,6 +22,7 @@ class VegetableController extends AbstractController
 {
     /**
      * @Route("/vegetable", name="list", methods="GET")
+     * @IsGranted("PUBLIC_ACCESS")
      */
     public function list(VegetableRepository $vegetableRepository): JsonResponse
     {
@@ -34,7 +36,8 @@ class VegetableController extends AbstractController
     }
 
     /**
-     * @Route("/vegetable/{id}", name="show", methods="GET", requirements={"id"="\d+"}) 
+     * @Route("/vegetable/{id}", name="show", methods="GET", requirements={"id"="\d+"})
+     * @IsGranted("PUBLIC_ACCESS")
      */
     public function show($id, VegetableRepository $vegetableRepository): JsonResponse
     {

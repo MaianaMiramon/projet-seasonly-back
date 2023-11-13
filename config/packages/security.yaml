@@ -45,16 +45,24 @@ security:
             # This value auto-selects the best possible hashing algorithm
             # (i.e. Sodium when available).
             algorithm: auto
-    role_hierarchy:
-        ROLE_MODERATOR: ROLE_USER
-        ROLE_ADMIN: ROLE_MODERATOR
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
-    # TODO : les routes accès + les roles !
-    # access_control:
-    #    - { path: ^/admin, roles: ROLE_ADMIN }
-    #    - { path: ^/profile, roles: ROLE_USER }
+    access_control:
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/logout, roles: [ROLE_MEMBER] }
+        - { path: ^/api/member/add, roles: PUBLIC_ACCESS }
+        - { path: ^/api/favorite, roles: [ROLE_MEMBER] }
+        - { path: ^/api/favorite/delete/\d+, roles: [ROLE_MEMBER] }
+        - { path: ^/api/favorite/add/\d+, roles: [ROLE_MEMBER] }
+        - { path: ^/api/member, roles: [ROLE_MEMBER] }
+        - { path: ^/api/member/\d+, roles: [ROLE_MEMBER] }
+        - { path: ^/api, roles: PUBLIC_ACCESS }
+        - { path: ^/back, roles: [ROLE_ADMIN] }
+
+    role_hierarchy:
+        ROLE_MEMBER: ROLE_USER
+        ROLE_ADMIN: ROLE_MEMBER
 
 when@test:
     security:
