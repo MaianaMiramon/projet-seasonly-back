@@ -13,7 +13,7 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/logout", name="app_logout")
-     * @IsGranted("ROLE_ADMIN or ROLE_MEMBER")
+     * @IsGranted("ROLE_MEMBER")
      * 
      */
     public function logout(): void

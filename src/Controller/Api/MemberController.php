@@ -60,7 +60,7 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/{id}", name="api_member_delete", methods="DELETE")
-     * @IsGranted("ROLE_ADMIN or ROLE_MEMBER")
+     * @IsGranted("ROLE_MEMBER")
      */
     public function delete($id, EntityManagerInterface $em): JsonResponse
     {
@@ -87,7 +87,7 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/{id}", name="api_member_read", methods="GET", requirements={"id"="\d+"})
-     * @IsGranted("ROLE_ADMIN or ROLE_MEMBER")
+     * @IsGranted("ROLE_MEMBER")
      */
     public function read($id, MemberRepository $memberRepository): JsonResponse
     {
@@ -110,7 +110,7 @@ class MemberController extends AbstractController
 
     /**
      * @Route("/{id}", name="api_member_update", methods="PUT", requirements={"id"="\d+"})
-     * @IsGranted("ROLE_ADMIN or ROLE_MEMBER")
+     * @IsGranted("ROLE_MEMBER")
      */
     public function update($id, EntityManagerInterface $em, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {

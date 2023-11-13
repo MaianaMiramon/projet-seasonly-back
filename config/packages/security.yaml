@@ -50,11 +50,13 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/logout, roles: [ROLE_ADMIN, ROLE_MEMBER] }
+        - { path: ^/api/logout, roles: [ROLE_MEMBER] }
         - { path: ^/api/member/add, roles: PUBLIC_ACCESS }
-        #- { path: ^/api/favorite, roles: [ROLE_ADMIN, ROLE_MEMBER] }
-        - { path: ^/api/member, roles: [ROLE_ADMIN, ROLE_MEMBER] }
-        - { path: ^/api/member/\d+, roles: [ROLE_ADMIN, ROLE_MEMBER] }
+        - { path: ^/api/favorite, roles: [ROLE_MEMBER] }
+        - { path: ^/api/favorite/delete/\d+, roles: [ROLE_MEMBER] }
+        - { path: ^/api/favorite/add/\d+, roles: [ROLE_MEMBER] }
+        - { path: ^/api/member, roles: [ROLE_MEMBER] }
+        - { path: ^/api/member/\d+, roles: [ROLE_MEMBER] }
         - { path: ^/api, roles: PUBLIC_ACCESS }
         - { path: ^/back, roles: [ROLE_ADMIN] }
 
