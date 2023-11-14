@@ -2,16 +2,24 @@ html {
     overflow-y: scroll;
 }
 
+body {
+    background-color: #fff9f2;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.navbar {
+    background-color: #45624c;
+}
+
 .header-logo__title {
-    color: #7cb07c;
-    font-size: 1.5em;
+    color: white;
+    font-size: 1em;
     font-weight: bold;
     margin: 0 0.8em 0 0.3em;
-    text-transform: uppercase;
 }
 
 .nav-link {
-    color: #7cb07c;
+    color: white;
     font-weight: bold;
 }
 
