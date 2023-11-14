@@ -7,6 +7,10 @@ body {
     font-family: 'Work Sans', sans-serif;
 }
 
+footer {
+    background-color: #fff9f2;
+}
+
 .navbar {
     background-color: #45624c;
 }
@@ -18,6 +22,16 @@ body {
     margin: 0 0.8em 0 0.3em;
 }
 
+.home-page {
+    text-align: center;
+    background-image: url('../images/background3.jpg');
+    background-size: cover;    
+    filter: opacity(0.20);
+    color: white;
+    font-weight: bold;
+    padding: 300px;
+}
+
 .nav-link {
     color: white;
     font-weight: bold;
@@ -25,26 +39,4 @@ body {
 
 .h-md-300 {
     height: 300px;
-}
-
-.movie__poster {
-    background-position: center;
-    background-size: cover;
-}
-
-.movie__poster img {
-    width: 100%;
-    /* height: 300px;
-    object-fit: cover;
-    object-position: top; */
-}
-
-.movie__favorite {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.allocine nav {
-    background-color: yellow;
 }
