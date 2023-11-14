@@ -2,7 +2,10 @@
 
 namespace App\Controller\Back;
 
+use App\Entity\Member;
+use App\Form\Back\MemberType;
 use App\Repository\MemberRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,11 +23,8 @@ class MemberController extends AbstractController
         // Préparation des données
         $membersList = $memberRepository->findAll();
 
-        // TODO : préparer les données liées à l'entité User
-
-        // On retourne les données des members au format Json
         return $this->render('back/member/index.html.twig', [
-            'members' => $membersList,
+            'members' => $membersList, 
         ]);
     }
 
@@ -56,6 +56,50 @@ class MemberController extends AbstractController
             'member' => $member,
             'email' => $email,
             'newsletter' => $newsletter,  
+        ]);
+    }
+
+    /**
+     * @Route("/update/{id}", name="update", methods={"GET", "POST"}, requirements={"id"="\d+"})
+     */
+    public function update($id, Request $request, Member $member, MemberRepository $memberRepository): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $member = $entityManager->getRepository(Member::class)->find($id);
+
+        if (!$member) {
+            throw $this->createNotFoundException('Membre non trouvé pour l\'id ' . $id);
+        }
+
+        $form = $this->createForm(MemberType::class, $member);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer les valeurs des champs non mappés
+            $userEmail = $form->get('user_email')->getData();
+            $userNewsletter = $form->get('user_newsletter')->getData();
+
+            // Mettre à jour l'entité Member
+            $member->setPseudo($form->get('pseudo')->getData());
+            $member->setRoles($form->get('roles')->getData());
+
+            // Vérifier si l'entité User est associée à Member
+            $user = $member->getUser();
+            if ($user) {
+                // Mettre à jour l'entité User si elle existe
+                $user->setEmail($userEmail);
+                $user->setNewsletter($userNewsletter);
+                // Vous pouvez ajouter d'autres mises à jour si nécessaire pour l'entité User
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_back_member_index');
+        }
+
+        return $this->render('back/member/update.html.twig', [
+            'member' => $member,
+            'form' => $form,
         ]);
     }
 }

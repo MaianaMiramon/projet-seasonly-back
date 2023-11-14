@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update member{% endblock %}
+
+{% block body %}
+<h1>Modifier le membre : {{ member.pseudo }}</h1>
+
+{{ form_start(form, {"attr": {"novalidate": "novalidate"}}) }}
+<button class="btn btn-primary">Modifier</button>
+{{ form_end(form) }}
+{% endblock %}
