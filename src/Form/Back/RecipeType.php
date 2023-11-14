@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class RecipeType extends AbstractType
 {
@@ -23,24 +24,26 @@ class RecipeType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Nom de la recette'
+                'label' => 'Ex: Pizza 4 fromages',
             ])  
             ->add('description', TextType::class, [
-                'label' => 'Description de la recette'
+                'label' => 'C\'est une pizza..'
             ])
             ->add('image', TextType::class, [
-                'label' => 'Image de la recette (URL)'
+                'label' => 'https://exemple.com'
             ])
             ->add('instruction', TextType::class, [
-                'label' => 'Etapes de préparation de la recette'
+                'label' => 'Etape 1 : ..'
             ])
             ->add('duration', TextType::class, [
-                'label' => 'Temps pour faire la recette'
+                'label' => 'Ex: 120'
             ])
             ->add('serving', IntegerType::class, [
-                'label' => 'Nombre de personnes'
+                'label' => 'Ex: 4'
             ])
-            ->add('created_at')
+            ->add('created_at', DateTimeType::class, array(
+                'input' => 'datetime_immutable'
+            ))
             ->add('updated_at', null, [
                 'label' => 'Dernière modification'
             ])

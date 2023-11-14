@@ -1,4 +1,94 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Sauvegarder') }}</button>
-{{ form_end(form) }}
+<form>
+    <div class="form-group">
+        <label for="recipeInputName">Nom de la recette</label>
+        <input
+            title="{{ field_name(form.title) }}"
+            value="{{ field_value(form.title) }}"
+            placeholder="{{ field_label(form.title) }}"
+            class="form-control"
+            id="recipeInputName"
+        >
+    </div>
+    <div class="form-group">
+        <label for="recipeInputDescription">Description de la recette</label>
+        <textarea
+            title="{{ field_name(form.description) }}"
+            value="{{ field_value(form.description) }}"
+            placeholder="{{ field_label(form.description) }}"
+            class="form-control"
+            id="recipeInputDescription"
+        ></textarea>
+    </div>
+    <div class="form-group">
+        <label for="recipeInputImage">Image de la recette (URL)</label>
+        <input
+            title="{{ field_name(form.image) }}"
+            value="{{ field_value(form.image) }}"
+            placeholder="{{ field_label(form.image) }}"
+            class="form-control"
+            id="recipeInputImage"
+        >
+    </div>
+    <div class="form-group">
+        <label for="recipeInputInstruction">Etape de préparation de la recette</label>
+        <textarea
+            title="{{ field_name(form.instruction) }}"
+            value="{{ field_value(form.instruction) }}"
+            placeholder="{{ field_label(form.instruction) }}"
+            class="form-control"
+            id="recipeInputInstruction"
+        ></textarea>
+    </div>
+    <div class="form-group">
+        <label for="recipeInputDuration">Temps (en minute)</label>
+        <input
+            title="{{ field_name(form.duration) }}"
+            value="{{ field_value(form.duration) }}"
+            placeholder="{{ field_label(form.duration) }}"
+            class="form-control"
+            id="recipeInputDuration"
+        >
+    </div>
+    <div class="form-group">
+        <label for="recipeInputServing">Nombre de personnes</label>
+        <input
+            title="{{ field_name(form.serving) }}"
+            value="{{ field_value(form.serving) }}"
+            placeholder="{{ field_label(form.serving) }}"
+            class="form-control"
+            id="recipeInputServing"
+        >
+    </div>
+    <div class="form-group">
+        <label for="recipeInputMeal">Meal</label>
+        <select id="recipeInputMeal" name="{{ field_name(form.meal) }}" class="form-control">
+
+        {% for label, value in field_choices(form.meal) %}
+            <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <div class="col" id="some-custom-id">
+        {{ form_row(form.created_at) }}
+    </div>
+    {# <div class="form-group">
+        <label for="recipeInputCreatedAt">Date de création</label>
+        <input
+            title="{{ field_name(form.created_at) }}"
+            class="form-control"
+            id="recipeInputCreatedAt"
+            type="datetime-local"
+        >
+    </div> #}
+
+<button class="btn btn-success">{{ button_label|default('Sauvegarder') }}</button>
+</form>
+
+
+{# <select title="{{ field_name(form.country) }}" class="form-control">
+    <option value="">{{ field_label(form.country) }}</option>
+
+    {% for label, value in field_choices(form.country) %}
+        <option value="{{ value }}">{{ label }}</option>
+    {% endfor %}
+</select> #}
