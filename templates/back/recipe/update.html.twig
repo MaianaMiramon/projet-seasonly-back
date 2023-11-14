@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Recipe{% endblock %}
+{% block title %}Modification : {{ recipe.title }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Recipe</h1>
+    <h1>Modification : {{ recipe.title }}</h1>
 
     {{ include('back/recipe/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_back_recipe_index') }}">back to list</a>
-
+    
+    <a class="btn btn-secondary" href="{{ path('app_back_recipe_index') }}">Liste des recettes</a>
+    
     {{ include('back/recipe/_delete_form.html.twig') }}
+
 {% endblock %}

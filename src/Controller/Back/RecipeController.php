@@ -50,7 +50,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * @Route("/update/{id}", name="update", methods={"GET", "POST"}, requirements={"id"="\d+"})
+     * @Route("/{id}/update", name="update", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
     public function update(Request $request, Recipe $recipe, RecipeRepository $recipeRepository): Response
     {
@@ -81,7 +81,7 @@ class RecipeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $recipeRepository->add($recipe, true);
 
-            return $this->redirectToRoute('app_back_recipe_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_content_create', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/recipe/create.html.twig', [
@@ -91,7 +91,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * @Route("/recipe/delete/{id}", name="delete", methods="POST", requirements={"id"="\d+"}) 
+     * @Route("/{id}", name="delete", methods="POST", requirements={"id"="\d+"}) 
      */
     public function delete(Request $request, Recipe $recipe, RecipeRepository $recipeRepository): Response
     {

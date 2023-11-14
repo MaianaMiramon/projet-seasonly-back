@@ -38,7 +38,7 @@ class ContentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $contentRepository->add($content, true);
 
-            return $this->redirectToRoute('app_back_content_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_content_create', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/content/create.html.twig', [
@@ -64,11 +64,12 @@ class ContentController extends AbstractController
     {
         $form = $this->createForm(ContentType::class, $content);
         $form->handleRequest($request);
+        $recipe = $content->getRecipe();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contentRepository->add($content, true);
 
-            return $this->redirectToRoute('app_content_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/content/update.html.twig', [
@@ -82,10 +83,11 @@ class ContentController extends AbstractController
      */
     public function delete(Request $request, Content $content, ContentRepository $contentRepository): Response
     {
+        $recipe = $content->getRecipe();
         if ($this->isCsrfTokenValid('delete'.$content->getId(), $request->request->get('_token'))) {
             $contentRepository->remove($content, true);
         }
 
-        return $this->redirectToRoute('app_back_content_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_back_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
     }
 }

@@ -1,35 +1,3 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
-
-<form>
-  <div class="row">
-    <div class="col">
-        <label for="contentQuantity">Quantité</label>
-        <input
-            title="{{ field_name(form.quantity) }}"
-            value="{{ field_value(form.quantity) }}"
-            placeholder="{{ field_label(form.quantity) }}"
-            class="form-control"
-            id="contentQuantity"
-        >
-    </div>
-    <div class="col">
-        <label for="contentMeasure">Mesure</label>
-        <select id="contentMeasure" name="{{ field_name(form.measure) }}" class="form-control">
-
-        {% for label, value in field_choices(form.measure) %}
-            <option value="{{ value }}">{{ label }}</option>
-        {% endfor %}
-    </div>
-    <div class="col">
-        <label for="contentIngredient">Ingredient</label>
-        <select id="contentIngredient" name="{{ field_name(form.ingredient) }}" class="form-control">
-
-        {% for label, value in field_choices(form.ingredient) %}
-            <option value="{{ value }}">{{ label }}</option>
-        {% endfor %}
-    </div>
-  </div>
-</form>

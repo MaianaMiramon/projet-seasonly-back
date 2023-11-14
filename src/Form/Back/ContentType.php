@@ -10,29 +10,34 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ContentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('quantity')
             ->add('recipe', EntityType::class, [
-                'class' => Recipe::class,
-                'choice_label' => 'title',
-                'multiple' => false
+            'class' => Recipe::class,
+            'choice_label' => 'title',
+            'multiple' => false,
+            'label' => 'Recette :'
             ])
-            ->add('ingredient', EntityType::class, [
-                'class' => Ingredient::class,
-                'choice_label' => 'name',
-                'multiple' => false
+            ->add('quantity', Integertype::class, [
+                'label' => 'Quantité :'
             ])
             ->add('measure', EntityType::class, [
                 'class' => Measure::class,
                 'choice_label' => 'type',
                 'multiple' => false
+                ])
+            ->add('ingredient', EntityType::class, [
+                'class' => Ingredient::class,
+                'choice_label' => 'name',
+                'multiple' => false
             ])
-        ;
+            ->add('Sauvegarder', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
