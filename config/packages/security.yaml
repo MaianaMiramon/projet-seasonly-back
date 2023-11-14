@@ -15,7 +15,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login:
+        login_api:
             pattern: ^/api/login
             stateless: true
             json_login:
@@ -23,21 +23,24 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
-            pattern:   ^/api
+            pattern: ^/api
             stateless: true
             jwt: ~
-
+            logout:
+                path: app_api_logout
+                target: /api/  # Redirection après la déconnexion de l'API
         main:
             lazy: true
             provider: app_user_provider
             logout:
-                path: app_logout
+                path: app_back_logout
+                target: app_back_login
             form_login:
                 # "app_back_login" route de connexion back et redirection vers l'accueil
                 login_path: app_back_login
                 check_path: app_back_login
                 default_target_path: /back/
-
+        
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -64,6 +67,7 @@ security:
         - { path: ^/api/member/\d+, roles: [ROLE_MEMBER] }
         - { path: ^/api, roles: PUBLIC_ACCESS }
         - { path: ^/back/login, roles: PUBLIC_ACCESS }
+        - { path: ^/back/logout, roles: [ROLE_ADMIN] }
         - { path: ^/back, roles: [ROLE_ADMIN] }
 
     role_hierarchy:

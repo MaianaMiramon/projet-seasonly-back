@@ -24,17 +24,13 @@
 <body>
     <!-- Nav -->
     <nav class="navbar navbar-expand-lg navbar-black">
-    <div class="container-fluid d-flex justify-content-between">
-        <div>
-            <a href="#" class="navbar-brand d-flex">
-                <span class="header-logo__title me-3">Backoffice</span>
-            </a>              
-        </div>
+    <div class="container-fluid d-flex">
         <div class="text-center">
-            <a href="#" class="navbar-brand d-flex">
-                <img src="{{ asset('images/seasonly4.png')}}" height="50" alt="Logo de Seasonly">
+            <a href="{{ path("app_back_home") }}" class="navbar-brand d-flex">
+                <img src="{{ asset('images/seasonly4.png')}}" height="60" alt="Logo de Seasonly">
             </a>
         </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -56,25 +52,28 @@
                         <a class="nav-link" href="">User</a>
                     </li>
                     <li class="nav-item dropdown">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown">
-                            <span></span>
-                            <i class="bi bi-person-square"></i>
+                            data-bs-toggle="dropdown" style="color: white;">
+                            <span>{{ app.user.pseudo }}</span>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="">Déconnexion</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ path('app_back_logout') }}">Déconnexion</a></li>
                         </ul>
+                    </li>
+                </ul>
+                {% endif %}
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-        <div class="container bg-lighttt pt-5">
+        <div class="container pt-5">
             <div class="row mb-2">
                 <div class="col">
-
             <div class="" role="alert">
-            </div>
+        </div>
 
         {% block body %}
         {# C'est ici qu'on va coder nos vue #}
@@ -86,7 +85,7 @@
 <footer>
     <div class="text-center p-4">
         © 2023 Copyright:
-        <a class="text-reset fw-bold" href="#">Seasonly</a>
+        <a class="text-reset fw-bold" href="{{ path("app_back_home") }}">Seasonly</a>
     </div>
 </footer>
 <!-- Footer -->

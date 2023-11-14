@@ -12,7 +12,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/api/logout", name="app_api_logout")
      * @IsGranted("ROLE_MEMBER")
      * 
      */
