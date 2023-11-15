@@ -49,7 +49,7 @@ footer {
     background-image: url('../images/background3.jpg'); /* Photo de <a href="https://unsplash.com/fr/@jannerboy62?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Nick Fewings</a> sur <a href="https://unsplash.com/fr/photos/legumes-verts-et-bruns-sur-une-table-en-bois-brune-O6ZhaRtXa3Q?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> */
     background-size: cover;    
     filter: opacity(0.20);
-    color: white;
+    color: #f5ddc1;
     font-weight: bold;
     padding: 300px;
 }
