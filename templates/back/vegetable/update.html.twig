@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Update vegetable{% endblock %}
+{% block title %}Modification : {{ vegetable.title }}{% endblock %}
 
 {% block body %}
-<h1>Modifier le fruit/légume : {{ vegetable.title }}</h1>
+    <h1>Modification : {{ vegetable.title }}</h1>
 
-{{ form_start(form, {"attr": {"novalidate": "novalidate"}}) }}
-<button class="btn btn-primary">Modifier</button>
-{{ form_end(form) }}
+    {{ include('back/vegetable/_form.html.twig', {'button_label': 'Update'}) }}
+    
+    <a class="btn btn-secondary" href="{{ path('app_back_vegetable_index') }}">Liste des fruits et légumes</a>
+    
+    {{ include('back/vegetable/_delete_form.html.twig') }}
+
 {% endblock %}
