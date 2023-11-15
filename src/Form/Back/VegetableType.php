@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class VegetableType extends AbstractType
 {
@@ -20,16 +21,16 @@ class VegetableType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Nom du vegetable'
+                'label' => 'Nom'
             ])  
             ->add('description', TextType::class, [
-                'label' => 'Description du vegetable'
+                'label' => 'Description'
             ])
             ->add('image', TextType::class, [
-                'label' => 'Image du vegetable'
+                'label' => 'Image'
             ])
             ->add('benefits', TextType::class, [
-                'label' => 'Bénéfices liés au vegetable'
+                'label' => 'Bénéfices apportés'
             ])
             ->add('local', ChoiceType::class, [
                 'choices' => [
@@ -40,28 +41,33 @@ class VegetableType extends AbstractType
                 'expanded' => true
             ])
             ->add('conservation', TextType::class, [
-                'label' => 'Conservation du vegetable'
+                'label' => 'Conservation'
             ])
-            ->add('created_at')
-            ->add('updated_at')
             ->add('months', EntityType::class, [
                 'class' => Month::class,
+                'label' => 'Mois associés',
                 'choice_label' => 'name',
                 'multiple' => true
             ])
             ->add('botanical', EntityType::class, [
                 'class' => Botanical::class,
+                'label' => 'Identité en botanique',
                 'choice_label' => 'name'
             ])
             ->add('genre', EntityType::class, [
                 'class' => Genre::class,
+                'label' => 'Genre',
                 'choice_label' => 'name',
                 'multiple' => false
             ])
             ->add('ingredient', EntityType::class, [
                 'class' => Ingredient::class,
+                'label' => 'Fruit ou légume racine',
                 'choice_label' => 'name'
             ])
+            ->add('created_at')
+            ->add('updated_at')
+            ->add('Sauvegarder', SubmitType::class);
         ;
     }
 

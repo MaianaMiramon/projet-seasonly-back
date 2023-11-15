@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create vegetable{% endblock %}
+{% block title %}Nouveau vegetable{% endblock %}
 
 {% block body %}
-<h1>Ajouter un fruit ou un légume</h1>
+    <div class="d-flex justify-content-between">
+    <h3>Ajouter un fruit ou un légume</h1>
+        <a class="btn btn-secondary" href="{{ path('app_back_vegetable_index') }}">Liste des fruits et légumes</a>
+    </div>
+    <div class="mt-2">
+        {{ include('back/vegetable/_form.html.twig') }}
+    </div>
 
-{{ form_start(form, {"attr": {"novalidate": "novalidate"}}) }}
-<button class="btn btn-primary">Ajouter</button>
-{{ form_end(form) }}
 {% endblock %}
