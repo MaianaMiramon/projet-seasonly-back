@@ -29,37 +29,6 @@ class MemberController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show", methods="GET", requirements={"id"="\d+"}) 
-     */
-    public function show($id, MemberRepository $memberRepository): Response
-    {
-        // préparation des données
-        $member = $memberRepository->find($id);
-
-        // Vérifier si le membre existe
-        if (!$member) {
-            throw $this->createNotFoundException('Membre non trouvé');
-        }
-
-        $user = $member->getUser();
-
-        // Vérifier si l'utilisateur existe
-        if (!$user) {
-            throw $this->createNotFoundException('Utilisateur non trouvé');
-        }
-
-        $email = $user->getEmail();
-        $newsletter = $user->isNewsletter();
-
-        // On retourne les données du member au format Json
-        return $this->render('back/member/show.html.twig', [
-            'member' => $member,
-            'email' => $email,
-            'newsletter' => $newsletter,  
-        ]);
-    }
-
-    /**
      * @Route("/update/{id}", name="update", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
     public function update($id, Request $request, Member $member, MemberRepository $memberRepository): Response
@@ -70,12 +39,25 @@ class MemberController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $memberRepository->add($member, true);
 
-            return $this->redirectToRoute('app_back_vegetable_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_member_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/member/update.html.twig', [
-            'member' => $vegetable,
+            'member' => $member,
             'form' => $form,
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="delete", methods="POST", requirements={"id"="\d+"}) 
+     */
+    public function delete(Request $request, Member $member, MemberRepository $memberRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $member->getId(), $request->request->get('_token'))) {
+            $memberRepository->remove($member, true);
+            $this->addFlash('success', 'Membre supprimé');
+        }
+
+        return $this->redirectToRoute('app_back_member_index', [], Response::HTTP_SEE_OTHER);
     }
 }
