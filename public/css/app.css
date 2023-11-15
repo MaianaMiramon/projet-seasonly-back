@@ -23,7 +23,16 @@ footer {
     color: #f7d6b1; /* Couleur au survol */
 }
 
-.custom-btn {
+.custom-btn-warning {
+    color: white;
+    background-color: #DF6C2A;
+}
+
+.custom-btn-add {
+    background-color: #e4c9ab;
+}
+
+.custom-thead {
     color: white;
     background-color: #45624c;
 }

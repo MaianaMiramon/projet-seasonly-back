@@ -67,7 +67,9 @@ class VegetableType extends AbstractType
             ])
             ->add('created_at')
             ->add('updated_at')
-            ->add('Sauvegarder', SubmitType::class);
+            ->add('Sauvegarder', SubmitType::class, [
+                'attr' => ['class' => 'btn custom-btn-add'],
+            ]);
         ;
     }
 

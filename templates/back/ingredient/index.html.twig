@@ -6,10 +6,10 @@
     <div class="container my-4 w-50">
         <h1 class="text-center">Liste des ingrédients</h1>
         <div class="text-center">
-            <a class="btn btn-success" href="{{ path('app_back_ingredient_create') }}">Ajouter un ingrédient</a>
+            <a class="custom-btn-add btn" href="{{ path('app_back_ingredient_create') }}">Ajouter un ingrédient</a>
         </div>
         <table class="table table-sm table-striped table-bordered table-responsive mt-3">
-            <thead class="thead-light">
+            <thead class="custom-thead">
                 <tr class="text-center">
                     <th scope="col">Id</th>
                     <th scope="col">Nom</th>
@@ -22,8 +22,8 @@
                     <td>{{ ingredient.id }}</td>
                     <td>{{ ingredient.name }}</td>
                     <td class="d-flex justify-content-around">
-                        <a class="btn btn-secondary" href="{{ path('app_back_ingredient_show', {'id': ingredient.id}) }}">Voir plus</a>
-                        <a class="btn btn-warning" href="{{ path('app_back_ingredient_update', {'id': ingredient.id}) }}">Modifier</a>
+                        <a class="btn custom-btn-add" href="{{ path('app_back_ingredient_show', {'id': ingredient.id}) }}">Voir plus</a>
+                        <a class="btn custom-btn-warning" href="{{ path('app_back_ingredient_update', {'id': ingredient.id}) }}">Modifier</a>
                     </td>
                 </tr>
             {% else %}

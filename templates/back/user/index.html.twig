@@ -6,10 +6,10 @@
     <div class="container my-4 w-50">
         <h1 class="text-center">Liste des users</h1>
         <div class="text-center">
-            <a class="btn btn-success" href="{{ path('app_back_user_create') }}">Ajouter un user</a>
+            <a class="btn custom-btn-add" href="{{ path('app_back_user_create') }}">Ajouter un user</a>
         </div>
         <table class="table table-sm table-striped table-bordered table-responsive mt-3">
-            <thead class="thead-light">
+            <thead class="custom-thead">
                 <tr class="text-center">
                     <th scope="col">Id</th>
                     <th scope="col">Email</th>
@@ -22,10 +22,9 @@
                 <tr class="text-center">
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.newsletter }}</td>
+                    <td>{{ user.newsletter ? 'Oui' : 'Non' }}</td>
                     <td class="d-flex justify-content-around">
-                        <a class="btn btn-secondary" href="{{ path('app_back_user_show', {'id': user.id}) }}">Voir plus</a>
-                        <a class="btn btn-warning" href="{{ path('app_back_user_update', {'id': user.id}) }}">Modifier</a>
+                        <a class="btn custom-btn-warning" href="{{ path('app_back_user_update', {'id': user.id}) }}">Modifier</a>
                     </td>
                 </tr>
             {% else %}

@@ -6,9 +6,9 @@
     <div>
         <h1 class="text-center mt-4">Liste des fruits et légumes</h1>
         <div class="container my-4">
-        <a class="btn btn-success" href="{{ path('app_back_vegetable_create') }}">Nouveau fruit ou légume</a>
+        <a class="custom-btn-add btn" href="{{ path('app_back_vegetable_create') }}">Nouveau fruit ou légume</a>
             <table class="table table-striped table-bordered table-responsive mt-4">
-                <thead class="table-dark">
+                <thead class="custom-thead">
                     <tr class="text-center">
                         <th scope="col">Id</th>
                         <th scope="col">Titre</th>
@@ -22,10 +22,10 @@
                         <td scope="row">{{ vegetable.id }}</td>
                         <td>{{ vegetable.title }}</td>
                         <td>
-                            <a href="{{ path('app_back_vegetable_show', {'id': vegetable.id}) }}" class="btn btn-sm btn-secondary">Voir plus</a>
+                            <a href="{{ path('app_back_vegetable_show', {'id': vegetable.id}) }}" class="btn btn-sm custom-btn-add">Voir plus</a>
                         </td>
                         <td class="text-center">
-                            <a href="{{ path('app_back_vegetable_update', {'id': vegetable.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                            <a href="{{ path('app_back_vegetable_update', {'id': vegetable.id}) }}" class="btn btn-sm custom-btn-warning">Modifier</a>
                         </td>
                     </tr>
                 {% else %}
