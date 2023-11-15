@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Ingredient{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between">
+        <h3>Create new Ingredient</h3>
+        <a class="btn btn-secondary" href="{{ path('app_back_ingredient_index') }}">back to list</a>
+    </div>
+    <div class="mt-2">
+        {{ include('back/ingredient/_form.html.twig') }}
+    </div>
+{% endblock %}
