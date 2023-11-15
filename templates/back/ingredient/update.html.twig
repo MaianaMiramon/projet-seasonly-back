@@ -5,13 +5,10 @@
 {% block body %}
     <div class="d-flex justify-content-between">
         <h3>Modification : {{ ingredient.name }}</h3>
-        {% if ingredient.vegetables is null %}
-        {{ include('back/ingredient/_delete_form.html.twig') }}
-        {% endif %}
+        <a class="btn btn-secondary" href="{{ path('app_back_ingredient_index') }}">Liste des ingrédients</a>
     </div>
     <div class="mt-2">
         {{ include('back/ingredient/_form.html.twig', {'button_label': 'Update'}) }}
-    <a class="btn btn-secondary" href="{{ path('app_back_ingredient_index') }}">Liste des ingrédients</a>
     </div>
 
 {% endblock %}
