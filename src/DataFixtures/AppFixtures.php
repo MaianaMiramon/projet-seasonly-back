@@ -237,92 +237,47 @@ class AppFixtures extends Fixture
         
     }
 
-        
+        // Création des members
+        $memberList = $this->getMember();
 
-        // Création du membre
-        $user = new User();
-        $user->setEmail('member@member.fr');
-        $user->setNewsletter(true);
-        $user->setCreatedAt(new DateTimeImmutable('2010-03-05'));
-        
-        $manager->persist($user);
-
-
-        $member = new Member();
-        $member->setPseudo('member');
-
-        $hashedPassword = $this->passwordHasher->hashPassword($member, 'member');
-        $member->setPassword($hashedPassword);
-        $member->setRoles(['ROLE_MEMBER']);
-        $member->setCreatedAt(new DateTimeImmutable('2010-03-05'));
-        $member->setUser($user);
-
-        // Association avec les recettes (favoris)
-        $recipeRepository = $manager->getRepository(Recipe::class);
-        $recipeList = $recipeRepository->findAll();
-        for ($i = 1; $i <= mt_rand(0, 4); $i++) {
-        $recipeRandom = mt_rand(0, count($recipeList) -1);
-        $currentRecipeId = $recipeList[$recipeRandom];
-        $member->addRecipe($currentRecipeId);
+        foreach ($memberList as $currentUser) {
+            $userObject = new User();
+            $userObject->setEmail($currentUser['email']);
+            $userObject->setNewsletter($currentUser['newsletter']);
+            $userObject->setCreatedAt(new DateTimeImmutable($currentUser['created_at']));
+            $manager->persist($userObject);
         }
+        $manager->flush();
 
-        $manager->persist($member);
-        
-        
-        // Création du moderator
-        $user = new User();
-        $user->setEmail('moderator@moderator.fr');
-        $user->setNewsletter(false);
-        $user->setCreatedAt(new DateTimeImmutable('2010-03-05'));
+        $userRepository = $manager->getRepository(User::class);
+        $userList = $userRepository->findAll();
 
-        $manager->persist($user);    
-        
-        $moderatorMember = new Member();
-        $moderatorMember->setPseudo('moderator');
-        $hashedPassword = $this->passwordHasher->hashPassword($moderatorMember, 'moderator');
-        $moderatorMember->setPassword($hashedPassword);
-        $moderatorMember->setRoles(['ROLE_MODERATOR']);
-        $moderatorMember->setCreatedAt(new DateTimeImmutable('2010-03-05'));
-        $moderatorMember->setUser($user);
-
-        // Association avec les recettes (favoris)
-        $recipeRepository = $manager->getRepository(Recipe::class);
-        $recipeList = $recipeRepository->findAll();
-        for ($i = 1; $i <= mt_rand(0, 4); $i++) {
-        $recipeRandom = mt_rand(0, count($recipeList) -1);
-        $currentRecipeId = $recipeList[$recipeRandom];
-        $moderatorMember->addRecipe($currentRecipeId);
+        foreach($memberList as $currentMember) {
+            $memberObject = new Member();
+            $memberObject->setPseudo($currentMember['pseudo']);
+            $memberObject->setRoles($currentMember['roles']);
+            $hashedPassword = $this->passwordHasher->hashPassword($memberObject, $currentMember['password']);
+            $memberObject->setPassword($hashedPassword);
+            $memberObject->setCreatedAt(new DateTimeImmutable($currentMember['created_at']));
+            
+            foreach ($userList as $userObject) {
+                if ($userObject->getEmail() === $currentMember['email']) {
+                    $memberObject->setUser($userObject);
+                }
+            }    
+            
+            // Association avec les recettes (favoris)
+            $recipeRepository = $manager->getRepository(Recipe::class);
+            $recipeList = $recipeRepository->findAll();
+            for ($i = 1; $i <= mt_rand(0, 6); $i++) {
+            $recipeRandom = mt_rand(0, count($recipeList) -1);
+            $currentRecipeId = $recipeList[$recipeRandom];
+            $memberObject->addRecipe($currentRecipeId);
         }
+            
+            $manager->persist($memberObject);
 
-        $manager->persist($moderatorMember);
-
-        // création admin
-        $user = new User();
-        $user->setEmail('admin@admin.fr');
-        $user->setNewsletter(true);
-        $user->setCreatedAt(new DateTimeImmutable('2010-03-05'));
-
-        $manager->persist($user);
-
-        $adminMember = new Member();
-        $adminMember->setPseudo('admin');
-        $hashedPassword = $this->passwordHasher->hashPassword($adminMember, 'admin');
-        $adminMember->setPassword($hashedPassword);
-        $adminMember->setRoles(['ROLE_ADMIN']);
-        $adminMember->setCreatedAt(new DateTimeImmutable('2010-03-05'));
-        $adminMember->setUser($user);
-
-        // Association avec les recettes (favoris)
-        $recipeRepository = $manager->getRepository(Recipe::class);
-        $recipeList = $recipeRepository->findAll();
-        for ($i = 1; $i <= mt_rand(0, 4); $i++) {
-        $recipeRandom = mt_rand(0, count($recipeList) -1);
-        $currentRecipeId = $recipeList[$recipeRandom];
-        $adminMember->addRecipe($currentRecipeId);
-        
         }
-
-        $manager->persist($adminMember);
 
         // Création des users
         $userList = $this->getUser();
@@ -334,35 +289,6 @@ class AppFixtures extends Fixture
         $userObject->setCreatedAt(new DateTimeImmutable($currentUser['created_at']));
         
         $manager->persist($userObject);
-
-        }
-
-        // Création des members
-        $memberList = $this->getMember();
-
-        $userRepository = $manager->getRepository(User::class);
-        $userList = $userRepository->findAll();
-
-        foreach($memberList as $currentMember) {
-        $memberObject = new Member();
-        $memberObject->setPseudo($currentMember['pseudo']);
-        $memberObject->setRoles($currentMember['roles']);
-        $hashedPassword = $this->passwordHasher->hashPassword($memberObject, $currentMember['password']);
-        $memberObject->setPassword($hashedPassword);
-        $memberObject->setCreatedAt(new DateTimeImmutable($currentMember['created_at']));
-
-
-        foreach ($userList as $currentUser) {
-            $pseudo = $currentMember['pseudo'];
-            $email = $currentUser->getEmail();
-            dd($pseudo + '@' + $pseudo + '.com');
-            if ($pseudo + '@' + $pseudo + '.com' === $email) {
-                $memberObject->setUser($currentUser);
-            }
-        }
-        
-        
-        $manager->persist($memberObject);
 
         }
 
@@ -1031,77 +957,52 @@ class AppFixtures extends Fixture
                 'created_at' => '2017-03-05',
             ],
             [
-                'email' => 'gilles@gilles.com',
+                'email' => 'nicolas@gmail.com',
                 'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
-                'email' => 'david@david.com',
+                'email' => 'baptiste@hotmail.fr',
                 'newsletter' => false,
                 'created_at' => '2023-10-12',
             ],
             [
-                'email' => 'cyprien@cyprien.com',
+                'email' => 'clément@gmail.com',
                 'newsletter' => false,
                 'created_at' => '2023-10-12',
             ],
             [
-                'email' => 'maïana@maïana.com',
+                'email' => 'megane@yahoo.fr',
                 'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
-                'email' => 'antoine@antoine.com',
+                'email' => 'eloise@gmail.com',
                 'newsletter' => false,
                 'created_at' => '2023-10-12',
             ],
             [
-                'email' => 'patrice@patrice.com',
+                'email' => 'jimmy@butler.com',
                 'newsletter' => false,
                 'created_at' => '2023-10-12',
             ],
             [
-                'email' => 'caroline@caroline.com',
+                'email' => 'victor@hotmail.fr',
                 'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
-                'email' => 'romain@bleh.com',
+                'email' => 'cécile@gmail.com',
                 'newsletter' => false,
                 'created_at' => '2023-10-12',
             ],
             [
-                'email' => 'salomé@salomé.com',
+                'email' => 'kylian@laposte.net',
                 'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
-                'email' => 'lucas@lucas.com',
-                'newsletter' => false,
-                'created_at' => '2023-10-12',
-            ],
-            [
-                'email' => 'mélina@mélina.com',
-                'newsletter' => true,
-                'created_at' => '2023-10-12',
-            ],
-            [
-                'email' => 'admin@admin.com',
-                'newsletter' => true,
-                'created_at' => '2023-10-12',
-            ],
-            [
-                'email' => 'member@member.com',
-                'newsletter' => true,
-                'created_at' => '2023-10-12',
-            ],
-            [
-                'email' => 'squeezie@squeezie.com',
-                'newsletter' => true,
-                'created_at' => '2023-10-12',
-            ],
-            [
-                'email' => 'kameto@kcorp.com',
+                'email' => 'sarah@hotmail.fr',
                 'newsletter' => false,
                 'created_at' => '2023-10-12',
             ],
@@ -1113,91 +1014,121 @@ class AppFixtures extends Fixture
             [
                 'pseudo' => 'gilles',
                 'roles' => ['ROLE_ADMIN'],
-                'password' => 'Gilles',
+                'password' => 'gilles',
+                'email' => 'gilles@gilles.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'david',
                 'roles' => ['ROLE_ADMIN'],
-                'password' => 'David',
+                'password' => 'david',
+                'email' => 'david@david.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'cyprien',
                 'roles' => ['ROLE_ADMIN'],
-                'password' => 'Cyprien',
+                'password' => 'cyprien',
+                'email' => 'cyprien@cyprien.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'maïana',
                 'roles' => ['ROLE_ADMIN'],
-                'password' => 'Maïana',
+                'password' => 'maïana',
+                'email' => 'maïana@maïana.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'antoine',
                 'roles' => ['ROLE_ADMIN'],
-                'password' => 'Antoine',
+                'password' => 'antoine',
+                'email' => 'antoine@antoine.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'patrice',
                 'roles' => ['ROLE_ADMIN'],
                 'password' => 'patrice',
+                'email' => 'patrice@patrice.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'caroline',
                 'roles' => [''],
                 'password' => 'caroline',
+                'email' => 'caroline@caroline.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'romain',
                 'roles' => [''],
                 'password' => 'romain',
+                'email' => 'romain@bleh.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'salomé',
                 'roles' => [''],
                 'password' => 'salomé',
+                'email' => 'salomé@salomé.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'lucas',
                 'roles' => [''],
                 'password' => 'lucas',
+                'email' => 'lucas@debleh.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'mélina',
                 'roles' => [''],
                 'password' => 'mélina',
+                'email' => 'mélina@mélina.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'admin',
                 'roles' => ['ROLE_ADMIN'],
                 'password' => 'admin',
+                'email' => 'admin@admin.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'member',
                 'roles' => [''],
                 'password' => 'member',
+                'email' => 'member@member.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'squeezie',
                 'roles' => [''],
                 'password' => 'squeezie',
+                'email' => 'squeezie@squeezie.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'kameto',
                 'roles' => [''],
                 'password' => 'kameto',
+                'email' => 'kameto@kameto.com',
+                'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
         ];
