@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class MemberType extends AbstractType
 {
@@ -24,26 +25,15 @@ class MemberType extends AbstractType
                 'label' => 'Rôles',
                 'choices' => [
                     'ROLE_USER' => 'ROLE_USER',
+                    'ROLE_MEMBER' => 'ROLE_MEMBER',
                     'ROLE_ADMIN' => 'ROLE_ADMIN',
                 ],
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('email', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'email',
-                'multiple' => false,
-            ])
-            ->add('newsletter', EntityType::class, [
-                'class' => User::class,
-                'label' => 'Inscription à la newsletter',
-                'choice_label' => 'newsletter',
-                'multiple' => false,
-                'expanded' => true,
-                'mapped' => false,
-            ])
             ->add('created_at')
             ->add('updated_at')
+            ->add('Sauvegarder', SubmitType::class);
         ;
     }
 
