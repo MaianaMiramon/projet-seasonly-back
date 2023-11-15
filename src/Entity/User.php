@@ -27,7 +27,7 @@ class User
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups ({"member_list", "member_read"})
+     * @Groups ({"member"})
      */
     private $newsletter;
 

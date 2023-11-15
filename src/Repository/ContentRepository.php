@@ -39,6 +39,14 @@ class ContentRepository extends ServiceEntityRepository
         }
     }
 
+    public function getContentSortByRecipeName()
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->orderBy('r.recipe', 'ASC');
+        
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Content[] Returns an array of Content objects
 //     */
