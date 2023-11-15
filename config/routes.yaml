@@ -4,3 +4,15 @@
 
 api_login_check:
     path: /api/login_check
+
+app_api_logout:
+    path: /api/logout
+    controller: App\Controller\Api\SecurityController::logout
+
+app_back_login:
+    path: /back/login
+    controller: App\Controller\Back\SecurityController::login
+
+app_back_logout:
+    path: /back/logout
+    controller: App\Controller\Back\SecurityController::logout

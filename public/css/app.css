@@ -2,41 +2,54 @@ html {
     overflow-y: scroll;
 }
 
+body {
+    background-color: #fff9f2;
+    font-family: 'Work Sans', sans-serif;
+}
+
+footer {
+    background-color: #fff9f2;
+}
+
+.navbar {
+    background-color: #45624c;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f7d6b1;
+}
+
+.nav-item.dropdown:hover .a.nav-link {
+    color: #f7d6b1; /* Couleur au survol */
+}
+
+.custom-btn {
+    color: white;
+    background-color: #45624c;
+}
+
 .header-logo__title {
-    color: #7cb07c;
-    font-size: 1.5em;
+    color: white;
+    font-size: 1em;
     font-weight: bold;
     margin: 0 0.8em 0 0.3em;
-    text-transform: uppercase;
+}
+
+.home-page {
+    text-align: center;
+    background-image: url('../images/background3.jpg'); /* Photo de <a href="https://unsplash.com/fr/@jannerboy62?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Nick Fewings</a> sur <a href="https://unsplash.com/fr/photos/legumes-verts-et-bruns-sur-une-table-en-bois-brune-O6ZhaRtXa3Q?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> */
+    background-size: cover;    
+    filter: opacity(0.20);
+    color: white;
+    font-weight: bold;
+    padding: 300px;
 }
 
 .nav-link {
-    color: #7cb07c;
+    color: white;
     font-weight: bold;
 }
 
 .h-md-300 {
     height: 300px;
-}
-
-.movie__poster {
-    background-position: center;
-    background-size: cover;
-}
-
-.movie__poster img {
-    width: 100%;
-    /* height: 300px;
-    object-fit: cover;
-    object-position: top; */
-}
-
-.movie__favorite {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.allocine nav {
-    background-color: yellow;
 }

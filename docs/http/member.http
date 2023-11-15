@@ -20,9 +20,16 @@ POST http://localhost:8000/api/member/add
 content-type: application/json
 
 {
-  "pseudo": "TestApi8",
-  "password": "testapi8",
-  "created_at": "2023-01-01",
-  "email": "coucou3@gmail.com",
-  "newsletter": false
+  "pseudo": "TestApi",
+  "password": "abcdefjh",
+  "role": "[ROLE_USER]",
+  "created_at": "2023-01-01"
+}
+
+### Modification d'un member backoffice
+PUT http://localhost:8000/back/member/update/3
+content-type: application/json
+
+{
+    "pseudo" : "moderateur"
 }
