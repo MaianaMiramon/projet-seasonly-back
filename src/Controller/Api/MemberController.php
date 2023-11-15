@@ -2,7 +2,9 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\User;
 use App\Entity\Member;
+use DateTimeImmutable;
 use App\Form\Member1Type;
 use App\Repository\MemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +17,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/api/member")
@@ -37,25 +40,46 @@ class MemberController extends AbstractController
      * @Route("/add", name="api_member_create", methods="POST")
      * @IsGranted("PUBLIC_ACCESS")
      */
-    public function create(EntityManagerInterface $em, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function create(EntityManagerInterface $entityManager,
+    Request $request, SerializerInterface $serializer, ValidatorInterface $validator, UserPasswordEncoderInterface $passwordEncoder): JsonResponse
     {
-        // récupération des données en json
+        // TODO : gestion newsletter d'un user qui s'inscrit en Member et gestion des erreurs, utilisateur déjà inscrit
+        
+        // On récupère les données user reçues 
         $json = $request->getContent();
 
-        dump($json);
+        // Deserialization des données JSON pour obtenir un objet User
+        $user = $serializer->deserialize($json, User::class, 'json');
 
-        $member = $serializer->deserialize($json, Member::class, 'json');
+        // On récupère l'email du User qui s'inscrit
+        $email = $user->getEmail();
 
-        $errorList = $validator->validate($member);
-        if (count($errorList) > 0)
-        {
-            return $this->json($errorList, Response::HTTP_BAD_REQUEST);
+        // On vérifie si l'email récupéré existe déjà dans la table User
+        $registeredUser = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $email]);
+
+        if (!$registeredUser) {
+            // Création d'un nouveau User s'il n'existe pas
+            $registeredUser = new User();
+            $registeredUser->setEmail($email);
+            $registeredUser->setNewsletter($user->isNewsletter());
+            $registeredUser->setCreatedAt(new DateTimeImmutable());
+            $entityManager->persist($registeredUser);
+            $entityManager->flush();
         }
 
-        $em->persist($member);
-        $em->flush();
+        // Création d'un nouveau membre
+        $data = json_decode($json, true); // Convertit le JSON en tableau associatif
+        $member = new Member();
+        $member->setPseudo($data['pseudo']);
+        $member->setPassword($passwordEncoder->encodePassword($member, $data['password']));
+        $member->setRoles(['ROLE_MEMBER']);
+        $member->setUser($registeredUser);
+        $member->setCreatedAt(new \DateTimeImmutable());
 
-        return $this->json($member, Response::HTTP_CREATED, [], ["groups" => "member"]);
+        $entityManager->persist($member);
+        $entityManager->flush();
+
+        return $this->json(['message' => 'Inscription réussie'], JsonResponse::HTTP_CREATED, ["groups" => "member"]);
     }
 
     /**
