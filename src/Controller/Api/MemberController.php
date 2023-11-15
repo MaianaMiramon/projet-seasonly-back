@@ -127,7 +127,7 @@ class MemberController extends AbstractController
         }
 
         return $this->json([
-            'movie' => $member,
+            'member' => $member,
         ], Response::HTTP_OK, [], ["groups" => "member"]);
         
     }
