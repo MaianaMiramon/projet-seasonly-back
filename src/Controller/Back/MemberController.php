@@ -64,41 +64,17 @@ class MemberController extends AbstractController
      */
     public function update($id, Request $request, Member $member, MemberRepository $memberRepository): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $member = $entityManager->getRepository(Member::class)->find($id);
-
-        if (!$member) {
-            throw $this->createNotFoundException('Membre non trouvé pour l\'id ' . $id);
-        }
-
         $form = $this->createForm(MemberType::class, $member);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Récupérer les valeurs des champs non mappés
-            $userEmail = $form->get('user_email')->getData();
-            $userNewsletter = $form->get('user_newsletter')->getData();
+            $memberRepository->add($member, true);
 
-            // Mettre à jour l'entité Member
-            $member->setPseudo($form->get('pseudo')->getData());
-            $member->setRoles($form->get('roles')->getData());
-
-            // Vérifier si l'entité User est associée à Member
-            $user = $member->getUser();
-            if ($user) {
-                // Mettre à jour l'entité User si elle existe
-                $user->setEmail($userEmail);
-                $user->setNewsletter($userNewsletter);
-                // Vous pouvez ajouter d'autres mises à jour si nécessaire pour l'entité User
-            }
-
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_back_member_index');
+            return $this->redirectToRoute('app_back_vegetable_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('back/member/update.html.twig', [
-            'member' => $member,
+        return $this->renderForm('back/member/update.html.twig', [
+            'member' => $vegetable,
             'form' => $form,
         ]);
     }

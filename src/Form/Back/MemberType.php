@@ -29,16 +29,15 @@ class MemberType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('user_email', EmailType::class, [
-                'label' => 'Email du membre',
-                'mapped' => false,
+            ->add('email', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'email',
+                'multiple' => false,
             ])
-            ->add('user_newsletter', ChoiceType::class, [
+            ->add('newsletter', EntityType::class, [
+                'class' => User::class,
                 'label' => 'Inscription à la newsletter',
-                'choices' => [
-                    'Oui' => true,
-                    'Non' => false,
-                ],
+                'choice_label' => 'newsletter',
                 'multiple' => false,
                 'expanded' => true,
                 'mapped' => false,
