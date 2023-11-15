@@ -388,7 +388,31 @@ class AppFixtures extends Fixture
                 'created_at' => '2010-03-05',
             ],
             [
-                'type' => 'kl',
+                'type' => 'kg',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => '1/4',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => '1/2',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => '1',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => '2',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => '3',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'type' => '4',
                 'created_at' => '2010-03-05',
             ],
           ];
@@ -454,47 +478,63 @@ class AppFixtures extends Fixture
     public function getIngredient() {
         return [
             [
-                'name' => 'tomate',
+                'name' => 'Tomate',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'aubergine',
+                'name' => 'Aubergine',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'pomme de terre',
+                'name' => 'Pomme de terre',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'farine',
+                'name' => 'Farine',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'oeuf',
+                'name' => 'Oeuf',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'concombre',
+                'name' => 'Concombre',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'salade',
+                'name' => 'Salade',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'fraise',
+                'name' => 'Fraise',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'citron',
+                'name' => 'Citron',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'banane',
+                'name' => 'Banane',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'pomme',
+                'name' => 'Pomme',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Pâte feuilletée',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Beurre demi-sel',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Sucre',
+                'created_at' => '2010-03-05',
+            ],
+            [
+                'name' => 'Sauce soja salée',
                 'created_at' => '2010-03-05',
             ],
         ];
@@ -595,27 +635,27 @@ class AppFixtures extends Fixture
                 'duration' => 120,
                 'serving' => 4,
                 'created_at' => '2010-03-05',
-                'meal' => 'Entrée',
+                'meal' => 'Plat',
             ],
             [
-                'title' => 'Pizza 4 fromages',
-                'image' => 'https://cdn.pixabay.com/photo/2012/04/01/16/51/pizza-23477_1280.png',
-                'description' => 'Un pizza italienne avec plus de fromages',
-                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
-                'duration' => 130,
+                'title' => 'Tatin de tomates cerises',
+                'image' => 'https://pixabay.com/fr/photos/tomates-p%C3%A2te-feuillet%C3%A9e-tarte-1822187/',
+                'description' => 'Une si jolie tarte !',
+                'instruction' => 'Étape 1 : Préchauffez le four à 200°C. Dans une poêle à feu vif ajoutez la sauce soja, le sucre et le beurre. Faire réduire pour faire un caramel. Étape 2 : Coupez les tomates cerises en deux. Étape 3 : Versez le caramel dans le fond du plat et y ajouter les tomates. Étape 4 : Disposez la pâte feuilletée sur le dessus. Étape 5 : Faites un trou au milieu de la pate puis enfournez à 200°C pendant 20 minutes. Étape 6 : Sortez la tarte du four, attendez que la tarte refoidisse un peu. Démoulez : placez une grande assiette sur votre plat puis retournez le tout. Servez avec un peu de basilic !',
+                'duration' => 30,
                 'serving' => 4,
                 'created_at' => '2010-03-05',
                 'meal' => 'Plat',
             ],
             [
-                'title' => 'Salade composé',
-                'image' => 'https://cdn.pixabay.com/photo/2014/12/21/23/29/salad-575436_1280.png',
-                'description' => 'Un salade avec plein d\'aliments',
-                'instruction' => 'Etape 1 : Lorem Ipsum, Etape 3 : Lorem Ipsum, Etape 4 : Lorem Ipsum',
-                'duration' => 120,
+                'title' => 'Aubergine parma',
+                'image' => 'https://pixabay.com/fr/photos/aubergine-entr%C3%A9e-aliments-gratin%C3%A9-237733/',
+                'description' => 'Des aubergines bien gourmandes',
+                'instruction' => 'Étape 1 : Préchauffez le four à 220°C. Coupez les aubergines en deux. Étape 2 : Sur une plaque allant au four, disposez les aubergines. Ajoutez un filet d\'huile d\'olive, salez et poivrez. Enfournez pour 20 minutes. Étape 3 : Ajoutez la sauce tomate, la mozzarella et le parmesan sur les aubergines. Enfournez à nouveau pour 20 minutes de cuisson. Étape 4 : Sortez les aubergines du four et ajoutez quelques feuilles de basilic par-dessus. Accompagnez d\'une salade assaisonnée !',
+                'duration' => 45,
                 'serving' => 4,
                 'created_at' => '2010-03-05',
-                'meal' => 'Entrée',
+                'meal' => 'Plat',
             ],
             [
                 'title' => 'Ratatouille',
@@ -684,51 +724,51 @@ class AppFixtures extends Fixture
     public function getMonths() {
         return [
             [
-                'name' => 'janvier',
+                'name' => 'Janvier',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'février',
+                'name' => 'Février',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'mars',
+                'name' => 'Mars',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'avril',
+                'name' => 'Avril',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'mai',
+                'name' => 'Mai',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'juin',
+                'name' => 'Juin',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'juillet',
+                'name' => 'Juillet',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'août',
+                'name' => 'Août',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'septembre',
+                'name' => 'Septembre',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'octobre',
+                'name' => 'Octobre',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'novembre',
+                'name' => 'Novembre',
                 'created_at' => '2010-03-05',
             ],
             [
-                'name' => 'décembre',
+                'name' => 'Décembre',
                 'created_at' => '2010-03-05',
             ],
         ];
@@ -737,20 +777,20 @@ class AppFixtures extends Fixture
     public function getVegetables() {
         return [
             [   
-                'title' => 'tomates cerises',
+                'title' => 'Tomates cerises',
                 'description' => 'La tomate cerise est un type de variété de tomate, cultivée comme cette dernière pour ses fruits - mais de taille réduite - consommés comme légumes. Les tomates cerises sont généralement considérées comme des hybrides entre Solanum pimpinellifolium L. et la tomate cultivée, issue de l\'espèce Solanum lycopersicum.',
-                'image' => 'https://cdn.pixabay.com/photo/2017/03/26/09/39/tomato-2175133_1280.png',
+                'image' => 'https://pixabay.com/fr/photos/isol%C3%A9-m%C3%BBr-naturel-rouge-recette-316517/',
                 'benefits' => 'Vitamines C',
                 'local' => true,
                 'conservation' => 'Malgré ce que l\'on croit, , il faut éviter de placer les tomates cerises au frigo. L\'air froid va les empécher de continuer à mûrir.',
                 'created_at' => '2010-03-05',
-                'month' => ['juillet', 'août', 'septembre'],
+                'month' => ['Juillet', 'Août', 'Septembre'],
                 'botanical' => 'Fruits à pépins',
                 'genre' => 'Fruit',
-                'ingredient' => 'tomate',
+                'ingredient' => 'Tomate',
             ],
             [
-                'title' => 'tomates coeur de boeuf',
+                'title' => 'Tomates coeur de boeuf',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'image' => 'https://cdn.pixabay.com/photo/2017/03/26/09/39/tomato-2175133_1280.png',
                 'benefits' => 'Lorem ipsum dolor sit amet',
@@ -981,7 +1021,7 @@ class AppFixtures extends Fixture
                 'created_at' => '2017-03-05',
             ],
             [
-                'email' => 'coucou@hotmail.fr',
+                'email' => 'maria@hotmail.fr',
                 'newsletter' => false,
                 'created_at' => '2017-03-05',
             ],
