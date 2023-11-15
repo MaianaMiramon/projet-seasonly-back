@@ -335,8 +335,38 @@ class AppFixtures extends Fixture
         
         $manager->persist($userObject);
 
-        $manager->flush();
         }
+
+        // Création des members
+        $memberList = $this->getMember();
+
+        $userRepository = $manager->getRepository(User::class);
+        $userList = $userRepository->findAll();
+
+        foreach($memberList as $currentMember) {
+        $memberObject = new Member();
+        $memberObject->setPseudo($currentMember['pseudo']);
+        $memberObject->setRoles($currentMember['roles']);
+        $hashedPassword = $this->passwordHasher->hashPassword($memberObject, $currentMember['password']);
+        $memberObject->setPassword($hashedPassword);
+        $memberObject->setCreatedAt(new DateTimeImmutable($currentMember['created_at']));
+
+
+        foreach ($userList as $currentUser) {
+            $pseudo = $currentMember['pseudo'];
+            $email = $currentUser->getEmail();
+            dd($pseudo + '@' + $pseudo + '.com');
+            if ($pseudo + '@' + $pseudo + '.com' === $email) {
+                $memberObject->setUser($currentUser);
+            }
+        }
+        
+        
+        $manager->persist($memberObject);
+
+        }
+
+        $manager->flush();
     }
 
     public function getMeal() {
@@ -1000,6 +1030,176 @@ class AppFixtures extends Fixture
                 'newsletter' => false,
                 'created_at' => '2017-03-05',
             ],
+            [
+                'email' => 'gilles@gilles.com',
+                'newsletter' => true,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'david@david.com',
+                'newsletter' => false,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'cyprien@cyprien.com',
+                'newsletter' => false,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'maïana@maïana.com',
+                'newsletter' => true,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'antoine@antoine.com',
+                'newsletter' => false,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'patrice@patrice.com',
+                'newsletter' => false,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'caroline@caroline.com',
+                'newsletter' => true,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'romain@bleh.com',
+                'newsletter' => false,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'salomé@salomé.com',
+                'newsletter' => true,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'lucas@lucas.com',
+                'newsletter' => false,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'mélina@mélina.com',
+                'newsletter' => true,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'admin@admin.com',
+                'newsletter' => true,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'member@member.com',
+                'newsletter' => true,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'squeezie@squeezie.com',
+                'newsletter' => true,
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'email' => 'kameto@kcorp.com',
+                'newsletter' => false,
+                'created_at' => '2023-10-12',
+            ],
           ];
+    }
+
+    public function getMember() {
+        return [
+            [
+                'pseudo' => 'gilles',
+                'roles' => ['ROLE_ADMIN'],
+                'password' => 'Gilles',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'david',
+                'roles' => ['ROLE_ADMIN'],
+                'password' => 'David',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'cyprien',
+                'roles' => ['ROLE_ADMIN'],
+                'password' => 'Cyprien',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'maïana',
+                'roles' => ['ROLE_ADMIN'],
+                'password' => 'Maïana',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'antoine',
+                'roles' => ['ROLE_ADMIN'],
+                'password' => 'Antoine',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'patrice',
+                'roles' => ['ROLE_ADMIN'],
+                'password' => 'patrice',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'caroline',
+                'roles' => [''],
+                'password' => 'caroline',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'romain',
+                'roles' => [''],
+                'password' => 'romain',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'salomé',
+                'roles' => [''],
+                'password' => 'salomé',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'lucas',
+                'roles' => [''],
+                'password' => 'lucas',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'mélina',
+                'roles' => [''],
+                'password' => 'mélina',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'admin',
+                'roles' => ['ROLE_ADMIN'],
+                'password' => 'admin',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'member',
+                'roles' => [''],
+                'password' => 'member',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'squeezie',
+                'roles' => [''],
+                'password' => 'squeezie',
+                'created_at' => '2023-10-12',
+            ],
+            [
+                'pseudo' => 'kameto',
+                'roles' => [''],
+                'password' => 'kameto',
+                'created_at' => '2023-10-12',
+            ],
+        ];
     }
 }
