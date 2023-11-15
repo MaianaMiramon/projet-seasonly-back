@@ -215,27 +215,27 @@ class AppFixtures extends Fixture
             $currentContent = new Content();
             $currentContent->setQuantity($currentContentName['quantity']);
             
-        $measureRepository = $manager->getRepository(Measure::class);
-        $measureList = $measureRepository->findAll();
-        $measureRandom = mt_rand(0, count($measureList) -1);
-        $currentMeasureId = $measureList[$measureRandom];
-        $currentContent->setMeasure($currentMeasureId);
+            $measureRepository = $manager->getRepository(Measure::class);
+            $measureList = $measureRepository->findAll();
+            $measureRandom = mt_rand(0, count($measureList) -1);
+            $currentMeasureId = $measureList[$measureRandom];
+            $currentContent->setMeasure($currentMeasureId);
+            
+            $ingredientRepository = $manager->getRepository(Ingredient::class);
+            $ingredientList = $ingredientRepository->findAll();
+            $ingredientRandom = mt_rand(0, count($ingredientList) -1);
+            $currentIngredientId = $ingredientList[$ingredientRandom];
+            $currentContent->setIngredient($currentIngredientId);
+            
+            $recipeRepository = $manager->getRepository(Recipe::class);
+            $recipeList = $recipeRepository->findAll();
+            $recipeRandom = mt_rand(0, count($recipeList) -1);
+            $currentRecipeId = $recipeList[$recipeRandom];
+            $currentContent->setRecipe($currentRecipeId);
+            
+            $manager->persist($currentContent);
         
-        $ingredientRepository = $manager->getRepository(Ingredient::class);
-        $ingredientList = $ingredientRepository->findAll();
-        $ingredientRandom = mt_rand(0, count($ingredientList) -1);
-        $currentIngredientId = $ingredientList[$ingredientRandom];
-        $currentContent->setIngredient($currentIngredientId);
-        
-        $recipeRepository = $manager->getRepository(Recipe::class);
-        $recipeList = $recipeRepository->findAll();
-        $recipeRandom = mt_rand(0, count($recipeList) -1);
-        $currentRecipeId = $recipeList[$recipeRandom];
-        $currentContent->setRecipe($currentRecipeId);
-        
-        $manager->persist($currentContent);
-        
-    }
+        }
 
         // Création des members
         $memberList = $this->getMember();
@@ -269,7 +269,7 @@ class AppFixtures extends Fixture
             // Association avec les recettes (favoris)
             $recipeRepository = $manager->getRepository(Recipe::class);
             $recipeList = $recipeRepository->findAll();
-            for ($i = 1; $i <= mt_rand(0, 6); $i++) {
+            for ($i = 1; $i <= mt_rand(0, 8); $i++) {
             $recipeRandom = mt_rand(0, count($recipeList) -1);
             $currentRecipeId = $recipeList[$recipeRandom];
             $memberObject->addRecipe($currentRecipeId);
@@ -499,6 +499,50 @@ class AppFixtures extends Fixture
             ],
             [
                 'name' => 'Chou',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Courgette',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Carotte',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Orange',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Kiwi',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Oignon',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Fenouil',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Courgette',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Cassis',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Poulet',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Lait',
+                'created_at' => '2023-03-05',
+            ],
+            [
+                'name' => 'Pâtes fraiches',
                 'created_at' => '2023-03-05',
             ],
         ];
@@ -761,10 +805,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'L\'idéal est de conserver les tomates à température ambiante, afin de préserver leur arôme et leur texture. Lavez soigneusement les tomates',
                 'created_at' => '2010-03-05',
-                'month' => ['juillet', 'août', 'septembre'],
+                'month' => ['Juillet', 'Août', 'Septembre'],
                 'botanical' => 'Fruits à pépins',
                 'genre' => 'Fruit',
-                'ingredient' => 'tomate',
+                'ingredient' => 'Tomate',
             ],
             [
                 'title' => 'pomme golden',
@@ -774,10 +818,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Si vous voulez conserver beaucoup de pommes pendant plusieurs mois, une atmosphère avec une température de 10°, isolée de la lumière et des grandes variations de température',
                 'created_at' => '2010-03-05',
-                'month' => ['septembre', 'octobre'],
+                'month' => ['Septembre', 'Octobre'],
                 'botanical' => 'Fruits à pépins',
                 'genre' => 'Fruit',
-                'ingredient' => 'pomme',
+                'ingredient' => 'Pomme',
             ],
             [
                 'title' => 'pomme gala',
@@ -787,10 +831,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Si vous voulez conserver beaucoup de pommes pendant plusieurs mois, une atmosphère avec une température de 10°, isolée de la lumière et des grandes variations de température',
                 'created_at' => '2010-03-05',
-                'month' => ['octobre', 'novembre', 'décembre'],
+                'month' => ['Octobre', 'Novembre', 'Décembre'],
                 'botanical' => 'Fruits à pépins',
                 'genre' => 'Fruit',
-                'ingredient' => 'pomme',
+                'ingredient' => 'Pomme',
             ],
             [
                 'title' => 'pomme granny smith',
@@ -800,10 +844,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Si vous voulez conserver beaucoup de pommes pendant plusieurs mois, une atmosphère avec une température de 10°, isolée de la lumière et des grandes variations de température',
                 'created_at' => '2010-03-05',
-                'month' => ['juillet', 'août'],
+                'month' => ['Juillet', 'Août'],
                 'botanical' => 'Fruits à pépins',
                 'genre' => 'Fruit',
-                'ingredient' => 'pomme',
+                'ingredient' => 'Pomme',
             ],
             [
                 'title' => 'citron vert',
@@ -813,10 +857,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Si vous consommez régulièrement du citron, vous pouvez tout à fait le laisser à portée à température ambiante, il restera en bon état une dizaine de jours.',
                 'created_at' => '2010-03-05',
-                'month' => ['juin', 'juillet', 'août'],
+                'month' => ['Juin', 'Juillet', 'Août'],
                 'botanical' => 'Agrumes',
                 'genre' => 'Fruit',
-                'ingredient' => 'citron',
+                'ingredient' => 'Citron',
             ],
             [
                 'title' => 'citron jaune',
@@ -826,10 +870,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Si vous consommez régulièrement du citron, vous pouvez tout à fait le laisser à portée à température ambiante, il restera en bon état une dizaine de jours.',
                 'created_at' => '2010-03-05',
-                'month' => ['juillet', 'août', 'septembre'],
+                'month' => ['Juillet', 'Août', 'Septembre'],
                 'botanical' => 'Agrumes',
                 'genre' => 'Fruit',
-                'ingredient' => 'citron',
+                'ingredient' => 'Citron',
             ],
             [
                 'title' => 'chou rouge',
@@ -839,10 +883,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Vous pouvez garder le chou rouge de votre panier 3 à 4 semaines dans le bac à légumes de votre réfrigérateur.',
                 'created_at' => '2010-03-05',
-                'month' => ['septembre', 'octobre', 'novembre', 'décembre', 'janvier'],
+                'month' => ['Septembre', 'Octobre', 'Novembre', 'Décembre', 'Janvier'],
                 'botanical' => 'Légumes feuilles',
                 'genre' => 'Légume',
-                'ingredient' => 'chou',
+                'ingredient' => 'Chou',
             ],
             [
                 'title' => 'chou de Bruxelles',
@@ -852,10 +896,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Pour les conserver jusqu\'à deux semaines dans le bac à légumes du réfrigérateur',
                 'created_at' => '2023-08-11',
-                'month' => ['octobre', 'novembre', 'décembre', 'janvier', 'février', 'mars'],
+                'month' => ['Octobre', 'Novembre', 'Décembre', 'Janvier', 'Février', 'Mars'],
                 'botanical' => 'Légumes feuilles',
                 'genre' => 'Légume',
-                'ingredient' => 'chou',
+                'ingredient' => 'Chou',
             ],
             [
                 'title' => 'salade romaine',
@@ -865,10 +909,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Essuyez ses feuilles ou essorez-les mais laissez les un peu humides afin qu\'elles restent fraîches et ne sèchent pas',
                 'created_at' => '2010-03-05',
-                'month' => ['avril', 'mai', 'juin', 'juillet'],
+                'month' => ['Avril', 'Mai', 'Juin', 'Juillet'],
                 'botanical' => 'Légumes feuilles',
                 'genre' => 'Légume',
-                'ingredient' => 'salade',
+                'ingredient' => 'Salade',
             ],
             [
                 'title' => 'salade batavia',
@@ -878,10 +922,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Essuyez ses feuilles ou essorez-les mais laissez les un peu humides afin qu\'elles restent fraîches et ne sèchent pas',
                 'created_at' => '2010-03-05',
-                'month' => ['mars', 'avril', 'mai'],
+                'month' => ['Mars', 'Avril', 'Mai'],
                 'botanical' => 'Légumes feuilles',
                 'genre' => 'Légume',
-                'ingredient' => 'salade',
+                'ingredient' => 'Salade',
             ],
             [
                 'title' => 'mini concombre',
@@ -891,10 +935,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Conservez le concombre (entier ou coupé) au réfrigérateur, dans le bac à légumes, dans un sac plastique ou autre contenant hermétique',
                 'created_at' => '2010-03-05',
-                'month' => ['mai', 'juin'],
+                'month' => ['Mai', 'Juin'],
                 'botanical' => 'Fruits à pépins',
                 'genre' => 'Fruit',
-                'ingredient' => 'concombre',
+                'ingredient' => 'Concombre',
             ],
             [
                 'title' => 'concombre blanc',
@@ -904,10 +948,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Conservez le concombre (entier ou coupé) au réfrigérateur, dans le bac à légumes, dans un sac plastique ou autre contenant hermétique',
                 'created_at' => '2010-03-05',
-                'month' => ['avril', 'mai', 'juin', 'juillet'],
+                'month' => ['Avril', 'Mai', 'Juin', 'Juillet'],
                 'botanical' => 'Fruits à pépins',
                 'genre' => 'Fruit',
-                'ingredient' => 'concombre',
+                'ingredient' => 'Concombre',
             ],
             [
                 'title' => 'aubergine de barbentane',
@@ -917,10 +961,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'gardez l\'aubergine à une température fraîche mais pas froide pour éviter qu\'elle ne se dessèche ou ne pourrisse.',
                 'created_at' => '2010-03-05',
-                'month' => ['juin', 'juillet', 'août'],
+                'month' => ['Juin', 'Juillet', 'Août'],
                 'botanical' => 'Légumes fruits',
                 'genre' => 'Légume',
-                'ingredient' => 'aubergine',
+                'ingredient' => 'Aubergine',
             ],
             [
                 'title' => 'aubergine black beauty',
@@ -930,10 +974,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'gardez l\'aubergine à une température fraîche mais pas froide pour éviter qu\'elle ne se dessèche ou ne pourrisse.',
                 'created_at' => '2010-03-05',
-                'month' => ['juin', 'jillet', 'août', 'septembre'],
+                'month' => ['Juin', 'Juillet', 'Août', 'Septembre'],
                 'botanical' => 'Légumes fruits',
                 'genre' => 'Légume',
-                'ingredient' => 'aubergine',
+                'ingredient' => 'Aubergine',
             ],
             [
                 'title' => 'fraise gariguette',
@@ -943,10 +987,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Déposez délicatement vos fraises dans une barquette perforée et placez-la dans le bac à légumes.',
                 'created_at' => '2010-03-05',
-                'month' => ['avril', 'mai', 'juin'],
+                'month' => ['Avril', 'Mai', 'Juin'],
                 'botanical' => 'Fruits rouges',
                 'genre' => 'Fruit',
-                'ingredient' => 'fraise',
+                'ingredient' => 'Fraise',
             ],
             [
                 'title' => 'fraise reine des vallées',
@@ -956,10 +1000,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Déposez délicatement vos fraises dans une barquette perforée et placez-la dans le bac à légumes.',
                 'created_at' => '2010-03-05',
-                'month' => ['avril', 'mai', 'juin'],
+                'month' => ['Avril', 'Mai', 'Juin'],
                 'botanical' => 'Fruits rouges',
                 'genre' => 'Fruit',
-                'ingredient' => 'fraise',
+                'ingredient' => 'Fraise',
             ],
             [
                 'title' => 'banane cavendish',
@@ -969,10 +1013,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Les bananes sont conservées à température ambiante. Si elles sont placées au réfrigérateur cela les empêchera de mûrir convenablement.',
                 'created_at' => '2010-03-05',
-                'month' => ['octobre', 'novembre', 'décembre'],
+                'month' => ['Octobre', 'Novembre', 'Décembre'],
                 'botanical' => 'Fruits exotiques',
                 'genre' => 'Fruit',
-                'ingredient' => 'banane',
+                'ingredient' => 'Banane',
             ],
             [
                 'title' => 'banane plantain',
@@ -982,10 +1026,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Les bananes sont conservées à température ambiante. Si elles sont placées au réfrigérateur cela les empêchera de mûrir convenablement.',
                 'created_at' => '2010-03-05',
-                'month' => ['septembre', 'octobre', 'novembre', 'décembre', 'janvier'],
+                'month' => ['Septembre', 'Octobre', 'Novembre', 'Décembre', 'Janvier'],
                 'botanical' => 'Fruits exotiques',
                 'genre' => 'Fruit',
-                'ingredient' => 'banane',
+                'ingredient' => 'Banane',
             ],
             [
                 'title' => 'carotte primeur',
@@ -995,10 +1039,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Conserver dans un sac perméable dans le tiroir à légumes ou dans l\'eau sur une tablette du réfrigérateur',
                 'created_at' => '2010-03-05',
-                'month' => ['septembre', 'octobre', 'novembre', 'décembre', 'janvier'],
+                'month' => ['Septembre', 'Octobre', 'Novembre', 'Décembre', 'Janvier'],
                 'botanical' => 'Légumes racines',
                 'genre' => 'Légume',
-                'ingredient' => 'carotte',
+                'ingredient' => 'Carotte',
             ],
             [
                 'title' => 'orange',
@@ -1008,10 +1052,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'L\'orange est un fruit qui se conserve très bien à température ambiante',
                 'created_at' => '2010-03-05',
-                'month' => ['novembre', 'décembre', 'janvier', 'février', 'mars'],
+                'month' => ['Novembre', 'Décembre', 'Janvier', 'Février', 'Mars'],
                 'botanical' => 'Agrumes',
                 'genre' => 'Fruit',
-                'ingredient' => 'orange',
+                'ingredient' => 'Orange',
             ],
             [
                 'title' => 'kiwi',
@@ -1021,10 +1065,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Il se conservera frais jusqu\'à 7 jours à température ambiante',
                 'created_at' => '2010-03-05',
-                'month' => ['novembre', 'décembre', 'janvier', 'février', 'mars', 'avril'],
+                'month' => ['Novembre', 'Décembre', 'Janvier', 'Février', 'Mars', 'Avril'],
                 'botanical' => 'Baies',
                 'genre' => 'Fruit',
-                'ingredient' => 'kiwi',
+                'ingredient' => 'Kiwi',
             ],
             [
                 'title' => 'oignon',
@@ -1034,10 +1078,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Les oignons ont besoin d\'un endroit frais, très sec et à l\'abri de la lumière.',
                 'created_at' => '2010-03-05',
-                'month' => ['août', 'septembre','octobre', 'novembre', 'décembre', 'janvier', 'février', 'mars', 'avril', 'mai'],
+                'month' => ['Août', 'Septembre','Octobre', 'Novembre', 'Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai'],
                 'botanical' => 'Légumes bulbes',
                 'genre' => 'Légume',
-                'ingredient' => 'oignon',
+                'ingredient' => 'Oignon',
             ],
             [
                 'title' => 'fenouil',
@@ -1047,10 +1091,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Au réfrigérateur, il se conserve bien une semaine dans un bac à légumes ou dans un contenant hermétique.',
                 'created_at' => '2023-04-01',
-                'month' => ['octobre', 'novembre', 'décembre', 'janvier', 'février', 'mars', 'avril', 'mai'],
+                'month' => ['Octobre', 'Novembre', 'Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai'],
                 'botanical' => 'Légumes bulbes',
                 'genre' => 'Légume',
-                'ingredient' => 'fenouil',
+                'ingredient' => 'Fenouil',
             ],
             [
                 'title' => 'courgette',
@@ -1060,10 +1104,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Pour les garder plus longtemps, disposez-les plutôt à l\'obscurité, dans un endroit frais.',
                 'created_at' => '2023-04-01',
-                'month' => ['mai', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre'],
+                'month' => ['Mai', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre'],
                 'botanical' => 'Légumes graines',
                 'genre' => 'Légume',
-                'ingredient' => 'courgette',
+                'ingredient' => 'Courgette',
             ],
             [
                 'title' => 'cassis',
@@ -1073,10 +1117,10 @@ class AppFixtures extends Fixture
                 'local' => true,
                 'conservation' => 'Il se conserve dans le bac à légumes du réfrigérateur pendant 24 à 48 h.',
                 'created_at' => '2023-04-01',
-                'month' => ['juillet', 'août', 'septembre'],
+                'month' => ['Juillet', 'Août', 'Septembre'],
                 'botanical' => 'Baies',
                 'genre' => 'Fruit',
-                'ingredient' => 'cassis',
+                'ingredient' => 'Cassis',
             ],
         ];
     }
