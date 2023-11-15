@@ -60,7 +60,7 @@ class RecipeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $recipeRepository->add($recipe, true);
 
-            return $this->redirectToRoute('app_back_recipe_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/recipe/update.html.twig', [

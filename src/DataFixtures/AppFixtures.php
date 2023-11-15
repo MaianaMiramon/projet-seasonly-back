@@ -725,7 +725,16 @@ class AppFixtures extends Fixture
                 'created_at' => '2010-03-05',
                 'meal' => 'Entrée',
             ],
-
+            [
+                'title' => 'Yaourt & poire',
+                'image' => 'https://unsplash.com/fr/photos/piatto-in-ceramica-bianca-vicino-al-tessuto-bianco-tkK3gE-EAxI',
+                'description' => 'Rien de plus simple !',
+                'instruction' => 'Étape 1 : Coupez les poires. Décortiquez et concassez les pistaches. Étape 2 : Mettez le yaourt dans un bol, ajoutez les poires, les pistaches et le sirop d\'érable !',
+                'duration' => 2,
+                'serving' => 1,
+                'created_at' => '2010-03-05',
+                'meal' => 'Dessert',
+            ],
           ];
     }
   
