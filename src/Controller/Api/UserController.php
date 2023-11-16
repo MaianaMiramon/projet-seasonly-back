@@ -33,11 +33,6 @@ class UserController extends AbstractController
         //on récupère l'email du User qui s'inscrit
         $email = $user->getEmail();
 
-//        $errorList = $validator->validate($email);
-//        if (count($errorList) > 0 ) {
-//            return $this->json($errorList, Response::HTTP_BAD_REQUEST);
-//        }
-
         // on vérifie si l'email récupéré existe déjà dans la table User
         $registeredUser = $userRepository->findOneBy(['email' => $email]);
 
