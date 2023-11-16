@@ -24,6 +24,7 @@ class AppFixtures extends Fixture
     // injecter une dépendance
     public function __construct(UserPasswordHasherInterface $passwordHasherInterface)
     {
+        // Permet de hasher un mot de passe
         $this->passwordHasher = $passwordHasherInterface;
     }
 
@@ -31,83 +32,82 @@ class AppFixtures extends Fixture
     {       
         // Création des Meal
         $mealList = $this->getMeal();
-        foreach ($mealList as $currentMealName) {
-        // création de l'objet Meal
-        $currentMeal = new Meal();
-        $currentMeal->setName($currentMealName['name']);
-        $currentMeal->setCreatedAt(new DateTimeImmutable($currentMealName['created_at']));
+        foreach ($mealList as $currentMeal) {
+            // création de l'objet Meal
+            $mealObject = new Meal();
+            $mealObject->setName($currentMeal['name']);
+            $mealObject->setCreatedAt(new DateTimeImmutable($currentMeal['created_at']));
 
-        $manager->persist($currentMeal);
+            $manager->persist($mealObject);
         }
 
         // Création des Measures
         $measureList = $this->getMeasure();
 
-        foreach ($measureList as $currentMeasureName) {
+        foreach ($measureList as $currentMeasure) {
             // Création de l'objet Measure
-            $currentMeasure = new Measure();
-            $currentMeasure->setType($currentMeasureName['type']);
-            $currentMeasure->setCreatedAt(new DateTimeImmutable($currentMeasureName['created_at']));
+            $measureObject = new Measure();
+            $measureObject->setType($currentMeasure['type']);
+            $measureObject->setCreatedAt(new DateTimeImmutable($currentMeasure['created_at']));
 
-            $manager->persist($currentMeasure);
+            $manager->persist($measureObject);
         }
         
         // Création des genres
         $genreList = $this->getGenre();
         
-        foreach ($genreList as $currentGenreName) {
+        foreach ($genreList as $currentGenre) {
             // création de l'objet Genre
-            $currentGenre = new Genre();
-            $currentGenre->setName($currentGenreName['name']);
-            $currentGenre->setCreatedAt(new DateTimeImmutable($currentGenreName['created_at']));
+            $genreObject = new Genre();
+            $genreObject->setName($currentGenre['name']);
+            $genreObject->setCreatedAt(new DateTimeImmutable($currentGenre['created_at']));
             
-            $manager->persist($currentGenre);
+            $manager->persist($genreObject);
             
         }
         
         // Création des botanicals
         $botanicalList = $this->getBotanical();
-        // $measureObjectList = [];
         
-        foreach ($botanicalList as $currentBotanicalName) {
+        foreach ($botanicalList as $currentBotanical) {
             // Création de l'objet Botanical
-            $currentBotanical = new Botanical();
-            $currentBotanical->setName($currentBotanicalName['name']);
-            $currentBotanical->setCreatedAt(new DateTimeImmutable($currentBotanicalName['created_at']));
+            $botanicalObject = new Botanical();
+            $botanicalObject->setName($currentBotanical['name']);
+            $botanicalObject->setCreatedAt(new DateTimeImmutable($currentBotanical['created_at']));
             
-            $manager->persist($currentBotanical);
-        }
-        
+            $manager->persist($botanicalObject);
+        }     
         
         // Creation des Ingredients
         $ingredientList = $this->getIngredient();
         
-        foreach ($ingredientList as $currentIngredientName) {
+        foreach ($ingredientList as $currentIngredient) {
             // création de l'objet Ingredient
-            $currentIngredient = new Ingredient();
-            $currentIngredient->setName($currentIngredientName['name']);
-            $currentIngredient->setCreatedAt(new DateTimeImmutable($currentIngredientName['created_at']));
+            $ingredientObject = new Ingredient();
+            $ingredientObject->setName($currentIngredient['name']);
+            $ingredientObject->setCreatedAt(new DateTimeImmutable($currentIngredient['created_at']));
             
-            $manager->persist($currentIngredient);
+            $manager->persist($ingredientObject);
         }
 
         // Creation des Month
         $monthList = $this->getMonths();
-        foreach ($monthList as $currentMonthName) {
-        // création de l'objet Month
-        $currentMonth = new Month();
-        $currentMonth->setName($currentMonthName['name']);
-        $currentMonth->setCreatedAt(new DateTimeImmutable($currentMonthName['created_at']));
-        
-        $manager->persist($currentMonth);
-    }
-        
-        
+        foreach ($monthList as $currentMonth) {
+            // création de l'objet Month
+            $monthObject = new Month();
+            $monthObject->setName($currentMonth['name']);
+            $monthObject->setCreatedAt(new DateTimeImmutable($currentMonth['created_at']));
+            
+            $manager->persist($monthObject);
+    }        
+        // Envoie des entités en base de données
         $manager->flush();
+
         
         // Création des recettes
         $recipeList = $this->getRecipe();
         foreach($recipeList as $currentRecipe) {
+            // Création de l'object Recipe
             $recipeObject = new Recipe();
             $recipeObject->setTitle($currentRecipe['title']);
             $recipeObject->setImage($currentRecipe['image']);
@@ -129,8 +129,7 @@ class AppFixtures extends Fixture
                 }
             }
             
-            $manager->persist($recipeObject);
-            
+            $manager->persist($recipeObject);            
         }
         
         // Création des vegetables
@@ -151,8 +150,10 @@ class AppFixtures extends Fixture
             foreach ($genreList as $genre)
             {
                 $currentGenreName = $genre->getName();
+                // On compare le nom des entité Genre avec celui du tableau
                 if ($currentGenreName === $currentVegetable['genre'])
                 {
+                    // S'ils sont identique on associe l'ingrédient avec le vegetable
                     $vegetableObject->setGenre($genre);
                 }
             }
@@ -163,8 +164,10 @@ class AppFixtures extends Fixture
             foreach ($botanicalList as $botanical)
             {
                 $currentBotanicalName = $botanical->getName();
+                // On compare le nom des entité Botanical avec celui du tableau
                 if ($currentBotanicalName === $currentVegetable['botanical'])
                 {
+                    // S'ils sont identique on associe l'ingrédient avec le vegetable
                     $vegetableObject->setBotanical($botanical);
                 }
             }
@@ -175,18 +178,17 @@ class AppFixtures extends Fixture
             foreach ($ingredientList as $ingredient)
             {
                 $currentIngredientName = $ingredient->getName();
+                // On compare le nom des entité Ingredient avec celui du tableau
                 if ($currentIngredientName === $currentVegetable['ingredient'])
                 {
+                    // S'ils sont identique on associe l'ingrédient avec le vegetable
                     $vegetableObject->setIngredient($ingredient);
                 }
             }
 
-            // Association avec Month
-
-            // récupération du repository Month
+            // Association avec Month 
             $monthRepository = $manager->getRepository(Month::class);
             $monthList = $monthRepository->findAll();
-
 
             // récupération de la liste des mois du vegetable
             $vegetableMonth = $currentVegetable['month'];
@@ -197,49 +199,52 @@ class AppFixtures extends Fixture
                         $vegetableObject->addMonth($monthEntity);
                     }
                 }
-            }
-            
+            }           
             $manager->persist($vegetableObject);
         }
         
+        // Envoie des entités en base de données
         $manager->flush();
-        
+
+        // Création Content
         for ($i = 1; $i <= 25; $i++) {
-            // Création Content
-            $contentList = $this->getQuantity();
+            $quantityList = $this->getQuantity();
             
-            
-            $contentRandom = mt_rand(0, count($contentList) -1);
-            $currentContentName = $contentList[$contentRandom];
+            $quantityRandom = mt_rand(0, count($quantityList) -1);
+            $currentContent = $quantityList[$quantityRandom];
+
             // Création de l'objet Content
-            $currentContent = new Content();
-            $currentContent->setQuantity($currentContentName['quantity']);
+            $contentObject = new Content();
+            $contentObject->setQuantity($currentContent['quantity']);
             
+            // Association aléatoire avec measure 
             $measureRepository = $manager->getRepository(Measure::class);
             $measureList = $measureRepository->findAll();
             $measureRandom = mt_rand(0, count($measureList) -1);
             $currentMeasureId = $measureList[$measureRandom];
-            $currentContent->setMeasure($currentMeasureId);
+            $contentObject->setMeasure($currentMeasureId);
             
+            // Association aléatoire avec ingredient 
             $ingredientRepository = $manager->getRepository(Ingredient::class);
             $ingredientList = $ingredientRepository->findAll();
             $ingredientRandom = mt_rand(0, count($ingredientList) -1);
             $currentIngredientId = $ingredientList[$ingredientRandom];
-            $currentContent->setIngredient($currentIngredientId);
+            $contentObject->setIngredient($currentIngredientId);
             
+            // Association aléatoire avec recipe 
             $recipeRepository = $manager->getRepository(Recipe::class);
             $recipeList = $recipeRepository->findAll();
             $recipeRandom = mt_rand(0, count($recipeList) -1);
             $currentRecipeId = $recipeList[$recipeRandom];
-            $currentContent->setRecipe($currentRecipeId);
+            $contentObject->setRecipe($currentRecipeId);
             
-            $manager->persist($currentContent);
-        
+            $manager->persist($contentObject);       
         }
 
         // Création des members
         $memberList = $this->getMember();
 
+        // On créer en premier les users qui vont être associés aux members
         foreach ($memberList as $currentUser) {
             $userObject = new User();
             $userObject->setEmail($currentUser['email']);
@@ -247,8 +252,10 @@ class AppFixtures extends Fixture
             $userObject->setCreatedAt(new DateTimeImmutable($currentUser['created_at']));
             $manager->persist($userObject);
         }
+        // on les ajoute en base de données
         $manager->flush();
 
+        // On récupère la liste des entités users enregistré juste avant
         $userRepository = $manager->getRepository(User::class);
         $userList = $userRepository->findAll();
 
@@ -267,8 +274,12 @@ class AppFixtures extends Fixture
             }    
             
             // Association avec les recettes (favoris)
+
+            // On récupère la liste des entités recettes
             $recipeRepository = $manager->getRepository(Recipe::class);
             $recipeList = $recipeRepository->findAll();
+
+            // Pour chaque member on ajoute entre 0 et 8 recettes en favoris aléatoirement
             for ($i = 1; $i <= mt_rand(0, 8); $i++) {
             $recipeRandom = mt_rand(0, count($recipeList) -1);
             $currentRecipeId = $recipeList[$recipeRandom];
@@ -279,7 +290,7 @@ class AppFixtures extends Fixture
 
         }
 
-        // Création des users
+        // Création des users qui n'ont pas de compte member
         $userList = $this->getUser();
 
         foreach($userList as $currentUser) {
@@ -292,9 +303,11 @@ class AppFixtures extends Fixture
 
         }
 
+        // Envoie des entités en base de données
         $manager->flush();
     }
 
+    // Tableau des Meals
     public function getMeal() {
         return [
             [
@@ -312,6 +325,7 @@ class AppFixtures extends Fixture
         ];
     }
 
+    // Tableau des Genres
     public function getGenre() {
         return [
             [
@@ -325,6 +339,7 @@ class AppFixtures extends Fixture
         ];
     }
 
+    // Tableau des Measures
     public function getMeasure() {
         return [
             [
@@ -371,9 +386,10 @@ class AppFixtures extends Fixture
                 'type' => '4',
                 'created_at' => '2010-03-05',
             ],
-          ];
-      }
+        ];
+    }
 
+    // tableau des Botanicals
     public function getBotanical() {
         return [
             [
@@ -435,6 +451,7 @@ class AppFixtures extends Fixture
         ];
     }
 
+    // tableau des Ingredients
     public function getIngredient() {
         return [
             [
@@ -549,7 +566,7 @@ class AppFixtures extends Fixture
                 'name' => 'Champignon',
                 'created_at' => '2010-03-05',
             ],
-          [
+            [
                 'name' => 'Chou',
                 'created_at' => '2023-03-05',
             ],
@@ -600,6 +617,7 @@ class AppFixtures extends Fixture
         ];
     }
 
+    // Tableaud es Quantity
     public function getQuantity() {
         return [
             [
@@ -685,6 +703,7 @@ class AppFixtures extends Fixture
         ];
     }
 
+    // Tableau des Recipes
     public function getRecipe() {
         return [
             [
@@ -790,6 +809,7 @@ class AppFixtures extends Fixture
           ];
     }
   
+    // Tableau des Month
     public function getMonths() {
         return [
             [
@@ -843,6 +863,7 @@ class AppFixtures extends Fixture
         ];
     }
 
+    // Tableau des vegetables
     public function getVegetables() {
         return [
             [   
@@ -1186,6 +1207,7 @@ class AppFixtures extends Fixture
         ];
     }
     
+    // tableau des users
     public function getUser() {
         return [
             [
@@ -1266,6 +1288,7 @@ class AppFixtures extends Fixture
           ];
     }
 
+    // Tableau des membres et users associés
     public function getMember() {
         return [
             [
