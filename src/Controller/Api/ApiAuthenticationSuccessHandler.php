@@ -17,9 +17,13 @@ class ApiAuthenticationSuccessHandler implements AuthenticationSuccessHandlerInt
         $this->jwtManager = $jwtManager;
     }
 
+    // Méthode appellée lors d'une authentification réussie
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
+        // On récuère l'utilisateur a partir du jeton
         $user = $token->getUser();
+        
+        // On renvoie une réponse JSON avec cette donnée
         $data = [
             'token' => $this->jwtManager->create($user),
             'user_id' => $user->getId(), // Include the user ID in the response
