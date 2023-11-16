@@ -708,7 +708,7 @@ class AppFixtures extends Fixture
         return [
             [
                 'title' => 'Pizza aux champignons & mozarella',
-                'image' => 'https://pixabay.com/fr/photos/pizza-aliments-repas-v%C3%A9g%C3%A9tarien-705680/',
+                'image' => 'https://cdn.pixabay.com/photo/2015/04/03/19/02/pizza-705680_1280.jpg',
                 'description' => 'La pizza est une recette de cuisine traditionnelle de la cuisine italienne, originaire de Naples à base de galette de pâte à pain, garnie principalement d\'huile d\'olive, de sauce tomate, de mozzarella et d\'autres ingrédients et cuite au four.',
                 'instruction' => 'Etape 1 : réparer une pâte à pizza ou l\'acheter toute faite, Etape 2 : Étaler la pâte et la recouvrir d\'huile d\'olive, Etape 3 : Couper les tomates en rondelles, la mozzarella en cubes et le jambon en petits carrés. Éplucher l\'oignon et les champignons. Les hacher finement.',
                 'duration' => 120,
@@ -718,7 +718,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Tatin de tomates cerises',
-                'image' => 'https://pixabay.com/fr/photos/tomates-p%C3%A2te-feuillet%C3%A9e-tarte-1822187/',
+                'image' => 'https://cdn.pixabay.com/photo/2016/11/13/22/04/tomatoes-1822187_1280.jpg',
                 'description' => 'Une si jolie tarte !',
                 'instruction' => 'Étape 1 : Préchauffez le four à 200°C. Dans une poêle à feu vif ajoutez la sauce soja, le sucre et le beurre. Faire réduire pour faire un caramel. Étape 2 : Coupez les tomates cerises en deux. Étape 3 : Versez le caramel dans le fond du plat et y ajouter les tomates. Étape 4 : Disposez la pâte feuilletée sur le dessus. Étape 5 : Faites un trou au milieu de la pate puis enfournez à 200°C pendant 20 minutes. Étape 6 : Sortez la tarte du four, attendez que la tarte refoidisse un peu. Démoulez : placez une grande assiette sur votre plat puis retournez le tout. Servez avec un peu de basilic !',
                 'duration' => 30,
@@ -728,7 +728,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Aubergine parma',
-                'image' => 'https://pixabay.com/fr/photos/aubergine-entr%C3%A9e-aliments-gratin%C3%A9-237733/',
+                'image' => 'https://cdn.pixabay.com/photo/2021/11/19/18/29/eggplant-6810008_1280.jpg',
                 'description' => 'Des aubergines bien gourmandes',
                 'instruction' => 'Étape 1 : Préchauffez le four à 220°C. Coupez les aubergines en deux. Étape 2 : Sur une plaque allant au four, disposez les aubergines. Ajoutez un filet d\'huile d\'olive, salez et poivrez. Enfournez pour 20 minutes. Étape 3 : Ajoutez la sauce tomate, la mozzarella et le parmesan sur les aubergines. Enfournez à nouveau pour 20 minutes de cuisson. Étape 4 : Sortez les aubergines du four et ajoutez quelques feuilles de basilic par-dessus. Accompagnez d\'une salade assaisonnée !',
                 'duration' => 45,
@@ -738,7 +738,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Sandwich thon & concombre',
-                'image' => 'https://pixabay.com/fr/photos/sushi-v%C3%A9g%C3%A9tarien-l%C3%A9gumes-riz-3559729/',
+                'image' => 'https://cdn.pixabay.com/photo/2018/07/24/18/15/sushi-3559729_1280.jpg',
                 'description' => 'Un mélange de légumes',
                 'instruction' => 'Étape 1 : Lavez puis coupez le concombre en tranches. Étape 2 : Tartinez vos tranches de pain de fromage frais puis ajouter des lamelles d\'oignon rouge. Étape 3 : Ajoutez le thon égoutté et les lamelles de concombre sur vos tranches de pain. Étape 4 : Refermez le sandwich et coupez-le en deux si vous le souhaitez !',
                 'duration' => 5,
@@ -748,7 +748,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Salade de tomate, fraise & basilic',
-                'image' => 'https://pixabay.com/fr/photos/basilic-aliments-des-l%C3%A9gumes-3077929/',
+                'image' => 'https://cdn.pixabay.com/photo/2018/01/12/10/19/basil-3077929_1280.jpg',
                 'description' => 'Pour un été tout en douceur',
                 'instruction' => 'Étape 1 : Coupez les tomates et les fraises en quartiers. Les mettre dans un saladier avec la burrata en morceaux et le basilic. Étape 2 : Pour la vinaigrette, mélangez le vinaigre balsamique et 4 cuillères à soupe d\'huile d\'olive, ajoutez du sel et du poivre. Mélangez à votre salade !',
                 'duration' => 10,
@@ -758,7 +758,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Tarte aux figues',
-                'image' => 'https://pixabay.com/fr/photos/aliments-boissons-g%C3%A2teau-2940452/',
+                'image' => 'https://cdn.pixabay.com/photo/2017/11/11/20/57/food-2940452_1280.jpg',
                 'description' => 'Une magnifique tarte aux figues, pour allier légèreté et gourmandise',
                 'instruction' => 'Étape 1 : Préchauffez le four à 200°C. Coupez les figues en 4. Étape 2 : Déroulez la pâte feuilletée et déposez-la sur une plaque de cuisson recouverte de papier sulfurisé. Saupoudrez de poudre d’amande. Étape 3 : Répartissez par-dessus les figues coupées. Saupoudrez de sucre. Étape 4 : Enfourner pour 30 minutes !',
                 'duration' => 120,
@@ -768,7 +768,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Soupe alphabet',
-                'image' => 'https://pixabay.com/fr/photos/soupe-soupe-aux-l%C3%A9gume-8021565/',
+                'image' => 'https://cdn.pixabay.com/photo/2023/05/27/13/49/soup-8021565_1280.jpg',
                 'description' => 'Une soupe réconfortante aux doux souvenirs d\'enfance.',
                 'instruction' => 'Étape 1 : Ecrasez les tomates dans un bol. Étape 2 : Émincez les oignons. Étape 3 : Dans une casserole, faites dorer les oignons dans un filet d\'huile d\'olive 1 à 2 minutes. Étape 4 : Ajoutez les tomates avec leur jus et poursuivez la cuisson 2 minutes. Ajoutez 120cl d\'eau et le cube de bouillon. Portez à ébullition. Étape 5 : Ajoutez les pâtes et poursuivez la cuisson pendant 8 min. Salez, poivrez !',
                 'duration' => 20,
@@ -778,7 +778,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Gnocchis aux épinards & gorgonzola',
-                'image' => 'https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?w=740&t=st=1698738808~exp=1698739408~hmac=e7ba4c2635d8def69b6f68203fc449ba7073560733c506f038ee5f6249dfe067',
+                'image' => 'https://cdn.pixabay.com/photo/2020/02/03/15/27/noodles-4815929_1280.jpg',
                 'description' => 'Simple et efficace !',
                 'instruction' => 'Étape 1 : Mettre une noisette de beurre dans une poêle et faites revenir les gnocchis 2 minutes à feu vif. Étape 2 : Ajoutez les épinards, la crème et le gorgonzola. Étape 3 : Mélangez et couvrez pour 3 minutes de cuisson à feu moyen. Étape 4 : Salez et poivrez !',
                 'duration' => 120,
@@ -788,7 +788,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Carottes rôties au miel',
-                'image' => 'https://unsplash.com/fr/photos/un-bouquet-de-carottes-assis-sur-un-plateau-4CujyAHvmNk',
+                'image' => 'https://cdn.pixabay.com/photo/2018/06/10/21/35/carrots-3467399_1280.jpg',
                 'description' => 'Tout en douceur',
                 'instruction' => 'Étape 1: Préchauffez le four à 180°C. Epluchez et coupez les carottes en 2 dans la longueur. Disposez-les sur une plaque de cuisson ou dans un plat. Étape 2 : Saupoudrez-les de cumin, ajoutez un filet d\'huile d\'olive et de miel, salez, poivrez, puis enfournez pendant 45 à 50 minutes !',
                 'duration' => 60,
@@ -798,7 +798,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'title' => 'Yaourt & poire',
-                'image' => 'https://unsplash.com/fr/photos/piatto-in-ceramica-bianca-vicino-al-tessuto-bianco-tkK3gE-EAxI',
+                'image' => 'https://cdn.pixabay.com/photo/2017/06/21/17/57/dessert-2428038_1280.jpg',
                 'description' => 'Rien de plus simple !',
                 'instruction' => 'Étape 1 : Coupez les poires. Décortiquez et concassez les pistaches. Étape 2 : Mettez le yaourt dans un bol, ajoutez les poires, les pistaches et le sirop d\'érable !',
                 'duration' => 2,
