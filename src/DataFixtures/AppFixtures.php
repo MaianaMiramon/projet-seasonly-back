@@ -204,7 +204,7 @@ class AppFixtures extends Fixture
         
         $manager->flush();
         
-        for ($i = 1; $i <= 11; $i++) {
+        for ($i = 1; $i <= 25; $i++) {
             // Création Content
             $contentList = $this->getQuantity();
             
@@ -872,7 +872,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Tomate',
             ],
             [
-                'title' => 'pomme golden',
+                'title' => 'Pomme golden',
                 'description' => 'La Golden Delicious est une pomme jaune très populaire dans le monde entier. En France, c\'est la pomme la plus cultivée puisqu\'elle représente plus d\'un tiers de la production nationale. Communément appelée « Golden », son succès vient de sa capacité à répondre au goût des consommateurs, aux exigences de la production et du commerce moderne. Toutefois, les gastronomes lui reprochent souvent son manque de goût et sa forte teneur en eau.',
                 'image' => 'https://cdn.pixabay.com/photo/2019/01/23/10/57/apple-3950021_1280.jpg',
                 'benefits' => 'La pomme est également recommandée pour avoir une bonne santé cérébrale car elle contient un antioxydant',
@@ -885,7 +885,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Pomme',
             ],
             [
-                'title' => 'pomme gala',
+                'title' => 'Pomme gala',
                 'description' => 'Les pommes Gala sont plutôt petites. Rouge orangé à rayures verticales, elles résistent bien aux chocs bien qu\'elles aient une peau très fine. La Gala est une pomme très sucrée, faiblement acide avec une petite pointe d’amertume; ferme et juteuse, très croquante. Certains lui trouvent des arômes de banane et de poire',
                 'image' => 'https://cdn.pixabay.com/photo/2023/06/05/19/55/apples-8043221_1280.jpg',
                 'benefits' => 'La pomme est pour avoir une bonne santé cérébrale car elle contient un antioxydant',
@@ -898,7 +898,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Pomme',
             ],
             [
-                'title' => 'pomme granny smith',
+                'title' => 'Pomme granny smith',
                 'description' => 'La Granny Smith est une pomme verte acidulée et peu sucrée, à la chair ferme et friable1. Elle est issue d\'un pommier domestique Malus domestica Granny Smith, un cultivar très populaire apparu en Australie en 1868 à la suite d\'un « semis chanceux » réalisé par une vieille dame, Maria Ann Smith surnommée Granny Smith (« Mamie Smith » en anglais)',
                 'image' => 'https://cdn.pixabay.com/photo/2018/12/27/22/24/green-apple-3898527_1280.jpg',
                 'benefits' => 'La pomme est recommandée pour avoir une bonne santé cérébrale car elle contient un antioxydant',
@@ -911,7 +911,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Pomme',
             ],
             [
-                'title' => 'citron vert',
+                'title' => 'Citron vert',
                 'description' => 'La lime, lime acide ou citron vert est un agrume. « Lime » est l\'appellation la plus utilisée au Canada alors que l\'appellation « citron vert » est davantage utilisée en France. C\'est le fruit du limettier, arbuste de la famille des Rutacées, dont il existe deux espèces : Citrus latifolia et Citrus aurantiifolia. Elles sont originaires d\'Asie du Sud-Est.',
                 'image' => 'https://cdn.pixabay.com/photo/2020/07/24/21/58/lemon-5435158_1280.jpg',
                 'benefits' => 'Le citron aide le foie à filtrer les déchets du corps',
@@ -924,7 +924,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Citron',
             ],
             [
-                'title' => 'citron jaune',
+                'title' => 'Citron jaune',
                 'description' => 'Le citron (ou citron jaune) est un agrume, fruit du citronnier Citrus limon. Ce fruit, mûr, a une écorce qui va du vert tendre au jaune éclatant sous l\'action du froid. La maturité est en fin d\'automne et début d\'hiver dans l’hémisphère nord. Sa chair est juteuse, le citron acide est riche en vitamine C',
                 'image' => 'https://cdn.pixabay.com/photo/2021/11/26/12/45/lemon-6825808_1280.jpg',
                 'benefits' => 'Le citron aide le foie à filtrer les déchets du corps',
@@ -937,7 +937,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Citron',
             ],
             [
-                'title' => 'chou rouge',
+                'title' => 'Chou rouge',
                 'description' => 'Avec sa tête bien ferme et ses feuilles lisses, le chou rouge fait partie des choux cabus. De forme ronde ou ovale, il pèse en moyenne 1,5 kg. Généralement pourpre, sa couleur varie du rouge au violet selon l’acidité du sol dans lequel il a poussé.',
                 'image' => 'https://cdn.pixabay.com/photo/2019/11/19/13/26/red-cabbage-4637426_1280.jpg',
                 'benefits' => 'Vitamine C',
@@ -950,7 +950,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Chou',
             ],
             [
-                'title' => 'chou de Bruxelles',
+                'title' => 'Chou de Bruxelles',
                 'description' => 'Notamment grâce à des saveurs moins amères et plus sucrées, davantage adaptées aux goûts actuels. Les jeunes chefs l’ont bien compris : le chou de Bruxelles n’est plus exclusivement le symbole d’une nourriture rustique traditionnelle mais peut jouer la carte de la modernité en s’accomodant de mille façons.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/04/07/02/29/brussels-sprouts-318200_1280.jpg',
                 'benefits' => 'Riche en calcium et en potassium',
@@ -963,7 +963,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Chou',
             ],
             [
-                'title' => 'salade romaine',
+                'title' => 'Salade romaine',
                 'description' => 'La laitue romaine (Lactuca sativa var. longifolia) est une variété de laitue qui pousse avec un cœur ferme et une longue tête de feuilles robustes. Au contraire de la plupart des laitues, elle tolère une chaleur élevée. Elle ne présentait pas de cœur à l\'origine, mais la sélection tend à améliorer sa formation.',
                 'image' => 'https://cdn.pixabay.com/photo/2015/05/17/14/29/salad-771056_1280.jpg',
                 'benefits' => 'Vitamines B9, Vitamines C',
@@ -976,7 +976,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Salade',
             ],
             [
-                'title' => 'salade batavia',
+                'title' => 'Salade batavia',
                 'description' => 'Elle est craquante et tendre, dotée d\'une grosse pomme vert clair ou vert jaune, gaufrée, avec les bords découpés, au goût légèrement sucré. Certaines variétés sont parfois rougeâtres. Il convient de la choisir avec une base bien blanche, signe de fraîcheur.',
                 'image' => 'https://cdn.pixabay.com/photo/2014/03/24/17/08/lettuce-295158_1280.png',
                 'benefits' => 'Vitamines B9, Vitamines C',
@@ -989,7 +989,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Salade',
             ],
             [
-                'title' => 'mini concombre',
+                'title' => 'Mini concombre',
                 'description' => 'Le concombre (Cucumis sativus) est une espèce de plante à fleurs de la famille des Cucurbitacées. C\'est une plante potagère herbacée, rampante, de la même famille que la calebasse africaine, le melon ou la courge. C\'est botaniquement un fruit qui est consommé comme un légume.',
                 'image' => 'https://cdn.pixabay.com/photo/2015/07/17/13/44/cucumbers-849269_1280.jpg',
                 'benefits' => 'Vitamines B',
@@ -1002,7 +1002,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Concombre',
             ],
             [
-                'title' => 'concombre blanc',
+                'title' => 'Concombre blanc',
                 'description' => 'Le concombre (Cucumis sativus) est une espèce de plante à fleurs de la famille des Cucurbitacées. C\'est une plante potagère herbacée, rampante, de la même famille que la calebasse africaine, le melon ou la courge. C\'est botaniquement un fruit qui est consommé comme un légume.',
                 'image' => 'https://cdn.pixabay.com/photo/2018/11/11/19/43/cucumbers-3809535_1280.jpg',
                 'benefits' => 'Vitamines B',
@@ -1015,7 +1015,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Concombre',
             ],
             [
-                'title' => 'aubergine de barbentane',
+                'title' => 'Aubergine de barbentane',
                 'description' => 'Variété hâtive et productive. Elle produit des fruits allongés, de couleur violet foncé, très brillants. Sa chair ferme de couleur blanche est très fondante. Le feuillage ovale est épineux et duveteux. On la consomme cuite en ratatouille, ou grillée au barbecue.',
                 'image' => 'https://cdn.pixabay.com/photo/2017/08/05/15/43/vegetable-2584412_1280.jpg',
                 'benefits' => 'Bonne sources de fibres et faible en calories',
@@ -1028,7 +1028,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Aubergine',
             ],
             [
-                'title' => 'aubergine black beauty',
+                'title' => 'Aubergine black beauty',
                 'description' => 'Variété ancienne et précoce d\'environ 60 cm de haut et donnant de nombreux fruits d\'environ 13 cm de long. Ses fruits d\'un noir profond se conservent bien. On peut la consommer en ratatouille, farcie, grillée ou gratinée.',
                 'image' => 'https://cdn.pixabay.com/photo/2022/08/08/19/07/eggplant-7373425_1280.jpg',
                 'benefits' => 'Bonne sources de fibres et faible en calories',
@@ -1041,7 +1041,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Aubergine',
             ],
             [
-                'title' => 'fraise gariguette',
+                'title' => 'Fraise gariguette',
                 'description' => 'La fraise gariguette est la plus cultivée en France, c\'est la reine des fraises ! Très appréciée de tous, on la doit à une chercheuse de l\'INRA (devenu INRAE au 1er janvier 2020) d\'Avignon qui a mis au point la variété avec son équipe. C\'est une espèce précoce non remontante.',
                 'image' => 'https://cdn.pixabay.com/photo/2021/09/23/05/30/strawberry-6648685_1280.jpg',
                 'benefits' => 'Vitamine B',
@@ -1054,7 +1054,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Fraise',
             ],
             [
-                'title' => 'fraise reine des vallées',
+                'title' => 'Fraise reine des vallées',
                 'description' => 'Variété de type fraise des bois et remontante aux fruits plutôt allongés et très parfumés. Elle ne produit pas de stolons. A déguster nature ou en pâtisserie.',
                 'image' => 'https://cdn.pixabay.com/photo/2018/04/29/11/54/strawberries-3359755_1280.jpg',
                 'benefits' => 'Vitamine B',
@@ -1067,11 +1067,11 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Fraise',
             ],
             [
-                'title' => 'banane cavendish',
+                'title' => 'Banane cavendish',
                 'description' => 'La banane est le fruit ou la baie dérivant de l’inflorescence du bananier. Les bananes sont des fruits très généralement stériles issus de variétés domestiquées. Seuls les fruits des bananiers sauvages et de quelques cultivars domestiques contiennent des graines. Les bananes sont vertes avant d\'être mûres et deviennent généralement jaunes avec des taches brunâtres à mâturité.',
                 'image' => 'https://cdn.pixabay.com/photo/2023/08/27/12/41/bananas-8216891_1280.jpg',
                 'benefits' => 'Riche en magnésium, potassium et calcium',
-                'local' => true,
+                'local' => false,
                 'conservation' => 'Les bananes sont conservées à température ambiante. Si elles sont placées au réfrigérateur cela les empêchera de mûrir convenablement.',
                 'created_at' => '2010-03-05',
                 'month' => ['Octobre', 'Novembre', 'Décembre'],
@@ -1080,11 +1080,11 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Banane',
             ],
             [
-                'title' => 'banane plantain',
+                'title' => 'Banane plantain',
                 'description' => 'La banane plantain est une espèce hybride de plante de la famille des Musaceae. Comme la banane dessert, elle est un sous-groupe de l\'espèce Musa ×paradisiaca (issue du croisement entre Musa acuminata et Musa balbisiana).',
                 'image' => 'https://cdn.pixabay.com/photo/2012/03/03/23/57/bananas-21686_1280.jpg',
                 'benefits' => 'Riche en magnésium, potassium et calcium',
-                'local' => true,
+                'local' => false,
                 'conservation' => 'Les bananes sont conservées à température ambiante. Si elles sont placées au réfrigérateur cela les empêchera de mûrir convenablement.',
                 'created_at' => '2010-03-05',
                 'month' => ['Septembre', 'Octobre', 'Novembre', 'Décembre', 'Janvier'],
@@ -1093,7 +1093,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Banane',
             ],
             [
-                'title' => 'carotte primeur',
+                'title' => 'Carotte primeur',
                 'description' => 'La carotte (Daucus carota subsp. sativus) est une plante bisannuelle de la famille des Apiacées (aussi appelées Ombellifères), largement cultivée pour sa racine pivotante charnue, comestible, de couleur généralement orangée, consommée comme légume. La carotte représente, après la pomme de terre, le principal légume-racine cultivé dans le monde2. C\'est une racine riche en carotène.',
                 'image' => 'https://cdn.pixabay.com/photo/2016/08/03/01/09/carrot-1565597_1280.jpg',
                 'benefits' => 'Vitamine B',
@@ -1106,7 +1106,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Carotte',
             ],
             [
-                'title' => 'orange',
+                'title' => 'Orange',
                 'description' => 'Son goût sucré légèrement acidulé excite les papilles. Consommée quotidiennement, elle apporte les vitamines nécessaires pour lutter contre le froid et la fatigue. Un concentré d’énergie et de bien-être à croquer et à boire !',
                 'image' => 'https://cdn.pixabay.com/photo/2016/01/02/02/03/orange-1117645_1280.jpg',
                 'benefits' => 'Une bonne source d\'antioxydants protecteurs',
@@ -1119,7 +1119,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Orange',
             ],
             [
-                'title' => 'kiwi',
+                'title' => 'Kiwi',
                 'description' => 'En France, il est cultivé dans trois régions, dont l’une détient même un Label Rouge !',
                 'image' => 'https://cdn.pixabay.com/photo/2016/08/03/04/34/kiwi-1565847_1280.jpg',
                 'benefits' => 'Vitamine C',
@@ -1132,7 +1132,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Kiwi',
             ],
             [
-                'title' => 'oignon',
+                'title' => 'Oignon',
                 'description' => 'S’invitant dans un nombre impressionnant de préparations, il se prête avec autant de réussite aux plats les plus rustiques (flamiche, gratinée…) qu’aux mets les plus sophistiqués (foie gras poêlé, magret de canard…). Ce bulbe, organe de réserves nutritives pour la plante et sa fleur, présente aussi des qualités nutritionnelles qui vous invitent à conjuguer bien-être et plaisir de la table.',
                 'image' => 'https://cdn.pixabay.com/photo/2018/07/15/20/43/onion-3540502_1280.jpg',
                 'benefits' => 'Riche en fibre',
@@ -1145,7 +1145,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Oignon',
             ],
             [
-                'title' => 'fenouil',
+                'title' => 'Fenouil',
                 'description' => 'Référence symbolique et mythologique depuis l’Antiquité, c’est avant tout un aliment particulièrement intéressant sur le plan nutritionnel. On le retrouve avec plaisir dans des plats salés, mais aussi dans les desserts sucrés.',
                 'image' => 'https://cdn.pixabay.com/photo/2016/04/06/12/39/fennel-1311691_1280.jpg',
                 'benefits' => 'Propriété anti-inflammatoire',
@@ -1158,7 +1158,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Fenouil',
             ],
             [
-                'title' => 'courgette',
+                'title' => 'Courgette',
                 'description' => 'Ce légume du soleil qui fleure bon la Méditerranée est présent dans les assiettes tout l’été. Facile à préparer, la courgette se consomme sous toutes ses formes. Et sa richesse en vitamines vous donne de l’énergie à la belle saison.',
                 'image' => 'https://cdn.pixabay.com/photo/2016/09/10/13/25/zucchini-1659094_1280.jpg',
                 'benefits' => 'riche en fibres',
@@ -1171,7 +1171,7 @@ class AppFixtures extends Fixture
                 'ingredient' => 'Courgette',
             ],
             [
-                'title' => 'cassis',
+                'title' => 'Cassis',
                 'description' => 'Deux grandes variétés composent la majorité des cultures, concentrées dans quatre régions françaises. Ses fruits acidulés et juteux se consomment aussi bien nature que préparés en dessert ou sous forme de liqueur (1) et de crème. ',
                 'image' => 'https://cdn.pixabay.com/photo/2023/07/31/10/20/fruit-8160703_1280.jpg',
                 'benefits' => 'il contribue à éliminer le sel et l\'eau en excès dans l\'organisme',
@@ -1293,10 +1293,10 @@ class AppFixtures extends Fixture
                 'created_at' => '2023-10-12',
             ],
             [
-                'pseudo' => 'maïana',
+                'pseudo' => 'maiana',
                 'roles' => ['ROLE_ADMIN'],
-                'password' => 'maïana',
-                'email' => 'maïana@maïana.com',
+                'password' => 'maiana',
+                'email' => 'maiana@maiana.com',
                 'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
@@ -1318,7 +1318,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'pseudo' => 'caroline',
-                'roles' => [''],
+                'roles' => ['ROLE_USER'],
                 'password' => 'caroline',
                 'email' => 'caroline@caroline.com',
                 'newsletter' => true,
@@ -1326,7 +1326,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'pseudo' => 'romain',
-                'roles' => [''],
+                'roles' => ['ROLE_USER'],
                 'password' => 'romain',
                 'email' => 'romain@bleh.com',
                 'newsletter' => true,
@@ -1334,15 +1334,15 @@ class AppFixtures extends Fixture
             ],
             [
                 'pseudo' => 'salomé',
-                'roles' => [''],
+                'roles' => ['ROLE_USER'],
                 'password' => 'salomé',
-                'email' => 'salomé@salomé.com',
+                'email' => 'salome@salome.com',
                 'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
             [
                 'pseudo' => 'lucas',
-                'roles' => [''],
+                'roles' => ['ROLE_USER'],
                 'password' => 'lucas',
                 'email' => 'lucas@debleh.com',
                 'newsletter' => true,
@@ -1350,9 +1350,9 @@ class AppFixtures extends Fixture
             ],
             [
                 'pseudo' => 'mélina',
-                'roles' => [''],
+                'roles' => ['ROLE_USER'],
                 'password' => 'mélina',
-                'email' => 'mélina@mélina.com',
+                'email' => 'melina@melina.com',
                 'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
@@ -1366,7 +1366,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'pseudo' => 'member',
-                'roles' => [''],
+                'roles' => ['ROLE_MEMBER'],
                 'password' => 'member',
                 'email' => 'member@member.com',
                 'newsletter' => true,
@@ -1374,7 +1374,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'pseudo' => 'zizou',
-                'roles' => [''],
+                'roles' => ['ROLE_USER'],
                 'password' => 'zizou',
                 'email' => 'zizou@zizou.com',
                 'newsletter' => true,
@@ -1382,7 +1382,7 @@ class AppFixtures extends Fixture
             ],
             [
                 'pseudo' => 'kameto',
-                'roles' => [''],
+                'roles' => ['ROLE_USER'],
                 'password' => 'kameto',
                 'email' => 'kameto@kameto.com',
                 'newsletter' => true,
