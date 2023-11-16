@@ -16,6 +16,7 @@ class MainController extends AbstractController
      */
     public function home(): Response
     {
+        // On renvoie l'url de la page home
         return $this->render('back/main/home.html.twig', [
         ]);
     }

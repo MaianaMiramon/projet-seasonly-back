@@ -17,6 +17,7 @@ class MemberType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // On ajoute plusieurs champs avec differents types (TextType, ChoiceType)
         $builder
             ->add('pseudo', TextType::class, [
                 'label' => 'Nom d\'utilisateur'
@@ -33,6 +34,7 @@ class MemberType extends AbstractType
             ])
             ->add('created_at')
             ->add('updated_at')
+            // ajout du bouton de soumission du form
             ->add('Sauvegarder', SubmitType::class, [
                 'attr' => ['class' => 'btn custom-btn-add'],
             ]);
@@ -41,6 +43,7 @@ class MemberType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // Options par défaut du formulaire
         $resolver->setDefaults([
             'data_class' => Member::class,
         ]);

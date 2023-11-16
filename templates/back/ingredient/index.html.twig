@@ -13,7 +13,8 @@
                 <tr class="text-center">
                     <th scope="col">Id</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Modification</th>
+                    <th scope="col">Suppression</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,8 @@
                     <td>{{ ingredient.name }}</td>
                     <td class="d-flex justify-content-around">
                         <a class="btn custom-btn-add" href="{{ path('app_back_ingredient_show', {'id': ingredient.id}) }}">Voir plus</a>
+                    </td>
+                    <td>
                         <a class="btn custom-btn-warning" href="{{ path('app_back_ingredient_update', {'id': ingredient.id}) }}">Modifier</a>
                     </td>
                 </tr>

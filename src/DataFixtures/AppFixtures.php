@@ -132,10 +132,16 @@ class AppFixtures extends Fixture
             $manager->persist($recipeObject);            
         }
         
-        // Création des vegetables
+        // Création des vegetables - on récupère la liste des vegetables
         $vegetableList = $this->getVegetables();
+
+        // Boucle sur chaque vegetable de la liste
         foreach($vegetableList as $currentVegetable) {
+
+            // création d'un nouvel objet Vegetable
             $vegetableObject = new Vegetable();
+
+            // On remplit de données les propriétés du vegetable (à partir de tableaux plus bas)
             $vegetableObject->setTitle($currentVegetable['title']);
             $vegetableObject->setImage($currentVegetable['image']);
             $vegetableObject->setDescription($currentVegetable['description']);
@@ -144,21 +150,26 @@ class AppFixtures extends Fixture
             $vegetableObject->setConservation($currentVegetable['conservation']);
             $vegetableObject->setCreatedAt(new DateTimeImmutable($currentVegetable['created_at']));
             
-            // Association avec les genres
+            // Association du vegetable avec avec le genre
+            // On récupère le repository Genre
             $genreRepository = $manager->getRepository(Genre::class);
+            // On récupère la liste de tous les genres
             $genreList = $genreRepository->findAll();
+            // Boucle qui permet de parcourir chaque genre
             foreach ($genreList as $genre)
             {
+                // On récupère le nom du genre
                 $currentGenreName = $genre->getName();
-                // On compare le nom des entité Genre avec celui du tableau
+
+                // Si le nom du genre actuel correspond au genre du vegetable
                 if ($currentGenreName === $currentVegetable['genre'])
                 {
-                    // S'ils sont identique on associe l'ingrédient avec le vegetable
+                    // On associe le genre au vegetable
                     $vegetableObject->setGenre($genre);
                 }
             }
-            
-            // Association avec Botanical
+
+            // Association du vegetable avec avec botanical 
             $botanicalRepository = $manager->getRepository(Botanical::class);
             $botanicalList = $botanicalRepository->findAll();
             foreach ($botanicalList as $botanical)
@@ -172,7 +183,7 @@ class AppFixtures extends Fixture
                 }
             }
             
-            // Association avec Ingredient
+            // Association du vegetable avec avec un ingredient
             $ingredientRepository = $manager->getRepository(Ingredient::class);
             $ingredientList = $ingredientRepository->findAll();
             foreach ($ingredientList as $ingredient)
@@ -185,12 +196,11 @@ class AppFixtures extends Fixture
                     $vegetableObject->setIngredient($ingredient);
                 }
             }
-
-            // Association avec Month 
+          
+            // Association du vegetable avec avec les mois
             $monthRepository = $manager->getRepository(Month::class);
             $monthList = $monthRepository->findAll();
 
-            // récupération de la liste des mois du vegetable
             $vegetableMonth = $currentVegetable['month'];
             foreach($vegetableMonth as $month) {
                 foreach ($monthList as $monthEntity) {
@@ -199,11 +209,12 @@ class AppFixtures extends Fixture
                         $vegetableObject->addMonth($monthEntity);
                     }
                 }
-            }           
+            }
+            // On persist 
             $manager->persist($vegetableObject);
         }
         
-        // Envoie des entités en base de données
+        // On applique dans la base de données, on enregistre tous les nouveaux vegetables
         $manager->flush();
 
         // Création Content
@@ -290,20 +301,28 @@ class AppFixtures extends Fixture
 
         }
 
-        // Création des users qui n'ont pas de compte member
+
+        // Création des users - on récupère la liste des users existants
+      
         $userList = $this->getUser();
 
+        // On boucle sur chaque user dans cette liste
         foreach($userList as $currentUser) {
+
+        // Création d'un nouvel objet pour chaque user
         $userObject = new User();
+
+        // On ajoute a ce user un email, newsletter, createdAt (à partir de tableaux plus bas qui contiennent les données)
         $userObject->setEmail($currentUser['email']);
         $userObject->setNewsletter($currentUser['newsletter']);
         $userObject->setCreatedAt(new DateTimeImmutable($currentUser['created_at']));
         
+        // On persist l'objet user
         $manager->persist($userObject);
 
         }
 
-        // Envoie des entités en base de données
+        // On applique les changements dans la base de données (on enregistre tous les nouveaux users)
         $manager->flush();
     }
 
@@ -343,6 +362,10 @@ class AppFixtures extends Fixture
     public function getMeasure() {
         return [
             [
+                'type' => '',
+                'created_at' => '2010-03-05',
+            ],
+            [
                 'type' => 'ml',
                 'created_at' => '2010-03-05',
             ],
@@ -362,32 +385,9 @@ class AppFixtures extends Fixture
                 'type' => 'kg',
                 'created_at' => '2010-03-05',
             ],
-            [
-                'type' => '1/4',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '1/2',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '1',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '2',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '3',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '4',
-                'created_at' => '2010-03-05',
-            ],
-        ];
+          ];
     }
+
 
     // tableau des Botanicals
     public function getBotanical() {
