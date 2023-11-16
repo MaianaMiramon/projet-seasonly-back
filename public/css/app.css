@@ -41,16 +41,8 @@ footer {
     background-color: #e4c9ab;
 }
 
-.custom-link {
-    color: white;
-}
-
-.custom-link:hover {
-    color: white;
-}
-
 .custom-link-connexion {
-    color: #45624c;
+    color: black;
 }
 
 .custom-link-connexion:hover {

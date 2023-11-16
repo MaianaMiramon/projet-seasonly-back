@@ -999,7 +999,7 @@ class AppFixtures extends Fixture
             [
                 'title' => 'Salade batavia',
                 'description' => 'Elle est craquante et tendre, dotée d\'une grosse pomme vert clair ou vert jaune, gaufrée, avec les bords découpés, au goût légèrement sucré. Certaines variétés sont parfois rougeâtres. Il convient de la choisir avec une base bien blanche, signe de fraîcheur.',
-                'image' => 'https://cdn.pixabay.com/photo/2014/03/24/17/08/lettuce-295158_1280.png',
+                'image' => 'https://cdn.pixabay.com/photo/2016/07/22/01/18/lettuce-1533958_1280.jpg',
                 'benefits' => 'Vitamines B9, Vitamines C',
                 'local' => true,
                 'conservation' => 'Essuyez ses feuilles ou essorez-les mais laissez les un peu humides afin qu\'elles restent fraîches et ne sèchent pas',
