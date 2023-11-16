@@ -37,6 +37,10 @@ footer {
     background-color: #45624c;
 }
 
+.custom-thead-ingredient {
+    background-color: #e4c9ab;
+}
+
 .header-logo__title {
     color: white;
     font-size: 1em;

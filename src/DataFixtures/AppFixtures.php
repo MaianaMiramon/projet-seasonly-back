@@ -328,6 +328,10 @@ class AppFixtures extends Fixture
     public function getMeasure() {
         return [
             [
+                'type' => '',
+                'created_at' => '2010-03-05',
+            ],
+            [
                 'type' => 'ml',
                 'created_at' => '2010-03-05',
             ],
@@ -345,30 +349,6 @@ class AppFixtures extends Fixture
             ],
             [
                 'type' => 'kg',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '1/4',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '1/2',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '1',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '2',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '3',
-                'created_at' => '2010-03-05',
-            ],
-            [
-                'type' => '4',
                 'created_at' => '2010-03-05',
             ],
           ];
