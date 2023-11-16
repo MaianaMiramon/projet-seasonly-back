@@ -41,6 +41,14 @@ footer {
     background-color: #e4c9ab;
 }
 
+.custom-link {
+    color: white;
+}
+
+.custom-link:hover {
+    color: white;
+}
+
 .header-logo__title {
     color: white;
     font-size: 1em;
