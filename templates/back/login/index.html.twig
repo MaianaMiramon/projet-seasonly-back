@@ -5,6 +5,7 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
     <h2 class="d-flex justify-content-center align-items-center">Connexion au Backoffice de Seasonly</h2>
+            <a class="custom-link-connexion d-flex justify-content-center align-items-center" href="http://localhost:5173/">Retour sur le site de Seasonly</a>
     <div class="d-flex justify-content-center align-items-center" style="height: 65vh;">
 
         <form action="{{ path('app_back_login') }}" method="post" class="row g-3">
@@ -22,5 +23,6 @@
             </div>
         </div>
     </form>
+
 {% endblock %}
 

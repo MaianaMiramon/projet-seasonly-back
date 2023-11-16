@@ -49,6 +49,14 @@ footer {
     color: white;
 }
 
+.custom-link-connexion {
+    color: #45624c;
+}
+
+.custom-link-connexion:hover {
+    color: #45624c;
+}
+
 .header-logo__title {
     color: white;
     font-size: 1em;
