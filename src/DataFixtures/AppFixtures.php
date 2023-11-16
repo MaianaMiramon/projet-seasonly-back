@@ -1312,10 +1312,10 @@ class AppFixtures extends Fixture
                 'created_at' => '2023-10-12',
             ],
             [
-                'pseudo' => 'squeezie',
+                'pseudo' => 'zizou',
                 'roles' => [''],
-                'password' => 'squeezie',
-                'email' => 'squeezie@squeezie.com',
+                'password' => 'zizou',
+                'email' => 'zizou@zizou.com',
                 'newsletter' => true,
                 'created_at' => '2023-10-12',
             ],
