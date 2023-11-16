@@ -62,7 +62,7 @@ class VegetableController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $vegetableRepository->add($vegetable, true);
 
-            return $this->redirectToRoute('app_back_vegetable_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_vegetable_show', ['id' => $vegetable->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/vegetable/update.html.twig', [

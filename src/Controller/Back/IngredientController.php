@@ -37,7 +37,7 @@ class IngredientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $ingredientRepository->add($ingredient, true);
 
-            return $this->redirectToRoute('app_back_ingredient_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_ingredient_show', ['id' => $ingredient->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/ingredient/create.html.twig', [
