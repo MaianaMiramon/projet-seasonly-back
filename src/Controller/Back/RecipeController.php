@@ -35,13 +35,13 @@ class RecipeController extends AbstractController
      */
     public function show($id, RecipeRepository $recipeRepository): Response
     {
-        // préparation des données
+        // Préparation des données
         $recipe = $recipeRepository->find($id);
         // Récupération des table associé aux recettes
         $content = $recipe->getContents();
         $meal = $recipe->getMeal();
 
-        // On retourne les données de recipes
+        // On retourne les données de recipes, content et meal
         return $this->render('back/recipe/show.html.twig', [
             'recipe' => $recipe,
             'contents' => $content,
@@ -54,15 +54,19 @@ class RecipeController extends AbstractController
      */
     public function update(Request $request, Recipe $recipe, RecipeRepository $recipeRepository): Response
     {
+        // On récupère le form RecipeType
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
+        // On vérifie si les données du form sont valides
         if ($form->isSubmitted() && $form->isValid()) {
             $recipeRepository->add($recipe, true);
 
-            return $this->redirectToRoute('app_back_recipe_index', [], Response::HTTP_SEE_OTHER);
+            // On redirige vers le détail de la recette créée
+            return $this->redirectToRoute('app_back_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
         }
 
+        // On retourne les données de recipe et du form
         return $this->renderForm('back/recipe/update.html.twig', [
             'recipe' => $recipe,
             'form' => $form,
@@ -74,16 +78,21 @@ class RecipeController extends AbstractController
      */
     public function create(Request $request, RecipeRepository $recipeRepository): Response
     {
+        // On créer une nouvelle entité recipe
         $recipe = new Recipe();
+        // On récupère le form RecipeType
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
+        // On vérifie si les données du form sont valides
         if ($form->isSubmitted() && $form->isValid()) {
             $recipeRepository->add($recipe, true);
 
+            // Si elles sont valides on redirige vers la page de création des contents
             return $this->redirectToRoute('app_back_content_create', [], Response::HTTP_SEE_OTHER);
         }
 
+        // On retourne les données des recipes et du form
         return $this->renderForm('back/recipe/create.html.twig', [
             'recipe' => $recipe,
             'form' => $form,
@@ -95,11 +104,13 @@ class RecipeController extends AbstractController
      */
     public function delete(Request $request, Recipe $recipe, RecipeRepository $recipeRepository): Response
     {
+        // On vérifie le token de recipe s'il est valide on supprime l'entité
         if ($this->isCsrfTokenValid('delete' . $recipe->getId(), $request->request->get('_token'))) {
             $recipeRepository->remove($recipe, true);
             $this->addFlash('success', 'Recette supprimé');
         }
 
+        // On redirige vers la page index des recipes
         return $this->redirectToRoute('app_back_recipe_index', [], Response::HTTP_SEE_OTHER);
     }
 }

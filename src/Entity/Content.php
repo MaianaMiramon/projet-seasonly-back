@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ORM\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ContentRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -42,6 +43,7 @@ class Content
     /**
      * @ORM\ManyToOne(targetEntity=Recipe::class, inversedBy="contents")
      * @Groups ({"content"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $recipe;
 

@@ -6,9 +6,9 @@
     <div class="container my-4 w-75">
         <h1 class="text-center mt-4">user n° {{ user.id }}</h1>
         <div class="d-flex justify-content-between">
-            <a href="{{ path('app_back_user_index') }}" class="btn btn-primary">Liste des users</a>
+            <a href="{{ path('app_back_user_index') }}" class="btn custom-btn-add">Liste des users</a>
             <div class="d-flex">
-                <a href="{{ path('app_back_user_update', {'id': user.id}) }}" class="btn btn-warning">Modifier</a>
+                <a href="{{ path('app_back_user_update', {'id': user.id}) }}" class="btn custom-btn-warning">Modifier</a>
                 {{ include('back/user/_delete_form.html.twig') }}
             </div>
         </div>
@@ -37,5 +37,3 @@
             </tbody>
         </table>
     </div>
-
-{% endblock %}

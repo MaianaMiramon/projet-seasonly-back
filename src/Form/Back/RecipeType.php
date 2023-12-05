@@ -54,7 +54,9 @@ class RecipeType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false
             ])
-            ->add('Sauvegarder', SubmitType::class);
+            ->add('Sauvegarder', SubmitType::class, [
+                'attr' => ['class' => 'btn custom-btn-add'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
