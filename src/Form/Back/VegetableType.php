@@ -19,6 +19,7 @@ class VegetableType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // On ajoute plusieurs champs avec differents types (TextType, ChoiceType)
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Nom'
@@ -67,12 +68,16 @@ class VegetableType extends AbstractType
             ])
             ->add('created_at')
             ->add('updated_at')
-            ->add('Sauvegarder', SubmitType::class);
+            // Bouton de soumission du form
+            ->add('Sauvegarder', SubmitType::class, [
+                'attr' => ['class' => 'btn custom-btn-add'],
+            ]);
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // Configuration par défaut
         $resolver->setDefaults([
             'data_class' => Vegetable::class,
         ]);

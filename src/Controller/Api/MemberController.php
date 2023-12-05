@@ -29,8 +29,10 @@ class MemberController extends AbstractController
      */
     public function browse(MemberRepository $memberRepository): JsonResponse
     {
+        // Préparation des données
         $membersList = $memberRepository->findAll();
 
+        // On retourne les données des members
         return $this->json([
             'members' => $membersList,
         ], Response::HTTP_OK, [], ["groups" => "member"]);
@@ -42,9 +44,7 @@ class MemberController extends AbstractController
      */
     public function create(EntityManagerInterface $entityManager,
     Request $request, SerializerInterface $serializer, ValidatorInterface $validator, UserPasswordEncoderInterface $passwordEncoder): JsonResponse
-    {
-        // TODO : gestion newsletter d'un user qui s'inscrit en Member et gestion des erreurs, utilisateur déjà inscrit
-        
+    {       
         // On récupère les données user reçues 
         $json = $request->getContent();
 
@@ -79,6 +79,7 @@ class MemberController extends AbstractController
         $entityManager->persist($member);
         $entityManager->flush();
 
+        // On retourne la validation de la création d'un member
         return $this->json(['message' => 'Inscription réussie'], JsonResponse::HTTP_CREATED, ["groups" => "member"]);
     }
 
@@ -92,6 +93,7 @@ class MemberController extends AbstractController
         // récupérer l'entité depuis la BDD
         $member = $em->find(Member::class, $id);
 
+        // On verifie si l'entité existe
         if ($member === null)
         {
             $errorMessage = [
@@ -100,7 +102,7 @@ class MemberController extends AbstractController
             return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
 
-        // lancer $em->remove($monEntite)
+        // On retire l'entité
         $em->remove($member);
 
         // + flush pour exécuter les requêtes
@@ -115,9 +117,10 @@ class MemberController extends AbstractController
      */
     public function read($id, MemberRepository $memberRepository): JsonResponse
     {
-        // comme le param converte
+        // On récupère l'entité grâce à son id 
         $member = $memberRepository->find($id);
 
+        // On vérifie si l'entité existe
         if ($member === null)
         {
             $errorMessage = [
@@ -126,6 +129,7 @@ class MemberController extends AbstractController
             return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
 
+        // On retourne l'entité avec ses propriété
         return $this->json([
             'member' => $member,
         ], Response::HTTP_OK, [], ["groups" => "member"]);
@@ -138,8 +142,10 @@ class MemberController extends AbstractController
      */
     public function update($id, EntityManagerInterface $em, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
+        // On récupère l'entité member grâce à son Id
         $member = $em->find(Member::class, $id);
 
+        // On vérifie si l'entité existe
         if ($member === null)
         {
             $errorMessage = [
@@ -148,9 +154,10 @@ class MemberController extends AbstractController
             return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
 
-        // on traite les données recues en json
+        // on traite les données recues en Json
         $json = $request->getContent();
 
+        // On sérialize les données reçu en Json
         $serializer->deserialize($json, Member::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $member]);
 
         $errorList = $validator->validate($member);
@@ -159,7 +166,7 @@ class MemberController extends AbstractController
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
         }
         // pas besoin de persist car on a fait un find
-        // $em->persist($movie);
+        // donc l'entité existe déja
         $em->flush();
 
         // on renvoit une réponse

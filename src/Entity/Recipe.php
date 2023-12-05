@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ORM\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\Collection;
