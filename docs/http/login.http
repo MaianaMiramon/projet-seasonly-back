@@ -3,8 +3,8 @@ POST http://localhost:8000/api/login_check
 content-type: application/json
 
 {
-  "username": "admin",
-  "password": "admin"
+  "username": "maiana",
+  "password": "maiana"
 }
 
 ### Deconnexion API
